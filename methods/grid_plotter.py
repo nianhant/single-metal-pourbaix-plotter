@@ -115,7 +115,6 @@ class GridPlotter:
                 x += 1
                 ax.text(x, y, label, ha=ha, va=va, color=color, rotation=-3.39)
             elif label == 'Fe(Gly)$_{2}$$^{2+}$(aq)':
-                print('hit')
                 fontsize = 12
                 x += 1
                 ax.text(x, y, label, ha=ha, va=va, color=color, rotation=rotation,fontsize=fontsize)
@@ -128,7 +127,12 @@ class GridPlotter:
                 x += 1
                 if label == 'FeO(s)':
                     y -= 0.1
-                ax.text(x, y, label, ha=ha, va=va, color=color, rotation=-3.39,fontsize=fontsize)
+                ax.text(x, y, label, ha=ha, va=va, color=color, rotation=-3.39,fontsize=10)
+            elif label == 'CuO$_{2}$$^{2-}$(aq)' or label == 'Cu$_{2}O$(s)' :
+                print(label)
+                fontsize = 13
+                x += 0.6
+                ax.text(x, y, label, ha=ha, va=va, color=color, rotation=rotation,fontsize=fontsize)
 
             else:
             
@@ -238,7 +242,8 @@ class GridPlotter:
 
                 if product.phase == 'aqueous_ion' or product.phase == 'complex':
                     aq_index += 1
-                    product_label+='(aq)'
+                    if '(aq)' not in product_label:
+                        product_label+='(aq)'
                     color = self.get_color_for_label(product_label, aq_index, total_aq)
                 
                 ax.scatter(pH_stable, eU_stable, s=1, label=product_label, color=color, alpha=1)

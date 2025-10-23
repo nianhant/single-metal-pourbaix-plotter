@@ -36,10 +36,10 @@ set_publication_style()
 # Ligand Concentration Setup
 # -------------------------------------
 aqueous_only = {'NH3': 0, 'NO2': 0, 'Gly': 0, 'CN': 0}
-no_CN = {'NH3': 0.02, 'NO2': 0, 'Gly': 0.005, 'CN': 0}
-with_CN = {'NH3': 0.02, 'NO2': 0, 'Gly': 0.005, 'CN': 1e-4}
-experiment_concentration = {'NH3':0., 'NO2':0, 'Gly': 0.01, 'CN':0}
-ligand_concentration_list = [experiment_concentration]
+no_CN = {'NH3': 0.02, 'NO2': 0, 'Gly': 0.1, 'CN': 0}
+with_CN = {'NH3': 0, 'NO2': 0, 'Gly': 0.1, 'CN': 1e-4}
+experiment_concentration = {'NH3':0., 'NO2':0, 'Gly': 0.1, 'CN':0}
+ligand_concentration_list = [experiment_concentration, with_CN, no_CN]
 
 # -------------------------------------
 # Ligand Chemical Potentials
@@ -57,15 +57,15 @@ mu_ligand = {
 del_G_json_path = '../data/metal_complex_del_G.json'
 data_loader = MetalComplexDataLoader(del_G_json_path)
 df = data_loader.load()
-data_loader.save_to_csv('data/metal_complex_energies.csv')
+data_loader.save_to_csv('../data/metal_complex_energies.csv')
 # -------------------------------------
 # Target Metals and Constants
 # -------------------------------------
-metal_list = ['Cu']
-activity_list = [1e-2, 1e-3, 1e-4,1e-5, 1e-6,1e-7,1e-8]
-activity_list = [1e-1, 1e-2, 1e-3]
-activity_list = [ 1e-5]
-activity =  1e-6
+metal_list = ['Cu','Au','Ni','Pt','Pd','Ti',]
+# metal_list = ['Cu']
+# activity_list = [1e-2, 1e-3, 1e-4,1e-5, 1e-6,1e-7,1e-8]
+# activity_list = [1e-1, 1e-2, 1e-3]
+activity_list = [1e-4, 1e-5, 1e-6,]
 
 T_list = [298,308,318,328,338,348,358]
 metal_stable_regions = {}
@@ -142,8 +142,7 @@ for metal in metal_list:
             pH_range = (-2, 16)
             V_range = (-2, 3)
             grid_size = 400
-            # plotter = GridPlotter(pH_range, V_range, metal_data, grid_size, save_fig=True, dir = 'T_test')
-            plotter = GridPlotter(pH_range, V_range, metal_data, grid_size, save_fig=True, dir = 'E_test_glycine', filename=None)#f'figures/E_test_glycine/{diff}.png')
+            plotter = GridPlotter(pH_range, V_range, metal_data, grid_size, save_fig=True, dir = f'/home/x-ntian/pourbaix_paper/Accelerated-Computational-Materials-Discovery-for-Electrochemical-Nutrient-Recovery/Figures/pourbaix_diagrams/{metal}', filename=None)
 
             # Stability and plotting
             stability_calculator = StabilityCalculator(plotter, all_species, thermo, metal_data)
