@@ -29,9 +29,9 @@ def get_ion_formation_energy(metal):
             trimmed_formula = formula#.split('(aq)')[0]
             trimmed_formula = re.sub(r'\[([+-])(\d+)\]', r'[\2\1]', trimmed_formula)
             if trimmed_formula not in ion_formation_eng:
-                ion_formation_eng[trimmed_formula] = entry.uncorrected_energy#* entry.normalization_factor
-            elif ion_formation_eng[trimmed_formula] > entry.uncorrected_energy:#* entry.normalization_factor:
-                ion_formation_eng[trimmed_formula] = entry.uncorrected_energy#* entry.normalization_factor
+                ion_formation_eng[trimmed_formula] = entry.uncorrected_energy
+            elif ion_formation_eng[trimmed_formula] > entry.uncorrected_energy:
+                ion_formation_eng[trimmed_formula] = entry.uncorrected_energy
     save_as_json(ion_formation_eng, f'{metal}_ion_formation_energy')
     
     return ion_formation_eng
@@ -53,9 +53,9 @@ def get_solid_formation_energy(metal):
         trimmed_formula = formula.replace(" ", "")
         trimmed_formula = re.sub(r'([A-Za-z])1(?=[A-Za-z]|$)', r'\1',trimmed_formula)
         if trimmed_formula not in solid_formation_eng:
-            solid_formation_eng[trimmed_formula] = entry.uncorrected_energy#* entry.normalization_factor
-        elif solid_formation_eng[trimmed_formula] > entry.uncorrected_energy:#* entry.normalization_factor:
-            solid_formation_eng[trimmed_formula] = entry.uncorrected_energy#* entry.normalization_factor
+            solid_formation_eng[trimmed_formula] = entry.uncorrected_energy
+        elif solid_formation_eng[trimmed_formula] > entry.uncorrected_energy:
+            solid_formation_eng[trimmed_formula] = entry.uncorrected_energy
     save_as_json(solid_formation_eng, f'{metal}_solid_formation_energy')
     return solid_formation_eng
 

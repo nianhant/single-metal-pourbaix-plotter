@@ -37,7 +37,7 @@ set_publication_style()
 # -------------------------------------
 aqueous_only = {'NH3': 0, 'NO2': 0, 'Gly': 0, 'CN': 0}
 no_CN = {'NH3': 0.02, 'NO2': 0, 'Gly': 0.1, 'CN': 0}
-with_CN = {'NH3': 0, 'NO2': 0, 'Gly': 0.1, 'CN': 1e-4}
+with_CN = {'NH3': 0.02, 'NO2': 0, 'Gly': 0.1, 'CN': 1e-4}
 experiment_concentration = {'NH3':0., 'NO2':0, 'Gly': 0.1, 'CN':0}
 ligand_concentration_list = [experiment_concentration, with_CN, no_CN]
 
