@@ -39,8 +39,16 @@ aqueous_only = {'NH3': 0, 'NO2': 0, 'Gly': 0, 'CN': 0}
 no_CN = {'NH3': 0.02, 'NO2': 0, 'Gly': 0.1, 'CN': 0}
 with_CN = {'NH3': 0.02, 'NO2': 0, 'Gly': 0.1, 'CN': 1e-4}
 experiment_concentration = {'NH3':0., 'NO2':0, 'Gly': 0.1, 'CN':0}
-ligand_concentration_list = [experiment_concentration, with_CN, no_CN]
-
+ligand_concentration_list = [experiment_concentration, with_CN, no_CN,
+                             {'NH3':0.02, 'NO2':0, 'Gly': 0.005, 'CN':0},
+                             {'NH3':0.02, 'NO2':0, 'Gly': 0.005, 'CN':1e-4},
+                             {'NH3':0.02, 'NO2':0, 'Gly': 0.05, 'CN':0},
+                             {'NH3':0.02, 'NO2':0, 'Gly': 0.05, 'CN':1e-4}]
+ligand_concentration_list = [aqueous_only, experiment_concentration, with_CN, no_CN,
+                             {'NH3':0.02, 'NO2':0, 'Gly': 0.005, 'CN':0},
+                             {'NH3':0.02, 'NO2':0, 'Gly': 0.005, 'CN':1e-4},
+                             {'NH3':0.02, 'NO2':0, 'Gly': 0.05, 'CN':0},
+                             {'NH3':0.02, 'NO2':0, 'Gly': 0.05, 'CN':1e-4}]
 # -------------------------------------
 # Ligand Chemical Potentials
 # -------------------------------------

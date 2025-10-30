@@ -55,8 +55,7 @@ class GridPlotter:
         Converts a chemical formula to a LaTeX-friendly format with subscripts.
         Example: "H2O" -> "H$_2$O"
         """
-        # Add LaTeX formatting for subscripts
-#         print(formula)
+
         if '[' in formula or 'aq' in formula or 'Gly' in formula:
             
             formatted_formula = re.sub(r"([A-Za-z\)\]])(\d+)", r"\1$_{\2}$", formula)
@@ -68,10 +67,8 @@ class GridPlotter:
         else:
             
             formula = Formula(formula)
-            # print(formula)
             formula = formula.reduce()[0]
             formatted_formula = f'{formula:latex}'
-#         print(formatted_formula)
         return formatted_formula
 
     def get_color_for_label(self,label, i, total_species):        
@@ -129,7 +126,6 @@ class GridPlotter:
                     y -= 0.1
                 ax.text(x, y, label, ha=ha, va=va, color=color, rotation=-3.39,fontsize=10)
             elif label == 'CuO$_{2}$$^{2-}$(aq)' or label == 'Cu$_{2}O$(s)' :
-                print(label)
                 fontsize = 13
                 x += 0.6
                 ax.text(x, y, label, ha=ha, va=va, color=color, rotation=rotation,fontsize=fontsize)
