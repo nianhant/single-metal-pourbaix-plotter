@@ -14,7 +14,12 @@ from grid_plotter import GridPlotter
 from thermodynamics import Thermodynamics
 from stability_calculator import StabilityCalculator
 from metal_complex_dataloader import MetalComplexDataLoader
+from mp_api.client import MPRester
 
+
+
+mpr_key = "hhsFnwPlqjxA77yv1zKSYGbynYuPJpR6"
+mpr = MPRester(mpr_key)
 # -------------------------------------
 # Plotting Style
 # -------------------------------------
@@ -39,6 +44,8 @@ aqueous_only = {'NH3': 0, 'NO2': 0, 'Gly': 0, 'CN': 0}
 no_CN = {'NH3': 0.02, 'NO2': 0, 'Gly': 0.1, 'CN': 0}
 with_CN = {'NH3': 0.02, 'NO2': 0, 'Gly': 0.1, 'CN': 1e-4}
 experiment_concentration = {'NH3':0., 'NO2':0, 'Gly': 0.1, 'CN':0}
+exp = {'NH3':0.02, 'NO2':0, 'Gly': 0.05, 'CN':0}
+
 ligand_concentration_list = [experiment_concentration, with_CN, no_CN,
                              {'NH3':0.02, 'NO2':0, 'Gly': 0.005, 'CN':0},
                              {'NH3':0.02, 'NO2':0, 'Gly': 0.005, 'CN':1e-4},
@@ -49,6 +56,15 @@ ligand_concentration_list = [aqueous_only, experiment_concentration, with_CN, no
                              {'NH3':0.02, 'NO2':0, 'Gly': 0.005, 'CN':1e-4},
                              {'NH3':0.02, 'NO2':0, 'Gly': 0.05, 'CN':0},
                              {'NH3':0.02, 'NO2':0, 'Gly': 0.05, 'CN':1e-4}]
+ligand_concentration_list = [aqueous_only, exp, with_CN,
+                             {'NH3':0.02, 'NO2':0, 'Gly': 0.005, 'CN':0},
+                             {'NH3':0.02, 'NO2':0, 'Gly': 0.005, 'CN':1e-4},
+                             {'NH3':0, 'NO2':0, 'Gly': 0.1, 'CN':0},
+                             {'NH3':0.02, 'NO2':0, 'Gly': 0.1, 'CN':0},
+                             {'NH3':0.02, 'NO2':0, 'Gly': 0.1, 'CN':1e-4}]
+
+# ligand_concentration_list = [{'NH3':0.02, 'NO2':0, 'Gly': 0.005, 'CN':0},
+#                              {'NH3':0.02, 'NO2':0, 'Gly': 0.005, 'CN':1e-4}]
 # -------------------------------------
 # Ligand Chemical Potentials
 # -------------------------------------
@@ -69,23 +85,30 @@ data_loader.save_to_csv('../data/metal_complex_energies.csv')
 # -------------------------------------
 # Target Metals and Constants
 # -------------------------------------
-metal_list = ['Cu','Au','Ni','Pt','Pd','Ti',]
-# metal_list = ['Cu']
-# activity_list = [1e-2, 1e-3, 1e-4,1e-5, 1e-6,1e-7,1e-8]
-# activity_list = [1e-1, 1e-2, 1e-3]
-activity_list = [1e-4, 1e-5, 1e-6,]
+metal_list = ['Cu','Au','Ni','Pt','Pd','Ti','Co','Mg','Mn','Zn','Fe', 'Ag']
+# metal_list = ['Co','Mg','Mn','Zn','Fe', 'Ag']
+metal_list = ['Ni']
+metal_list = ['Pt']
+metal_list = ['Sr']
 
-T_list = [298,308,318,328,338,348,358]
+activity_list = [1e-2, 1e-3, 1e-4,1e-5, 1e-6,1e-7,1e-8]
+# activity_list = [1e-1, 1e-2, 1e-3]
+# activity_list = [1e-4, 1e-5, 1e-6,]
+
+T_list = [298.15,308.15,318.15,328.15,338.15,348.15,358.15]
 metal_stable_regions = {}
 T = 298.15
-
+activity = 1e-4
 # diff_list = [-0.1, -0.05, 0, 0.05, 0.075, 0.1, 0.125, 0.15]
+diff_list = [-0.25,-0.2, -0.15, -0.1, -0.05, 0, 0.05, 0.1, 0.15, 0.2, 0.25]
+
 # -------------------------------------
 # Main Loop Over Metals and Ligands
 # -------------------------------------
 for metal in metal_list:
     # for diff in diff_list:
-    for activity in activity_list:
+    # for T in T_list:
+    # for activity in activity_list:
         for ligand_conc in ligand_concentration_list:
             target_df = df[df['metal'] == metal]
             metal_complex = target_df.set_index('species')['del_G_eV'].to_dict()
@@ -94,6 +117,12 @@ for metal in metal_list:
             # if metal == 'Cu':
             # #     print(metal_complex)
             #     metal_complex['Cu(Gly)2[2+]'] =-6.77
+            # Manually override missing data
+            if metal == 'Pd':
+                metal_complex['Pd(CN)4[2+]'] = 6.467825128
+            if metal == 'Pt':
+                metal_complex['Pt(CN)4[2+]'] = 5.646346039
+
 
             species_label_dict = target_df.set_index('species')['species_label'].to_dict()
 
@@ -105,15 +134,14 @@ for metal in metal_list:
                 with open(solid_path, 'r') as f:
                     solid_eng = json.load(f)
             else:
-                solid_eng = get_solid_formation_energy(metal)
+                solid_eng = get_solid_formation_energy(metal, mpr)
 
-
-            # solid_eng['Cu2O2'] += diff
+            # solid_eng['Ni2O2'] += diff
             if os.path.exists(ion_path):
                 with open(ion_path, 'r') as f:
                     ion_eng = json.load(f)
             else:
-                ion_eng = get_ion_formation_energy(metal)
+                ion_eng = get_ion_formation_energy(metal, mpr)
 
             if 'FeOH[2+]' in ion_eng:
                 ion_eng.pop('FeOH[2+]')
@@ -150,7 +178,11 @@ for metal in metal_list:
             pH_range = (-2, 16)
             V_range = (-2, 3)
             grid_size = 400
-            plotter = GridPlotter(pH_range, V_range, metal_data, grid_size, save_fig=True, dir = f'/home/x-ntian/pourbaix_paper/Accelerated-Computational-Materials-Discovery-for-Electrochemical-Nutrient-Recovery/Figures/pourbaix_diagrams/{metal}', filename=None)
+            filename = None
+            # filename =f'Ni-NH3-H2O_T={T}_activity={activity:.0e}_[NH3]={ligand_conc["NH3"]}M_[Gly]={ligand_conc["Gly"]}M_[CN]={ligand_conc["CN"]}_diff={diff}eV.png'
+            # filename = f'Pd-NH3-H2O_T={T}_activity={activity:.0e}_[NH3]={ligand_conc["NH3"]}M_[Gly]={ligand_conc["Gly"]}M_[CN]={ligand_conc["CN"]}_Smith1989CriticalConstants.png'
+            # filename = f'Pt-NH3-H2O_T={T}_activity={activity:.0e}_[NH3]={ligand_conc["NH3"]}M_[Gly]={ligand_conc["Gly"]}M_[CN]={ligand_conc["CN"]}_Harrington.png'
+            plotter = GridPlotter(pH_range, V_range, metal_data, grid_size, save_fig=True, dir = f'/home/x-ntian/pourbaix_paper/Accelerated-Computational-Materials-Discovery-for-Electrochemical-Nutrient-Recovery/Figures/pourbaix_diagrams/{metal}', filename=filename)
 
             # Stability and plotting
             stability_calculator = StabilityCalculator(plotter, all_species, thermo, metal_data)

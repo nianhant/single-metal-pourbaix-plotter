@@ -269,7 +269,8 @@ class GridPlotter:
             os.makedirs(output_dir, exist_ok=True)
             if self.filename == None:
                 self.filename = f'{output_dir}/{self.data.metal}-NH3-H2O_T={self.data.T}_activity={activity:.0e}_[NH3]={self.data.ligand_concentration["NH3"]}M_[Gly]={self.data.ligand_concentration["Gly"]}M_[CN]={self.data.ligand_concentration["CN"]}.png'
-
+            else:
+                self.filename = f'{output_dir}/{self.filename}'
             plt.savefig(self.filename, bbox_inches='tight')
             #             plt.savefig(f'figures/pourbaix_diagrams/{self.data.metal}-NH3-H2O_activity_Smith1989CriticalConstants_{self.data.metal}_42.4={activity:.0e}_[NH3]={self.data.ligand_concentration["NH3"]}M_[Gly]={self.data.ligand_concentration["Gly"]}M_[CN]={self.data.ligand_concentration["CN"]}.png', bbox_inches='tight')
     

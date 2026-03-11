@@ -4,11 +4,19 @@ from pymatgen.analysis.pourbaix_diagram import PourbaixDiagram, PourbaixPlotter,
 from pymatgen.entries.computed_entries import ComputedEntry
 from pymatgen.analysis.phase_diagram import PDEntry, PhaseDiagram
 from mp_api.client import MPRester
+from typing import Optional
+
 import re
 
-mpr_key = "hhsFnwPlqjxA77yv1zKSYGbynYuPJpR6"
-mpr = MPRester(mpr_key)
 
+def get_mpr(api_key: Optional[str] = None) -> MPRester:
+    key = api_key or os.getenv("MP_API_KEY") or os.getenv("MAPI_KEY")
+    if not key:
+        raise ValueError(
+            "No Materials Project API key provided. "
+            "Pass `api_key` or set MP_API_KEY / MAPI_KEY in your environment."
+        )
+    return MPRester(key)
 
 # Ensure 'data' directory exists
 if not os.path.exists('data'):
@@ -19,7 +27,7 @@ def save_as_json(data, filename):
         json.dump(data, json_file, indent=4)
 
         
-def get_ion_formation_energy(metal):
+def get_ion_formation_energy(metal, mpr):
     ion_formation_eng = {}
     
     pourbaix_entries = mpr.get_pourbaix_entries([metal])
@@ -38,7 +46,7 @@ def get_ion_formation_energy(metal):
 
 
 
-def get_solid_formation_energy(metal):
+def get_solid_formation_energy(metal, mpr):
     # returns per metal formation energy, not total
     solid_formation_eng = {}    
     pourbaix_entries = mpr.get_pourbaix_entries([metal])
