@@ -6,7 +6,10 @@ class Thermodynamics:
         self.T = T# 348.15 #298.15 # K
         self.mu_H2O = -2.458  # Reference for water
         self.correct_ion=True
-    
     def apply_ion_correction(self, species):
-        return species.mu + self.kB*self.T*np.log(species.activity)
+        a = max(species.activity, 1e-30)
+        return species.mu + self.kB * self.T * np.log(a)
+    
+    # def apply_ion_correction(self, species):
+    #     return species.mu + self.kB*self.T*np.log(species.activity)
     

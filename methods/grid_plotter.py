@@ -31,22 +31,32 @@ class GridPlotter:
          'CN': self.pCN_grid
     }
         
+    def _large_pL_grid(self, large_pL=100):
+        # print('hitting large pL grid')
+        return np.full_like(self.pH_grid, large_pL, dtype=float)
+    
     def generate_pNO2_grid(self, pKa=3.92):
         NO2_tot = self.data.ligand_concentration['NO2']
+        if NO2_tot <= 0:
+            return self._large_pL_grid()
         return (- np.log10(NO2_tot) + np.log10(1 + 10 ** (pKa - self.pH_grid)))
     
     def generate_pNH3_grid(self, pKa=9.25):
         NH3_tot = self.data.ligand_concentration['NH3']
+        if NH3_tot <= 0:
+            return self._large_pL_grid()
         return (- np.log10(NH3_tot) + np.log10(1 + 10 ** (pKa - self.pH_grid)))
     
     def generate_pCN_grid(self, pKa=9.2):
         CN_tot = self.data.ligand_concentration['CN']
+        if CN_tot <= 0:
+            return self._large_pL_grid()
         return (- np.log10(CN_tot) + np.log10(1 + 10 ** (pKa - self.pH_grid)))
     
     def generate_pGly_grid(self, pKa1=2.35, pKa2=9.78):
         Gly_tot = self.data.ligand_concentration['Gly']
-#         print(f'glytot={Gly_tot}')
-    
+        if Gly_tot <= 0:
+            return self._large_pL_grid()
         return (- np.log10(Gly_tot) + (pKa1 - self.pH_grid) 
                 + np.log10(1 + 10 ** (self.pH_grid - pKa1) 
                            + 1/(10 ** (self.pH_grid - pKa2))))
@@ -261,8 +271,7 @@ class GridPlotter:
         
         ax.legend(handles=legend_elements,loc='center left', bbox_to_anchor=(1.05, 0.58), borderaxespad=0.)
         
-        
-        
+    
         if self.save_fig:
             activity = self.data.ion_activity
             output_dir = os.path.join("figures", self.dir)
@@ -272,5 +281,5 @@ class GridPlotter:
             else:
                 self.filename = f'{output_dir}/{self.filename}'
             plt.savefig(self.filename, bbox_inches='tight')
-            #             plt.savefig(f'figures/pourbaix_diagrams/{self.data.metal}-NH3-H2O_activity_Smith1989CriticalConstants_{self.data.metal}_42.4={activity:.0e}_[NH3]={self.data.ligand_concentration["NH3"]}M_[Gly]={self.data.ligand_concentration["Gly"]}M_[CN]={self.data.ligand_concentration["CN"]}.png', bbox_inches='tight')
+            print('saved figure to', self.filename)
     

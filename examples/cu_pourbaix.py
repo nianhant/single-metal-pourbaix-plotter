@@ -63,8 +63,13 @@ ligand_concentration_list = [aqueous_only, exp, with_CN,
                              {'NH3':0.02, 'NO2':0, 'Gly': 0.1, 'CN':0},
                              {'NH3':0.02, 'NO2':0, 'Gly': 0.1, 'CN':1e-4}]
 
-# ligand_concentration_list = [{'NH3':0.02, 'NO2':0, 'Gly': 0.005, 'CN':0},
-#                              {'NH3':0.02, 'NO2':0, 'Gly': 0.005, 'CN':1e-4}]
+ligand_concentration_list = [{'NH3':0.02, 'NO2':0, 'Gly': 0.005, 'CN':0},
+                             {'NH3':0.02, 'NO2':0, 'Gly': 0.005, 'CN':1e-4},
+                             {'NH3':0., 'NO2':0, 'Gly': 0.0, 'CN':1e-2},
+                             {'NH3':0.02, 'NO2':0, 'Gly': 0.00, 'CN':0},
+                             {'NH3':0.0, 'NO2':0, 'Gly': 0.00, 'CN':0}]
+meng_concentration = {'NH3': 1, 'NO2': 0, 'Gly': 0, 'CN': 0}
+ligand_concentration_list = [meng_concentration]
 # -------------------------------------
 # Ligand Chemical Potentials
 # -------------------------------------
@@ -86,22 +91,18 @@ data_loader.save_to_csv('../data/metal_complex_energies.csv')
 # Target Metals and Constants
 # -------------------------------------
 metal_list = ['Cu','Au','Ni','Pt','Pd','Ti','Co','Mg','Mn','Zn','Fe', 'Ag']
-# metal_list = ['Co','Mg','Mn','Zn','Fe', 'Ag']
 metal_list = ['Ni']
-metal_list = ['Pt']
-metal_list = ['Sr']
 
 activity_list = [1e-2, 1e-3, 1e-4,1e-5, 1e-6,1e-7,1e-8]
-# activity_list = [1e-1, 1e-2, 1e-3]
-# activity_list = [1e-4, 1e-5, 1e-6,]
 
 T_list = [298.15,308.15,318.15,328.15,338.15,348.15,358.15]
 metal_stable_regions = {}
 T = 298.15
 activity = 1e-4
 # diff_list = [-0.1, -0.05, 0, 0.05, 0.075, 0.1, 0.125, 0.15]
-diff_list = [-0.25,-0.2, -0.15, -0.1, -0.05, 0, 0.05, 0.1, 0.15, 0.2, 0.25]
-
+# diff_list = [-0.25,-0.2, -0.15, -0.1, -0.05, 0, 0.05, 0.1, 0.15, 0.2, 0.25]
+def kJmol_to_eV(x):
+    return x / 96.485
 # -------------------------------------
 # Main Loop Over Metals and Ligands
 # -------------------------------------
@@ -111,6 +112,14 @@ for metal in metal_list:
     # for activity in activity_list:
         for ligand_conc in ligand_concentration_list:
             target_df = df[df['metal'] == metal]
+            target_df = df[df['metal'] == metal].copy()
+            
+            ligand_mu_eV = kJmol_to_eV(target_df["G_ligand (kJ/mol)"])
+            # target_df["del_G_eV_adj"] = (
+            #     target_df["del_G_eV"]
+            #     - ligand_mu_eV * target_df["n_complex"]
+            # )
+            # metal_complex = target_df.set_index('species')['del_G_eV_adj'].to_dict()
             metal_complex = target_df.set_index('species')['del_G_eV'].to_dict()
             
             # Manually override missing data
@@ -162,27 +171,43 @@ for metal in metal_list:
 
             # Combine species
             all_species = []
+            # for phase, chem_pot in [('bulk', solid_eng), ('aqueous_ion', ion_eng)]:
             for phase, chem_pot in [('bulk', solid_eng), ('aqueous_ion', ion_eng), ('complex', metal_complex)]:
                 for formula in chem_pot:
+                    if phase == 'bulk':
+                        activity = 0
+                    # elif phase == 'complex':
+                    #     activity =ligand_conc['NH3'] #ligand_conc.get(formula.split('[')[0], 0) 
+                    #     print(f"Complex {formula} has activity {activity}")
+
                     species = Species(
                         formula=formula,
                         metal=metal,
                         thermo=thermo,
                         data=metal_data,
                         phase=phase,
-                        activity=0 if phase == 'bulk' else activity
+                        activity= activity
                     )
+                    if phase == 'complex':
+                        print(f"Complex {formula} has activity {species.activity}")
+
+                    #     if 'NH3' in formula:
+                    #         all_species.append(species)
+                    #     else:
+                    #         continue
                     all_species.append(species)
 
             # Grid and plotting
             pH_range = (-2, 16)
             V_range = (-2, 3)
-            grid_size = 400
+            grid_size = 100
             filename = None
             # filename =f'Ni-NH3-H2O_T={T}_activity={activity:.0e}_[NH3]={ligand_conc["NH3"]}M_[Gly]={ligand_conc["Gly"]}M_[CN]={ligand_conc["CN"]}_diff={diff}eV.png'
             # filename = f'Pd-NH3-H2O_T={T}_activity={activity:.0e}_[NH3]={ligand_conc["NH3"]}M_[Gly]={ligand_conc["Gly"]}M_[CN]={ligand_conc["CN"]}_Smith1989CriticalConstants.png'
             # filename = f'Pt-NH3-H2O_T={T}_activity={activity:.0e}_[NH3]={ligand_conc["NH3"]}M_[Gly]={ligand_conc["Gly"]}M_[CN]={ligand_conc["CN"]}_Harrington.png'
-            plotter = GridPlotter(pH_range, V_range, metal_data, grid_size, save_fig=True, dir = f'/home/x-ntian/pourbaix_paper/Accelerated-Computational-Materials-Discovery-for-Electrochemical-Nutrient-Recovery/Figures/pourbaix_diagrams/{metal}', filename=filename)
+            # paper_dir = f'/home/x-ntian/pourbaix_paper/Accelerated-Computational-Materials-Discovery-for-Electrochemical-Nutrient-Recovery/Figures/pourbaix_diagrams{metal}'
+            dir = f'figures/updated_pourbaix/{metal}'
+            plotter = GridPlotter(pH_range, V_range, metal_data, grid_size, save_fig=True, dir = dir, filename=filename)
 
             # Stability and plotting
             stability_calculator = StabilityCalculator(plotter, all_species, thermo, metal_data)

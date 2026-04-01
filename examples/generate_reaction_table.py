@@ -50,6 +50,8 @@ def build_reaction_string(reaction: Reaction) -> str:
     products: List[Tuple[float, str]] = []
 
     reactants.append((mb["fraction"], species_latex(reaction.reactant.formula, reaction.reactant.phase)))
+    # print(f"Reactant: {reaction.reactant.formula} ({reaction.reactant.phase})", f"product: {reaction.product.formula} ({reaction.product.phase})")
+    # print(f"mass balance ligand: {mb['n_L']}")
     products.append((1, species_latex(reaction.product.formula, reaction.product.phase)))
 
     if mb["n_H"] > 0:
@@ -70,9 +72,12 @@ def build_reaction_string(reaction: Reaction) -> str:
     for ligand, count in mb["n_L"].items():
         ligand_tex = fr"\ce{{{ligand}}}"
         if count > 0:
-            reactants.append((count, ligand_tex))
+            products.append((count, ligand_tex))
         elif count < 0:
-            products.append((-count, ligand_tex))
+            reactants.append((-count, ligand_tex))
+    # if 'NH3' in mb['n_L']:
+    #     print('reactants', reactants)
+    #     print('products', products)
 
     left = " + ".join(f"{coeff_str(c)}{sp}" for c, sp in reactants)
     right = " + ".join(f"{coeff_str(c)}{sp}" for c, sp in products)
@@ -96,9 +101,9 @@ def build_species_for_metal(
 ):
     thermo = Thermodynamics(T=ROOM_TEMPERATURE_K)
 
-    with open(ROOT / "data" / f"{metal}_solid_formation_energy.json", "r", encoding="utf-8") as f:
+    with open(ROOT / "examples/data" / f"{metal}_solid_formation_energy.json", "r", encoding="utf-8") as f:
         solid_eng = json.load(f)
-    with open(ROOT / "data" / f"{metal}_ion_formation_energy.json", "r", encoding="utf-8") as f:
+    with open(ROOT / "examples/data" / f"{metal}_ion_formation_energy.json", "r", encoding="utf-8") as f:
         ion_eng = json.load(f)
 
     target_df = complex_df[complex_df["metal"] == metal]
@@ -163,6 +168,8 @@ def generate_reactions_for_metal(
 
     stable_regions = StabilityCalculator(plotter, all_species, thermo, metal_data).compute_stable_regions()
     species_with_area = [sp for sp, mask in stable_regions.items() if np.any(mask)]
+    # print(f"Found stable regions for {len(species_with_area)} species: {species_with_area}")
+    # print(species_with_area)
 
     reactions: List[str] = []
     for i, sp_a in enumerate(species_with_area):
@@ -170,13 +177,16 @@ def generate_reactions_for_metal(
             if not touches(stable_regions[sp_a], stable_regions[sp_b]):
                 continue
 
-            if (sp_b.formula, sp_b.phase) < (sp_a.formula, sp_a.phase):
-                rxn = Reaction(sp_b, sp_a, thermo, metal_data)
-            else:
-                rxn = Reaction(sp_a, sp_b, thermo, metal_data)
+            # if (sp_b.formula, sp_b.phase) < (sp_a.formula, sp_a.phase):
+            #     rxn = Reaction(sp_b, sp_a, thermo, metal_data)
+            # else:
+            rxn = Reaction(sp_a, sp_b, thermo, metal_data)
+            # print(rxn.reactant.formula, rxn.reactant.phase, rxn.product.formula, rxn.product.phase)
+
 
             reactions.append(build_reaction_string(rxn))
-
+    # print(set(reactions))
+    # 
     return sorted(set(reactions))
 
 
@@ -212,7 +222,7 @@ def main() -> None:
     parser.add_argument("--output-dir", default="data/paper/reactions")
     args = parser.parse_args()
 
-    ligand_conc = {"NH3": args.nh3, "NO2": 0.0, "Gly": 0.0, "CN": 0.0}
+    ligand_conc = {"NH3": args.nh3, "NO2": 0, "Gly": 0, "CN": 0.0}
 
     data_loader = MetalComplexDataLoader(str(ROOT / "data" / "metal_complex_del_G.json"))
     complex_df = data_loader.load()

@@ -12,12 +12,13 @@ class Species:
         self.metal = metal
         self.thermo = thermo
         self.data = data
-        self.phase = phase #'bulk', 'aqueous_ion','ligand','complex'
+        self.phase = phase #'bulk', 'aqueous_ion','complex'
         self.activity = activity
         self.ligand = None
         self.mu = self.get_mu()
         if self.phase == 'complex':
             self.composition = self.parse_complex_composition()
+            self.activity = data.ligand_concentration[self.ligand]
             
         else:
             self.composition = self.parse_formula_composition()

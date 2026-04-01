@@ -38,7 +38,7 @@ set_publication_style()
 aqueous_only = {'NH3': 0, 'NO2': 0, 'Gly': 0, 'CN': 0}
 no_CN = {'NH3': 0.02, 'NO2': 0, 'Gly': 0.005, 'CN': 0}
 with_CN = {'NH3': 0.02, 'NO2': 0, 'Gly': 0.005, 'CN': 1e-4}
-experiment_concentration = {'NH3':0.05, 'NO2':0, 'Gly': 0.1, 'CN':0}
+experiment_concentration = {'NH3':0.05, 'NO2':0, 'Gly': 0.1, 'CN':0.001}
 ligand_concentration_list = [experiment_concentration]
 
 # -------------------------------------
@@ -54,12 +54,10 @@ mu_ligand = {
 # -------------------------------------
 # Load Metal Complex Energies
 # -------------------------------------
-# df = pd.read_csv('data/metal_complex_energies.csv')
-# df = pd.read_json('data/metal_complex_del_G.json')
-del_G_json_path = 'data/metal_complex_del_G.json'
+del_G_json_path = '../data/metal_complex_del_G.json'
 data_loader = MetalComplexDataLoader(del_G_json_path)
 df = data_loader.load()
-data_loader.save_to_csv('data/metal_complex_energies.csv')
+data_loader.save_to_csv('../data/metal_complex_energies.csv')
 # -------------------------------------
 # Target Metals and Constants
 # -------------------------------------
@@ -74,11 +72,20 @@ T = 298.15
 # -------------------------------------
 # Main Loop Over Metals and Ligands
 # -------------------------------------
+def kJmol_to_eV(x):
+    return x / 96.485
+
 for metal in metal_list:
     for activity in activity_list:
         for ligand_conc in ligand_concentration_list:
-            target_df = df[df['metal'] == metal]
-            metal_complex = target_df.set_index('species')['del_G_eV'].to_dict()
+            target_df = df[df['metal'] == metal].copy()
+            ligand_mu_eV = kJmol_to_eV(target_df["G_ligand (kJ/mol)"])
+
+            target_df["del_G_eV_adj"] = (
+                target_df["del_G_eV"]
+                + ligand_mu_eV * target_df["n_complex"]
+            )
+            metal_complex = target_df.set_index('species')['del_G_eV_adj'].to_dict()
             
             # Manually override missing data
             if metal == 'Pd':

@@ -54,7 +54,8 @@ def get_solid_formation_energy(metal, mpr):
     solid_entries = [entry for entry in pourbaix_entries if entry.phase_type == "Solid"]
     entries_HO = [ComputedEntry("H", 0), ComputedEntry("O", 2.46)]
     solid_pd = PhaseDiagram(solid_entries + entries_HO)
-    solid_entries = list(set(solid_pd.stable_entries) - set(entries_HO))
+    # solid_entries = list(set(solid_pd.stable_entries) - set(entries_HO))
+    solid_entries = list(set(solid_pd.entries) - set(entries_HO))
     
     for entry in solid_entries:
         formula = entry.composition.formula
