@@ -2,7 +2,21 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
 import matplotlib.ticker as ticker
-from ase.formula import Formula
+try:
+    from ase.formula import Formula
+except ModuleNotFoundError:
+    class Formula:
+        def __init__(self, formula):
+            self.formula = formula
+
+        def __eq__(self, other):
+            return self.formula == other
+
+        def reduce(self):
+            return (self, 1)
+
+        def __format__(self, spec):
+            return self.formula
 import re
 import os
 
@@ -75,9 +89,12 @@ class GridPlotter:
             formatted_formula = re.sub(r"\^\{1([+-])\}", r"^{\1}", formatted_formula)
 
         else:
-            
             formula = Formula(formula)
-            formula = formula.reduce()[0]
+            # print(dir(formula))
+            if formula == 'NiHO2':
+                formula = Formula('NiOOH')
+            else:
+                formula = formula.reduce()[0]
             formatted_formula = f'{formula:latex}'
         return formatted_formula
 
@@ -110,43 +127,114 @@ class GridPlotter:
             rotation = 45
             x +=1
             fontsize = 10
-            ax.text(x, y, label, ha=ha, va=va, color=color, rotation=rotation,fontsize=fontsize)
-            return
+            return ax.text(x, y, label, ha=ha, va=va, color=color, rotation=rotation,fontsize=fontsize)
             
         if self.data.ligand_concentration['Gly'] != 0:
             if label == 'Ag$_{2}$O(s)':
                 fontsize = 10 
-                ax.text(x, y, label, ha=ha, va=va, color=color, rotation=rotation,fontsize=fontsize)
+                return ax.text(x, y, label, ha=ha, va=va, color=color, rotation=rotation,fontsize=fontsize)
             elif self.data.ligand_concentration['CN'] != 0 and label == 'AgO(s)' :
                 fontsize = 10 
                 x += 1
-                ax.text(x, y, label, ha=ha, va=va, color=color, rotation=-3.39)
+                return ax.text(x, y, label, ha=ha, va=va, color=color, rotation=-3.39)
             elif label == 'Fe(Gly)$_{2}$$^{2+}$(aq)':
                 fontsize = 12
                 x += 1
-                ax.text(x, y, label, ha=ha, va=va, color=color, rotation=rotation,fontsize=fontsize)
+                return ax.text(x, y, label, ha=ha, va=va, color=color, rotation=rotation,fontsize=fontsize)
             elif label == 'FeO$_{2}$$^{2-}$(aq)':
                 fontsize = 12
                 x += 0.3
-                ax.text(x, y, label, ha=ha, va=va, color=color, rotation=rotation,fontsize=fontsize)
+                return ax.text(x, y, label, ha=ha, va=va, color=color, rotation=rotation,fontsize=fontsize)
             elif label == 'FeO(s)' or label == 'Fe$_{3}$O$_{4}$(s)':
                 fontsize = 12
                 x += 1
                 if label == 'FeO(s)':
                     y -= 0.1
-                ax.text(x, y, label, ha=ha, va=va, color=color, rotation=-3.39,fontsize=10)
+                return ax.text(x, y, label, ha=ha, va=va, color=color, rotation=-3.39,fontsize=10)
             elif label == 'CuO$_{2}$$^{2-}$(aq)' or label == 'Cu$_{2}O$(s)' :
                 fontsize = 13
                 x += 0.6
-                ax.text(x, y, label, ha=ha, va=va, color=color, rotation=rotation,fontsize=fontsize)
+                return ax.text(x, y, label, ha=ha, va=va, color=color, rotation=rotation,fontsize=fontsize)
 
             else:
             
-                ax.text(x, y, label, ha=ha, va=va, color=color, rotation=rotation)
+                return ax.text(x, y, label, ha=ha, va=va, color=color, rotation=rotation)
         
         else:
             
-            ax.text(x, y, label, ha=ha, va=va, color=color, rotation=rotation)
+            return ax.text(x, y, label, ha=ha, va=va, color=color, rotation=rotation)
+
+    def _label_extent(self, label, rotation=0):
+        width = min(0.22, 0.006 * len(label) + 0.03)
+        height = 0.035
+        if abs(rotation) == 90:
+            width, height = height, min(0.22, 0.006 * len(label) + 0.03)
+        return width, height
+
+    def _data_to_axes_fraction(self, x, y):
+        x_min, x_max = min(self.pH_range), max(self.pH_range)
+        y_min, y_max = min(self.V_range), max(self.V_range)
+        return ((x - x_min) / (x_max - x_min), (y - y_min) / (y_max - y_min))
+
+    def _axes_fraction_to_data(self, x_frac, y_frac):
+        x_min, x_max = min(self.pH_range), max(self.pH_range)
+        y_min, y_max = min(self.V_range), max(self.V_range)
+        return (x_min + x_frac * (x_max - x_min), y_min + y_frac * (y_max - y_min))
+
+    def _label_overlaps(self, candidate, placed_labels, pad=0.01):
+        x, y, width, height = candidate
+        for placed_x, placed_y, placed_width, placed_height in placed_labels:
+            if (abs(x - placed_x) < (width + placed_width) / 2 + pad and
+                    abs(y - placed_y) < (height + placed_height) / 2 + pad):
+                return True
+        return False
+
+    def _region_needs_offset_label(self, pH_stable, eU_stable, label, rotation, placed_labels):
+        pH_span = max(pH_stable) - min(pH_stable)
+        eU_span = max(eU_stable) - min(eU_stable)
+        pH_axis_span = max(self.pH_range) - min(self.pH_range)
+        eU_axis_span = max(self.V_range) - min(self.V_range)
+        thin_region = pH_span / pH_axis_span < 0.04 or eU_span / eU_axis_span < 0.04
+
+        x_frac, y_frac = self._data_to_axes_fraction(np.mean(pH_stable), np.mean(eU_stable))
+        width, height = self._label_extent(label, rotation)
+        overlaps_existing_label = self._label_overlaps((x_frac, y_frac, width, height), placed_labels)
+        return thin_region or overlaps_existing_label
+
+    def _place_nonoverlapping_label(self, ax, x, y, label, rotation, placed_labels, force_offset=False, color='k'):
+        x_frac, y_frac = self._data_to_axes_fraction(x, y)
+        width, height = self._label_extent(label, rotation)
+        candidate_offsets = [(0, 0)]
+        if force_offset:
+            candidate_offsets = []
+        candidate_offsets += [
+            (0.08, 0.05), (0.08, -0.05), (-0.08, 0.05), (-0.08, -0.05),
+            (0.12, 0), (-0.12, 0), (0, 0.08), (0, -0.08),
+            (0.16, 0.08), (0.16, -0.08), (-0.16, 0.08), (-0.16, -0.08),
+        ]
+
+        for dx, dy in candidate_offsets:
+            label_x_frac = min(max(x_frac + dx, 0.03), 0.97)
+            label_y_frac = min(max(y_frac + dy, 0.03), 0.97)
+            candidate = (label_x_frac, label_y_frac, width, height)
+            if not self._label_overlaps(candidate, placed_labels):
+                label_x, label_y = self._axes_fraction_to_data(label_x_frac, label_y_frac)
+                placed_labels.append(candidate)
+                if dx == 0 and dy == 0:
+                    return self.place_label_within_bounds(ax, label_x, label_y, label, rotation, color=color)
+                return ax.annotate(
+                    label,
+                    xy=(x, y),
+                    xytext=(label_x, label_y),
+                    ha='center',
+                    va='center',
+                    color=color,
+                    rotation=rotation,
+                    arrowprops=dict(arrowstyle='-', lw=0.6, color=color, shrinkA=2, shrinkB=2),
+                )
+
+        placed_labels.append((x_frac, y_frac, width, height))
+        return self.place_label_within_bounds(ax, x, y, label, rotation, color=color)
 
 
     def count_solid_species(self, stable_regions):
@@ -181,7 +269,7 @@ class GridPlotter:
         legend_elements.append(h_line_plot)
         legend_elements.append(o_line_plot)
     
-    def add_plot_accessories(self, ax, legend_elements, pH_exp_range=(11.5,13.5), V_exp_range=(-2, 2.3), ):
+    def add_plot_accessories(self, ax, legend_elements, pH_exp_range=(11.5,13.5), V_exp_range=(-2, 2.3),rxn_box = True): 
         # V_exp_range is referenced to RHE
         # SHE = RHE - kB T ln(10) pH
         PREFAC = 0.0591
@@ -196,12 +284,13 @@ class GridPlotter:
         
         lw = 1
         # Draw the four sides of the box as a function of pH
-        style = 'g-'
-        bottom, = ax.plot([box_left, box_right], [V_left_bottom, V_right_bottom], style, lw=lw, label = f'Exp condition\nV vs RHE={V_exp_range[0]}-{V_exp_range[1]}\npH={pH_exp_range[0]}-{pH_exp_range[1]}')  # Bottom side (V as a function of pH)
-        top, = ax.plot([box_left, box_right], [V_left_top, V_right_top], style, lw=lw, label = f'{V_exp_range[1]}V vs RHE')        # Top side (V as a function of pH)
-        left, = ax.plot([box_left, box_left], [V_left_bottom, V_left_top], style, lw=lw, label = f'pH={pH_exp_range[0]}')       # Left side (fixed pH = box_left)
-        right, = ax.plot([box_right, box_right], [V_right_bottom, V_right_top], style, lw=lw,label = f'pH={pH_exp_range[1]}')     # Right side (fixed pH = box_right)
-        legend_elements.append(bottom)
+        if rxn_box:
+            style = 'g-'
+            bottom, = ax.plot([box_left, box_right], [V_left_bottom, V_right_bottom], style, lw=lw, label = f'Exp condition\nV vs RHE={V_exp_range[0]}-{V_exp_range[1]}\npH={pH_exp_range[0]}-{pH_exp_range[1]}')  # Bottom side (V as a function of pH)
+            top, = ax.plot([box_left, box_right], [V_left_top, V_right_top], style, lw=lw, label = f'{V_exp_range[1]}V vs RHE')        # Top side (V as a function of pH)
+            left, = ax.plot([box_left, box_left], [V_left_bottom, V_left_top], style, lw=lw, label = f'pH={pH_exp_range[0]}')       # Left side (fixed pH = box_left)
+            right, = ax.plot([box_right, box_right], [V_right_bottom, V_right_top], style, lw=lw,label = f'pH={pH_exp_range[1]}')     # Right side (fixed pH = box_right)
+            legend_elements.append(bottom)
 
         
 
@@ -215,10 +304,8 @@ class GridPlotter:
         return rotation
         
     
-    def plot_stable_regions(self, stable_regions, species_label_dict):
+    def plot_stable_regions(self, stable_regions, species_label_dict, rxn_box = True, show_legend = True):
         total_solid, total_aq = self.count_solid_species( stable_regions)
-#         self.save_stable_species(stable_regions)
-
         fig, ax = plt.subplots(figsize=(8, 8))
         ax.set_xlabel('pH')
         ax.set_ylabel(r'$E_{SHE}(V)$')
@@ -227,6 +314,7 @@ class GridPlotter:
         ax.yaxis.set_tick_params(which='both', direction='in', left=True, right=True)
 
         legend_elements = []
+        placed_labels = []
         
         solid_index = 0
         aq_index = 0
@@ -252,7 +340,10 @@ class GridPlotter:
                         product_label+='(aq)'
                     color = self.get_color_for_label(product_label, aq_index, total_aq)
                 
-                ax.scatter(pH_stable, eU_stable, s=1, label=product_label, color=color, alpha=1)
+                ax.scatter(
+                    pH_stable, eU_stable, s=1, label=product_label,
+                    color=color, alpha=1, rasterized=True
+                )
                 
                 legend_elements.append(Line2D([0], [0], marker='o', color='w', 
                                               markerfacecolor=color, markersize=10, label=product_label))
@@ -261,15 +352,19 @@ class GridPlotter:
                 centroid_eU = np.mean(eU_stable)
                 
                 rotation = self.compute_rotation(pH_stable, eU_stable)
-                
-                
-                
-                self.place_label_within_bounds(ax, centroid_pH, centroid_eU, product_label,rotation)
+                force_offset = self._region_needs_offset_label(
+                    pH_stable, eU_stable, product_label, rotation, placed_labels
+                )
+                self._place_nonoverlapping_label(
+                    ax, centroid_pH, centroid_eU, product_label, rotation,
+                    placed_labels, force_offset=force_offset
+                )
                 
         self.add_H2_O2_lines(ax, legend_elements)
-        self.add_plot_accessories(ax, legend_elements)
+        self.add_plot_accessories(ax, legend_elements, rxn_box=rxn_box)
         
-        ax.legend(handles=legend_elements,loc='center left', bbox_to_anchor=(1.05, 0.58), borderaxespad=0.)
+        if show_legend:
+            ax.legend(handles=legend_elements,loc='center left', bbox_to_anchor=(1.05, 0.58), borderaxespad=0.)
         
     
         if self.save_fig:
@@ -278,6 +373,8 @@ class GridPlotter:
             os.makedirs(output_dir, exist_ok=True)
             if self.filename == None:
                 self.filename = f'{output_dir}/{self.data.metal}-NH3-H2O_T={self.data.T}_activity={activity:.0e}_[NH3]={self.data.ligand_concentration["NH3"]}M_[Gly]={self.data.ligand_concentration["Gly"]}M_[CN]={self.data.ligand_concentration["CN"]}.png'
+            elif self.filename == 'pdf':
+                self.filename = f'{output_dir}/{self.data.metal}-NH3-H2O_T={self.data.T}_activity={activity:.0e}_[NH3]={self.data.ligand_concentration["NH3"]}M_[Gly]={self.data.ligand_concentration["Gly"]}M_[CN]={self.data.ligand_concentration["CN"]}.pdf'
             else:
                 self.filename = f'{output_dir}/{self.filename}'
             plt.savefig(self.filename, bbox_inches='tight')

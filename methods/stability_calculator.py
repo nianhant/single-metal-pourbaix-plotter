@@ -1,95 +1,63 @@
+from dataclasses import dataclass
+
 import numpy as np
-import itertools
+
 from reaction import Reaction
+
+
+@dataclass(frozen=True)
+class StabilityResult:
+    species_list: list
+    stable_index_grid: np.ndarray
+    stable_mu_grid: np.ndarray
+
+
 class StabilityCalculator:
     def __init__(self, gridplotter, all_species, thermo, data):
         self.grid = gridplotter
-        self.all_species = all_species
+        self.all_species = list(all_species)
         self.thermo = thermo
         self.data = data
+        self._self_reactions = [
+            Reaction(species, species, self.thermo, self.data)
+            for species in self.all_species
+        ]
 
+    def _energy_grid_shape(self):
+        return self.grid.pH_grid.shape
+
+    def _compute_species_energy_stack(self, dtype):
+        shape = (len(self._self_reactions),) + self._energy_grid_shape()
+        energy_stack = np.empty(shape, dtype=dtype)
+
+        for index, reaction in enumerate(self._self_reactions):
+            energy_stack[index] = reaction.calculate_energy_grid(self.grid)
+
+        return energy_stack
 
     def compute_stability(self, dtype=np.float32):
-        nx, ny = self.grid.pH_grid.shape
+        if not self.all_species:
+            empty_shape = self._energy_grid_shape()
+            return StabilityResult(
+                species_list=[],
+                stable_index_grid=np.full(empty_shape, -1, dtype=np.int32),
+                stable_mu_grid=np.full(empty_shape, np.inf, dtype=dtype),
+            )
 
-        best_mu = np.full((nx, ny), np.inf, dtype=dtype)
-        best_idx = np.full((nx, ny), -1, dtype=np.int32)
+        energy_stack = self._compute_species_energy_stack(dtype=dtype)
+        stable_index_grid = np.argmin(energy_stack, axis=0).astype(np.int32, copy=False)
+        stable_mu_grid = np.min(energy_stack, axis=0)
 
-        for i, species in enumerate(self.all_species):
-            reaction = Reaction(species, species, self.thermo, self.data)
-            mu = reaction.calculate_energy_grid(self.grid)
-            better = mu < best_mu
-            best_mu[better] = mu[better]
-            best_idx[better] = i
-
-        return {
-            "species_list": self.all_species,
-            "stable_index_grid": best_idx,
-            "stable_mu_grid": best_mu,
-        }
+        return StabilityResult(
+            species_list=self.all_species,
+            stable_index_grid=stable_index_grid,
+            stable_mu_grid=stable_mu_grid,
+        )
 
     def compute_stable_regions(self):
         result = self.compute_stability()
-        idx = result["stable_index_grid"]
+        idx = result.stable_index_grid
         return {
             species: (idx == i)
             for i, species in enumerate(self.all_species)
         }
-    
-    # def compute_stable_regions(self):
-    #     # stable_regions = {species: np.full((self.grid.grid_size, self.grid.grid_size), True) for species in self.combined_species}
-    #     species_list = list(self.combined_species)
-    #     n_species = len(species_list)
-
-    #     mu_stack = np.empty((n_species, self.grid.grid_size, self.grid.grid_size))
-    #     for i, species in enumerate(species_list):
-    #         # print(species.formula)
-            
-    #         reaction = Reaction(species, species, self.thermo, self.data)
-    #         energy_grid = reaction.calculate_energy_grid(self.grid)
-    #         # print(energy_grid)
-    #         mu_stack[i] = energy_grid
-
-    #     stable_index_grid = np.argmin(mu_stack, axis=0)
-    #     stable_regions = {
-    #         species: (stable_index_grid == i)
-    #         for i, species in enumerate(species_list)
-    #     }
-
-    #     return stable_regions
-        
-        # reactant_product_pairs = [
-        #     (reactant, product)
-        #     for reactant, product in itertools.combinations(self.combined_species, 2)
-        #     if reactant.formula != product.formula or (reactant.formula == product.formula and reactant.phase != product.phase)
-        # ]
-        # for reactant, product in reactant_product_pairs:
-        #     reaction = Reaction(reactant, product, self.thermo, self.data)
-        #     energy_grid = reaction.calculate_energy_grid(self.grid)
-
-        #     product_stable_indices = energy_grid < 0  # Product stable when energy < 0
-        #     reactant_stable_indices = np.logical_not(product_stable_indices)  # Reactant stable when product is unstable
-
-        #     stable_regions[product] = np.logical_and(stable_regions[product], product_stable_indices)
-        #     stable_regions[reactant] = np.logical_and(stable_regions[reactant], reactant_stable_indices)
-        
-        return stable_regions
-        
-    # def compute_stable_regions(self):
-    #     stable_regions = {species: np.full((self.grid.grid_size, self.grid.grid_size), True) for species in self.combined_species}
-    #     reactant_product_pairs = [
-    #         (reactant, product)
-    #         for reactant, product in itertools.combinations(self.combined_species, 2)
-    #         if reactant.formula != product.formula or (reactant.formula == product.formula and reactant.phase != product.phase)
-    #     ]
-    #     for reactant, product in reactant_product_pairs:
-    #         reaction = Reaction(reactant, product, self.thermo, self.data)
-    #         energy_grid = reaction.calculate_energy_grid(self.grid)
-
-    #         product_stable_indices = energy_grid < 0  # Product stable when energy < 0
-    #         reactant_stable_indices = np.logical_not(product_stable_indices)  # Reactant stable when product is unstable
-
-    #         stable_regions[product] = np.logical_and(stable_regions[product], product_stable_indices)
-    #         stable_regions[reactant] = np.logical_and(stable_regions[reactant], reactant_stable_indices)
-        
-    #     return stable_regions

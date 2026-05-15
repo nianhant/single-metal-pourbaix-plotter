@@ -2,7 +2,14 @@ import numpy as np
 import copy
 
 import re
-from ase.symbols import string2symbols
+try:
+    from ase.symbols import string2symbols
+except ModuleNotFoundError:
+    def string2symbols(formula):
+        symbols = []
+        for element, amount in re.findall(r"([A-Z][a-z]?)(\d*)", formula):
+            symbols.extend([element] * (int(amount) if amount else 1))
+        return symbols
 from scipy.optimize import linprog
 from scipy.spatial import HalfspaceIntersection
 
