@@ -1,0 +1,12 @@
+__pycache__/
+*.py[cod]
+
+# Local environments and editor state
+.venv/
+venv/
+.env
+.DS_Store
+
+# Generated outputs
+figures/
+analysis/
