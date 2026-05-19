@@ -1,6 +1,15 @@
-import copy
-import numpy as np 
-import re
+from dataclasses import dataclass
+
+import numpy as np
+
+
+@dataclass(frozen=True)
+class ReactionCoefficients:
+    eU_coeff: float
+    pH_coeff: float
+    p_ligand_coeff_dict: dict
+    constant: float
+    metal_normalization: float
 
 class Reaction:
     def __init__(self, reactant, product, thermo, data):
@@ -8,67 +17,95 @@ class Reaction:
         self.product = product
         self.thermo = thermo
         self.data = data
+        self._self_energy_coefficients = None
 
-    def calculate_energy_grid(self,grid):
-        
-        composition = copy.deepcopy(self.reactant.composition)
-        # print(composition)
+    @property
+    def coeff(self):
+        return self.thermo.kB * self.thermo.T * np.log(10)
 
-        #  e = e0 + 0.0591 log10(conc) - nO mu_H2O
-        #     + (nH - 2nO) pH + phi (-nH + 2nO + q)
+    def _scaled_composition(self, species, scale=1.0):
+        return {
+            key: value * scale
+            for key, value in species.composition.items()
+        }
 
-        n_H2O = composition['O']
-        n_H = composition['H'] - 2*n_H2O 
-        n_eu = composition['charge'] - n_H
+    def _ligand_term(self, species, grid):
+        if not species.ligand:
+            return 0.0, 0.0
 
+        ligand = species.ligand
+        n_ligand = species.composition[ligand]
+        ligand_standard_energy = n_ligand * self.data.mu_ligand[ligand]
+        p_ligand_grid = grid.ligand_grid_dict[ligand]
+        return ligand_standard_energy, n_ligand * self.coeff * p_ligand_grid
+
+    def self_energy_coefficients(self):
+        if self._self_energy_coefficients is not None:
+            return self._self_energy_coefficients
+
+        composition = self.reactant.composition
+        n_h2o = composition["O"]
+        n_h = composition["H"] - 2 * n_h2o
+        n_eu = composition["charge"] - n_h
         n_metal = composition[self.reactant.metal]
-        n_ligand = 0
-        ligand = None
-        ligand_standard_energy = 0
-        p_ligand_grid = 0
 
-        coeff = self.thermo.kB*self.thermo.T*np.log(10)
-
-        ligand_coeff = 1
-
+        ligand_standard_energy = 0.0
+        p_ligand_coeff_dict = {}
         if self.reactant.ligand:
             ligand = self.reactant.ligand
             n_ligand = composition[ligand]
-            ligand_standard_energy = n_ligand  * self.data.mu_ligand[ligand]
-            a = max(self.data.ligand_concentration[ligand], 1e-30)
-            # ligand_coeff = self.thermo.kB*self.thermo.T*np.log(a)
+            ligand_standard_energy = n_ligand * self.data.mu_ligand[ligand]
+            p_ligand_coeff_dict[ligand] = n_ligand * self.coeff
 
-            p_ligand_grid = grid.ligand_grid_dict[ligand]
-            # print(p_ligand_grid)
-        
-        energy_grid = ( self.reactant.mu 
-                       + n_H * coeff * grid.pH_grid  
-                       - n_eu * grid.V_grid
-                       - n_H2O*self.thermo.mu_H2O 
-                       - ligand_standard_energy)
-        
-        energy_grid += n_ligand * coeff * p_ligand_grid
-        energy_grid /= n_metal
-        return energy_grid
+        self._self_energy_coefficients = ReactionCoefficients(
+            eU_coeff=-n_eu,
+            pH_coeff=n_h * self.coeff,
+            p_ligand_coeff_dict=p_ligand_coeff_dict,
+            constant=self.reactant.mu - n_h2o * self.thermo.mu_H2O - ligand_standard_energy,
+            metal_normalization=n_metal,
+        )
+        return self._self_energy_coefficients
+
+    def calculate_energy_grid(self, grid):
+        if self.reactant is self.product:
+            coefficients = self.self_energy_coefficients()
+            energy_grid = (
+                coefficients.eU_coeff * grid.V_grid
+                + coefficients.pH_coeff * grid.pH_grid
+                + coefficients.constant
+            )
+            for ligand, coeff in coefficients.p_ligand_coeff_dict.items():
+                energy_grid += coeff * grid.ligand_grid_dict[ligand]
+            return energy_grid / coefficients.metal_normalization
+
+        ligand_standard_energy, ligand_grid_term = self._ligand_term(self.reactant, grid)
+        composition = self.reactant.composition
+        n_h2o = composition["O"]
+        n_h = composition["H"] - 2 * n_h2o
+        n_eu = composition["charge"] - n_h
+        n_metal = composition[self.reactant.metal]
+
+        energy_grid = (
+            self.reactant.mu
+            + n_h * self.coeff * grid.pH_grid
+            - n_eu * grid.V_grid
+            - n_h2o * self.thermo.mu_H2O
+            - ligand_standard_energy
+            + ligand_grid_term
+        )
+        return energy_grid / n_metal
 
         
     def compute_mass_balance(self):
         reactant = self.reactant 
         product = self.product
         # return a dictionary of mass balances
-        rea_composition = copy.deepcopy(self.reactant.composition)
-        prod_composition = copy.deepcopy(self.product.composition)
+        rea_composition = dict(self.reactant.composition)
+        prod_composition = dict(self.product.composition)
 
-        mass_balance_comp = {'fraction':1,
-                             'n_H2O':0, # RHS of equation
-                             'n_charge':0, # LHS of equation
-                             'n_L':{},
-                             'n_H':0
-                            } # LHS of equation
         ############## Balance metal elements ##############
-        fraction = prod_composition[product.metal]/rea_composition[reactant.metal]
-        for key in rea_composition:
-            rea_composition[key] *= fraction
+        fraction = prod_composition[product.metal] / rea_composition[reactant.metal]
+        rea_composition = self._scaled_composition(self.reactant, scale=fraction)
 
         # ############## Balance ligand ##############
         if not reactant.ligand and not product.ligand:
@@ -93,12 +130,13 @@ class Reaction:
         n_H = 2*n_H2O + prod_composition['H'] - rea_composition['H']
         ############## Balance charge ##############
         n_charge = prod_composition['charge'] - rea_composition['charge']- n_H
-        mass_balance_comp = {'fraction': fraction,
-                             'n_H2O':n_H2O,
-                             'n_charge':n_charge,
-                             'n_H':n_H,
-                             'n_L':n_L}
-        return mass_balance_comp
+        return {
+            'fraction': fraction,
+            'n_H2O': n_H2O,
+            'n_charge': n_charge,
+            'n_H': n_H,
+            'n_L': n_L,
+        }
     
     def formulate_coefficients(self):
         """
@@ -111,19 +149,14 @@ class Reaction:
         mu_react = self.reactant.mu
         mu_prod = self.product.mu
         
-        reactant_composition = reactant.composition
-        product_composition = product.composition
-        
         mass_balance = self.compute_mass_balance() 
-        # print('reaction:', reactant_composition, '->', product_composition)
-        # print('mass_balance', mass_balance)       
         
         fraction = mass_balance['fraction']
         n_H = mass_balance['n_H']
         n_charge = mass_balance['n_charge']
         n_H2O = mass_balance['n_H2O']
         n_L = mass_balance['n_L']
-        coeff = self.thermo.kB*self.thermo.T*np.log(10)
+        coeff = self.coeff
 
         pH_coeff = n_H * coeff
         eU_coeff = -n_charge
@@ -139,21 +172,27 @@ class Reaction:
             ligand_standard_energy += n * delta_mu_ligand
             p_ligand_coeff_dict[ligand] = n * coeff
 
-        constants = fraction*mu_react - mu_prod - n_H2O*self.thermo.mu_H2O - ligand_standard_energy
-        # constants = fraction*mu_react - mu_prod - n_H2O*self.thermo.mu_H2O
-        # constants -= ligand_standard_energy
-        return  eU_coeff, pH_coeff, p_ligand_coeff_dict, constants
+        constant = fraction * mu_react - mu_prod - n_H2O * self.thermo.mu_H2O - ligand_standard_energy
+        return ReactionCoefficients(
+            eU_coeff=eU_coeff,
+            pH_coeff=pH_coeff,
+            p_ligand_coeff_dict=p_ligand_coeff_dict,
+            constant=constant,
+            metal_normalization=1.0,
+        )
         
 
     def calculate_energy_grid_foo(self,grid):
-        eU_coeff, pH_coeff, p_ligand_coeff_dict, constants = self.formulate_coefficients()
+        coefficients = self.formulate_coefficients()
         
-        energy_grid = eU_coeff * grid.V_grid + pH_coeff * grid.pH_grid  - constants
+        energy_grid = (
+            coefficients.eU_coeff * grid.V_grid
+            + coefficients.pH_coeff * grid.pH_grid
+            - coefficients.constant
+        )
         
-        for ligand in p_ligand_coeff_dict:
-            coeff = p_ligand_coeff_dict[ligand]
-            p_ligand_grid = grid.ligand_grid_dict[ligand]
-            energy_grid -= coeff*p_ligand_grid
+        for ligand, coeff in coefficients.p_ligand_coeff_dict.items():
+            energy_grid -= coeff * grid.ligand_grid_dict[ligand]
         return energy_grid
     
     

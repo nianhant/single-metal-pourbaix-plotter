@@ -69,7 +69,9 @@ ligand_concentration_list = [{'NH3':0.02, 'NO2':0, 'Gly': 0.005, 'CN':0},
                              {'NH3':0.02, 'NO2':0, 'Gly': 0.00, 'CN':0},
                              {'NH3':0.0, 'NO2':0, 'Gly': 0.00, 'CN':0}]
 meng_concentration = {'NH3': 1, 'NO2': 0, 'Gly': 0, 'CN': 0}
-ligand_concentration_list = [meng_concentration]
+ligand_concentration_list = [aqueous_only,
+                            {'NH3':0.02, 'NO2':0, 'Gly': 0.005, 'CN':0},
+                            {'NH3':0.02, 'NO2':0, 'Gly': 0.005, 'CN':0.0001}]
 # -------------------------------------
 # Ligand Chemical Potentials
 # -------------------------------------
@@ -90,12 +92,10 @@ data_loader.save_to_csv('../data/metal_complex_energies.csv')
 # -------------------------------------
 # Target Metals and Constants
 # -------------------------------------
-metal_list = ['Cu','Au','Ni','Pt','Pd','Ti','Co','Mg','Mn','Zn','Fe', 'Ag']
-metal_list = ['Ni']
+metal_list = ['Cu','Au','Ni','Pt','Pd','Ti','Co','Cd','Sr','Mg','Mn','Zn','Fe', 'Ag']
+metal_list = ['Cu','Au','Ni','Pt','Pd','Ti']
+metal_list = ['Pd']
 
-activity_list = [1e-2, 1e-3, 1e-4,1e-5, 1e-6,1e-7,1e-8]
-
-T_list = [298.15,308.15,318.15,328.15,338.15,348.15,358.15]
 metal_stable_regions = {}
 T = 298.15
 activity = 1e-4
@@ -107,9 +107,6 @@ def kJmol_to_eV(x):
 # Main Loop Over Metals and Ligands
 # -------------------------------------
 for metal in metal_list:
-    # for diff in diff_list:
-    # for T in T_list:
-    # for activity in activity_list:
         for ligand_conc in ligand_concentration_list:
             target_df = df[df['metal'] == metal]
             target_df = df[df['metal'] == metal].copy()
@@ -129,8 +126,8 @@ for metal in metal_list:
             # Manually override missing data
             if metal == 'Pd':
                 metal_complex['Pd(CN)4[2+]'] = 6.467825128
-            if metal == 'Pt':
-                metal_complex['Pt(CN)4[2+]'] = 5.646346039
+            # if metal == 'Pt':
+            #     metal_complex['Pt(CN)4[2+]'] = 5.646346039
 
 
             species_label_dict = target_df.set_index('species')['species_label'].to_dict()
@@ -174,12 +171,9 @@ for metal in metal_list:
             # for phase, chem_pot in [('bulk', solid_eng), ('aqueous_ion', ion_eng)]:
             for phase, chem_pot in [('bulk', solid_eng), ('aqueous_ion', ion_eng), ('complex', metal_complex)]:
                 for formula in chem_pot:
-                    if phase == 'bulk':
-                        activity = 0
-                    # elif phase == 'complex':
-                    #     activity =ligand_conc['NH3'] #ligand_conc.get(formula.split('[')[0], 0) 
-                    #     print(f"Complex {formula} has activity {activity}")
-
+                    # if phase == 'bulk':
+                    #     activity = 0
+                    
                     species = Species(
                         formula=formula,
                         metal=metal,
@@ -190,23 +184,18 @@ for metal in metal_list:
                     )
                     if phase == 'complex':
                         print(f"Complex {formula} has activity {species.activity}")
-
-                    #     if 'NH3' in formula:
-                    #         all_species.append(species)
-                    #     else:
-                    #         continue
                     all_species.append(species)
 
             # Grid and plotting
             pH_range = (-2, 16)
             V_range = (-2, 3)
-            grid_size = 100
+            grid_size = 1000
             filename = None
             # filename =f'Ni-NH3-H2O_T={T}_activity={activity:.0e}_[NH3]={ligand_conc["NH3"]}M_[Gly]={ligand_conc["Gly"]}M_[CN]={ligand_conc["CN"]}_diff={diff}eV.png'
             # filename = f'Pd-NH3-H2O_T={T}_activity={activity:.0e}_[NH3]={ligand_conc["NH3"]}M_[Gly]={ligand_conc["Gly"]}M_[CN]={ligand_conc["CN"]}_Smith1989CriticalConstants.png'
             # filename = f'Pt-NH3-H2O_T={T}_activity={activity:.0e}_[NH3]={ligand_conc["NH3"]}M_[Gly]={ligand_conc["Gly"]}M_[CN]={ligand_conc["CN"]}_Harrington.png'
             # paper_dir = f'/home/x-ntian/pourbaix_paper/Accelerated-Computational-Materials-Discovery-for-Electrochemical-Nutrient-Recovery/Figures/pourbaix_diagrams{metal}'
-            dir = f'figures/updated_pourbaix/{metal}'
+            dir = f'figures/pourbaix_diagrams/{metal}'
             plotter = GridPlotter(pH_range, V_range, metal_data, grid_size, save_fig=True, dir = dir, filename=filename)
 
             # Stability and plotting
