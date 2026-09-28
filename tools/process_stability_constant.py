@@ -17,33 +17,25 @@ new_df=new_df.dropna(how='any')
 
 
 def generate_species(row):
-    signed_metal = row['signed_metal_ion'].split('[')
-    ligand_part = row['ligand'].split('[')[0]
-    
-    n_metal = int(row['n_metal'])  # Ensure n_metal is an integer
-    n_metal_part = str(n_metal) if n_metal != 1 else ''
-    
-    if len(signed_metal) > 1:
-        ion_part = signed_metal[1].strip(']')  # Remove closing bracket
-        # Use regular expression to extract the number and charge
-        match = re.match(r'(\d+)([+-])', ion_part)
-        if match:
-            number = int(match.group(1)) * n_metal  # Multiply the number by n_metal
-            charge_sign = match.group(2)  # Extract the sign
-            charge_multiplier = 1 if charge_sign == '+' else -1  # Apply the charge as multiplier
-            
-            result = number * charge_multiplier  # Multiply the number by the charge
- 
-            signed_metal_ion_part = f'[{result}{charge_sign}]'
- 
-        else:
-            signed_metal_ion_part = ''  # Default case if not matched
-    else:
-        signed_metal_ion_part = ''
-    
-    species = signed_metal[0] + n_metal_part + '(' + ligand_part + ')' + str(int(row['n_complex'])) + signed_metal_ion_part
-    
-    return species
+    def extract_charge(expression):
+        if "[" not in expression or "]" not in expression:
+            return 0
+        ion = expression[expression.find("[") + 1 : expression.find("]")]
+        return int(ion.replace("+", "").replace("-", "")) * (-1 if "-" in ion else 1)
+
+    def format_charge(charge):
+        return f"{abs(charge)}{'+' if charge > 0 else '-'}" if charge else ""
+
+    metal = row["signed_metal_ion"].split("[")[0]
+    ligand = row["ligand"].split("[")[0]
+    n_metal = int(row["n_metal"])
+    n_ligand = int(row["n_complex"])
+    metal_count = "" if n_metal == 1 else str(n_metal)
+    ligand_count = "" if n_ligand == 1 else str(n_ligand)
+    charge = extract_charge(row["signed_metal_ion"]) * n_metal + extract_charge(row["ligand"]) * n_ligand
+    charge_part = f"[{format_charge(charge)}]" if charge else ""
+
+    return f"{metal}{metal_count}({ligand}){ligand_count}{charge_part}"
 
 new_df['species'] = new_df.apply(generate_species, axis=1)
 new_df['metal'] = new_df['signed_metal_ion'].str.split('[').str[0]

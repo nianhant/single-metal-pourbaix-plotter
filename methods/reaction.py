@@ -2,6 +2,13 @@ from dataclasses import dataclass
 
 import numpy as np
 
+LIGAND_CHARGE = {
+    "NH3": 0,
+    "NO2": -1,
+    "Gly": -1,
+    "CN": -1,
+}
+
 
 @dataclass(frozen=True)
 class ReactionCoefficients:
@@ -39,6 +46,15 @@ class Reaction:
         p_ligand_grid = grid.ligand_grid_dict[ligand]
         return ligand_standard_energy, n_ligand * self.coeff * p_ligand_grid
 
+    def _bound_ligand_charge(self, species):
+        if not species.ligand:
+            return 0
+        ligand = species.ligand
+        return species.composition[ligand] * LIGAND_CHARGE.get(ligand, 0)
+
+    def _free_ligand_charge_delta(self, n_ligand):
+        return sum(count * LIGAND_CHARGE.get(ligand, 0) for ligand, count in n_ligand.items())
+
     def self_energy_coefficients(self):
         if self._self_energy_coefficients is not None:
             return self._self_energy_coefficients
@@ -46,7 +62,7 @@ class Reaction:
         composition = self.reactant.composition
         n_h2o = composition["O"]
         n_h = composition["H"] - 2 * n_h2o
-        n_eu = composition["charge"] - n_h
+        n_eu = composition["charge"] - self._bound_ligand_charge(self.reactant) - n_h
         n_metal = composition[self.reactant.metal]
 
         ligand_standard_energy = 0.0
@@ -82,7 +98,7 @@ class Reaction:
         composition = self.reactant.composition
         n_h2o = composition["O"]
         n_h = composition["H"] - 2 * n_h2o
-        n_eu = composition["charge"] - n_h
+        n_eu = composition["charge"] - self._bound_ligand_charge(self.reactant) - n_h
         n_metal = composition[self.reactant.metal]
 
         energy_grid = (
@@ -129,7 +145,12 @@ class Reaction:
         ############## Balance H protons ##############
         n_H = 2*n_H2O + prod_composition['H'] - rea_composition['H']
         ############## Balance charge ##############
-        n_charge = prod_composition['charge'] - rea_composition['charge']- n_H
+        n_charge = (
+            prod_composition['charge']
+            - rea_composition['charge']
+            - n_H
+            + self._free_ligand_charge_delta(n_L)
+        )
         return {
             'fraction': fraction,
             'n_H2O': n_H2O,

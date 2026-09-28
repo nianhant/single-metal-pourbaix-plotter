@@ -11,6 +11,7 @@ class MetalComplexDataLoader:
     def load(self):
         """Load JSON and process species label"""
         self.df = pd.read_json(self.json_path)
+        self.df["species"] = self.df.apply(self.create_species, axis=1)
         self.df["species_label"] = self.df.apply(self.create_species, axis=1)
         return self.df
 
@@ -75,8 +76,13 @@ class MetalComplexDataLoader:
         total_charge = metal_charge + ligand_charge
         total_charge_str = format_charge(total_charge)
 
-        species = f"[{row['signed_metal_ion'].split('[')[0]}{row['n_metal']}({row['ligand'].split('[')[0]}){row['n_complex']}]{total_charge_str}"
-        species = f"{row['signed_metal_ion'].split('[')[0]}{row['n_metal']}({row['ligand'].split('[')[0]}){row['n_complex']}[{total_charge_str}]"
+        metal_count = int(row["n_metal"])
+        ligand_count = int(row["n_complex"])
+        metal_count_str = "" if metal_count == 1 else str(metal_count)
+        ligand_count_str = "" if ligand_count == 1 else str(ligand_count)
+        charge_str = f"[{total_charge_str}]" if total_charge_str else ""
 
-        return species.replace("_1", "").replace("^1", "").replace("+1", "+").replace("-1", "-").replace("[]","")
+        metal = row["signed_metal_ion"].split("[")[0]
+        ligand = row["ligand"].split("[")[0]
+        return f"{metal}{metal_count_str}({ligand}){ligand_count_str}{charge_str}"
  

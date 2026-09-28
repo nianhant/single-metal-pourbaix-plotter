@@ -3,6 +3,10 @@ import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
 import matplotlib.ticker as ticker
 try:
+    from scipy import ndimage
+except ModuleNotFoundError:
+    ndimage = None
+try:
     from ase.formula import Formula
 except ModuleNotFoundError:
     class Formula:
@@ -20,7 +24,7 @@ except ModuleNotFoundError:
 import re
 import os
 
-AREA_LABEL_FONT_SIZE = 20
+AREA_LABEL_FONT_SIZE = 18
 AXIS_LABEL_FONT_SIZE = 26
 TICK_LABEL_FONT_SIZE = AXIS_LABEL_FONT_SIZE
 REGION_ALPHA = 0.50
@@ -83,9 +87,15 @@ class GridPlotter:
         Gly_tot = self.data.ligand_concentration['Gly']
         if Gly_tot <= 0:
             return self._large_pL_grid()
-        return (- np.log10(Gly_tot) + (pKa1 - self.pH_grid) 
-                + np.log10(1 + 10 ** (self.pH_grid - pKa1) 
-                           + 1/(10 ** (self.pH_grid - pKa2))))
+        return (
+            -np.log10(Gly_tot)
+            + (pKa1 - self.pH_grid)
+            + np.log10(
+                1
+                + 10 ** (self.pH_grid - pKa1)
+                + 1 / (10 ** (self.pH_grid - pKa2))
+            )
+        )
     def format_formula(self, formula):
         """
         Converts a chemical formula to a LaTeX-friendly format with subscripts.
@@ -264,7 +274,7 @@ class GridPlotter:
         intensity = self.color_intensity_for_product(product, category, used_intensities)
         return color_map(intensity), intensity
         
-    def place_label_within_bounds(self, ax, x, y, label, rotation,color='k', tol=0.05,max_shift=0.2):
+    def place_label_within_bounds(self, ax, x, y, label, rotation,color='k', tol=0.09,max_shift=0.2):
         rotation = 90 if abs(rotation) == 90 else 0
         x_min, x_max = min(self.pH_range), max(self.pH_range)
         y_min, y_max = min(self.V_range), max(self.V_range)
@@ -279,51 +289,81 @@ class GridPlotter:
             va = 'bottom'
         elif y > y_max - 0.1 * (y_max - y_min):
             va = 'top'
-        if label == 'Ag(OH)$_{2}$$^{-}$(aq)':
-            x +=1
+        if label == 'Ni(OH)$_{4}$$^{2-}$(aq)':
+            x +=0.5
             fontsize = AREA_LABEL_FONT_SIZE
             return ax.text(x, y, label, ha=ha, va=va, color=color, rotation=rotation, fontsize=fontsize, zorder=5)
-            
-        if self.data.ligand_concentration['Gly'] != 0:
-            if label == 'Ag$_{2}$O(s)':
-                fontsize = AREA_LABEL_FONT_SIZE
-                return ax.text(x, y, label, ha=ha, va=va, color=color, rotation=rotation, fontsize=fontsize, zorder=5)
-            elif self.data.ligand_concentration['CN'] != 0 and label == 'AgO(s)' :
-                fontsize = AREA_LABEL_FONT_SIZE
-                x += 1
-                return ax.text(x, y, label, ha=ha, va=va, color=color, rotation=rotation, fontsize=fontsize, zorder=5)
-            elif label == 'Fe(Gly)$_{2}$$^{2+}$(aq)':
-                fontsize = AREA_LABEL_FONT_SIZE
-                x += 1
-                return ax.text(x, y, label, ha=ha, va=va, color=color, rotation=rotation, fontsize=fontsize, zorder=5)
-            elif label == 'FeO$_{2}$$^{2-}$(aq)':
-                fontsize = AREA_LABEL_FONT_SIZE
-                x += 0.3
-                return ax.text(x, y, label, ha=ha, va=va, color=color, rotation=rotation, fontsize=fontsize, zorder=5)
-            elif label == 'FeO(s)' or label == 'Fe$_{3}$O$_{4}$(s)':
-                fontsize = AREA_LABEL_FONT_SIZE
-                x += 1
-                if label == 'FeO(s)':
-                    y -= 0.1
-                return ax.text(x, y, label, ha=ha, va=va, color=color, rotation=rotation, fontsize=fontsize, zorder=5)
-            elif label == 'CuO$_{2}$$^{2-}$(aq)' or label == 'Cu$_{2}O$(s)' :
-                fontsize = AREA_LABEL_FONT_SIZE
-                x += 0.6
-                return ax.text(x, y, label, ha=ha, va=va, color=color, rotation=rotation, fontsize=fontsize, zorder=5)
+        if label == 'PdO(s)':
+            x -=1
+            fontsize = AREA_LABEL_FONT_SIZE
+            return ax.text(x, y, label, ha=ha, va=va, color=color, rotation=rotation, fontsize=fontsize, zorder=5)
+        if label == 'AgO(s)':
+            x +=1.6
+            fontsize = AREA_LABEL_FONT_SIZE
+            return ax.text(x, y, label, ha=ha, va=va, color=color, rotation=rotation, fontsize=fontsize, zorder=5)
+        if label == 'Cd(Gly)$^{+}$(aq)':
+            x -=0.2
+            # y += 1
 
-            else:
+            fontsize = AREA_LABEL_FONT_SIZE-5
+            return ax.text(x, y, label, ha=ha, va=va, color=color, rotation=rotation, fontsize=fontsize, zorder=5)
+        if label == 'Cd(Gly)$_{2}$(aq)':
+            # y -=1
+            x+= 0.2
+            fontsize = AREA_LABEL_FONT_SIZE-5
+            return ax.text(x, y, label, ha=ha, va=va, color=color, rotation=rotation, fontsize=fontsize, zorder=5)
+        if label == 'Fe(Gly)$^{+}$(aq)':
+            x -=1
+            fontsize = AREA_LABEL_FONT_SIZE-5
+            return ax.text(x, y, label, ha=ha, va=va, color=color, rotation=rotation, fontsize=fontsize, zorder=5)
+        if label == 'Fe(Gly)$_{2}$(aq)':
+            x -=0.2
+            fontsize = AREA_LABEL_FONT_SIZE-5
+            return ax.text(x, y, label, ha=ha, va=va, color=color, rotation=rotation, fontsize=fontsize, zorder=5)
+
+        # if self.data.ligand_concentration['Gly'] != 0:
+        #     if label == 'Ag$_{2}$O(s)':
+        #         fontsize = AREA_LABEL_FONT_SIZE
+        #         return ax.text(x, y, label, ha=ha, va=va, color=color, rotation=rotation, fontsize=fontsize, zorder=5)
+        #     elif self.data.ligand_concentration['CN'] != 0 and label == 'AgO(s)' :
+        #         fontsize = AREA_LABEL_FONT_SIZE
+        #         x += 1
+        #         return ax.text(x, y, label, ha=ha, va=va, color=color, rotation=rotation, fontsize=fontsize, zorder=5)
+        #     elif label == 'Fe(Gly)$_{2}$$^{2+}$(aq)':
+        #         fontsize = AREA_LABEL_FONT_SIZE
+        #         x += 1
+        #         return ax.text(x, y, label, ha=ha, va=va, color=color, rotation=rotation, fontsize=fontsize, zorder=5)
+        #     elif label == 'FeO$_{2}$$^{2-}$(aq)':
+        #         fontsize = AREA_LABEL_FONT_SIZE
+        #         x += 0.3
+        #         return ax.text(x, y, label, ha=ha, va=va, color=color, rotation=rotation, fontsize=fontsize, zorder=5)
+        #     elif label == 'FeO(s)' or label == 'Fe$_{3}$O$_{4}$(s)':
+        #         fontsize = AREA_LABEL_FONT_SIZE
+        #         x += 1
+        #         if label == 'FeO(s)':
+        #             y -= 0.1
+        #         return ax.text(x, y, label, ha=ha, va=va, color=color, rotation=rotation, fontsize=fontsize, zorder=5)
+        #     elif label == 'CuO$_{2}$$^{2-}$(aq)' or label == 'Cu$_{2}O$(s)' :
+        #         fontsize = AREA_LABEL_FONT_SIZE
+        #         x += 0.6
+        #         return ax.text(x, y, label, ha=ha, va=va, color=color, rotation=rotation, fontsize=fontsize, zorder=5)
+
+        #     else:
             
-                return ax.text(x, y, label, ha=ha, va=va, color=color, rotation=rotation, fontsize=AREA_LABEL_FONT_SIZE, zorder=5)
+        #         return ax.text(x, y, label, ha=ha, va=va, color=color, rotation=rotation, fontsize=AREA_LABEL_FONT_SIZE, zorder=5)
         
-        else:
+        # else:
             
-            return ax.text(x, y, label, ha=ha, va=va, color=color, rotation=rotation, fontsize=AREA_LABEL_FONT_SIZE, zorder=5)
+        return ax.text(x, y, label, ha=ha, va=va, color=color, rotation=rotation, fontsize=AREA_LABEL_FONT_SIZE, zorder=5)
 
-    def _label_extent(self, label, rotation=0):
+    def _label_extent(self, label, rotation=0, font_size=AREA_LABEL_FONT_SIZE):
+        font_scale = font_size / AREA_LABEL_FONT_SIZE
         width = min(0.22, 0.006 * len(label) + 0.03)
         height = 0.035
+        width *= font_scale
+        height *= font_scale
         if abs(rotation) == 90:
-            width, height = height, min(0.22, 0.006 * len(label) + 0.03)
+            width, height = height, width
         return width, height
 
     def _data_to_axes_fraction(self, x, y):
@@ -336,7 +376,7 @@ class GridPlotter:
         y_min, y_max = min(self.V_range), max(self.V_range)
         return (x_min + x_frac * (x_max - x_min), y_min + y_frac * (y_max - y_min))
 
-    def _label_overlaps(self, candidate, placed_labels, pad=0.01):
+    def _label_overlaps(self, candidate, placed_labels, pad=0.002):
         x, y, width, height = candidate
         for placed_x, placed_y, placed_width, placed_height in placed_labels:
             if (abs(x - placed_x) < (width + placed_width) / 2 + pad and
@@ -344,7 +384,119 @@ class GridPlotter:
                 return True
         return False
 
-    def _region_needs_offset_label(self, pH_stable, eU_stable, label, rotation, placed_labels):
+    def _draw_label_text(self, ax, x, y, label, rotation, color='k', font_size=AREA_LABEL_FONT_SIZE):
+        rotation = 90 if abs(rotation) == 90 else 0
+        x_min, x_max = min(self.pH_range), max(self.pH_range)
+        y_min, y_max = min(self.V_range), max(self.V_range)
+
+        ha = 'center'
+        va = 'center'
+        if x < x_min + 0.1 * (x_max - x_min):
+            ha = 'left'
+        elif x > x_max - 0.1 * (x_max - x_min):
+            ha = 'right'
+        if y < y_min + 0.1 * (y_max - y_min):
+            va = 'bottom'
+        elif y > y_max - 0.1 * (y_max - y_min):
+            va = 'top'
+
+        return ax.text(
+            x, y, label, ha=ha, va=va, color=color, rotation=rotation,
+            fontsize=font_size, zorder=5
+        )
+
+    def _largest_connected_region_mask(self, stable_indices):
+        if ndimage is None:
+            return stable_indices
+
+        component_labels, num_components = ndimage.label(stable_indices)
+        if num_components <= 1:
+            return stable_indices
+
+        component_sizes = np.bincount(component_labels.ravel())
+        component_sizes[0] = 0
+        largest_component = int(np.argmax(component_sizes))
+        return component_labels == largest_component
+
+    def _region_points(self, region_mask):
+        return self.pH_grid[region_mask], self.V_grid[region_mask]
+
+    def _choose_region_label_anchor(self, region_mask):
+        pH_stable, eU_stable = self._region_points(region_mask)
+        if ndimage is not None:
+            distance_to_boundary = ndimage.distance_transform_edt(region_mask)
+            anchor_row, anchor_col = np.unravel_index(
+                int(np.argmax(distance_to_boundary)),
+                distance_to_boundary.shape,
+            )
+            return self.pH_values[anchor_col], self.V_values[anchor_row]
+
+        target_pH = 0.5 * (min(pH_stable) + max(pH_stable))
+        target_eU = 0.5 * (min(eU_stable) + max(eU_stable))
+        pH_span = max(max(pH_stable) - min(pH_stable), 1e-12)
+        eU_span = max(max(eU_stable) - min(eU_stable), 1e-12)
+        distance = (
+            ((pH_stable - target_pH) / pH_span) ** 2
+            + ((eU_stable - target_eU) / eU_span) ** 2
+        )
+        anchor_idx = int(np.argmin(distance))
+        return pH_stable[anchor_idx], eU_stable[anchor_idx]
+
+    def _region_label_candidates(self, region_mask, max_candidates=80):
+        pH_stable, eU_stable = self._region_points(region_mask)
+        if ndimage is not None:
+            distance_to_boundary = ndimage.distance_transform_edt(region_mask)
+            candidate_indices = np.argsort(distance_to_boundary.ravel())[::-1]
+            yielded = 0
+            for flat_idx in candidate_indices:
+                row, col = np.unravel_index(int(flat_idx), distance_to_boundary.shape)
+                if not region_mask[row, col]:
+                    continue
+                yield self.pH_values[col], self.V_values[row]
+                yielded += 1
+                if yielded >= max_candidates:
+                    return
+
+        pH_span = max(max(pH_stable) - min(pH_stable), 1e-12)
+        eU_span = max(max(eU_stable) - min(eU_stable), 1e-12)
+        target_pH = 0.5 * (min(pH_stable) + max(pH_stable))
+        target_eU = 0.5 * (min(eU_stable) + max(eU_stable))
+        distance = (
+            ((pH_stable - target_pH) / pH_span) ** 2
+            + ((eU_stable - target_eU) / eU_span) ** 2
+        )
+        candidate_indices = list(np.argsort(distance)[:max_candidates])
+
+        seen = set()
+        for idx in candidate_indices:
+            if idx in seen:
+                continue
+            seen.add(idx)
+            yield pH_stable[idx], eU_stable[idx]
+
+    def _place_direct_label(self, ax, region_mask, label, rotation, color='k'):
+        x, y = self._choose_region_label_anchor(region_mask)
+        return self._draw_label_text(ax, x, y, label, rotation, color=color)
+
+    # def _place_nonoverlapping_label_in_region(
+    #     self, ax, region_mask, label, rotation, placed_labels, color='k'
+    # ):
+    #     rotation = 90 if abs(rotation) == 90 else 0
+    #     width, height = self._label_extent(label, rotation)
+
+    #     for x, y in self._region_label_candidates(region_mask):
+    #         x_frac, y_frac = self._data_to_axes_fraction(x, y)
+    #         candidate = (x_frac, y_frac, width, height)
+    #         if not self._label_overlaps(candidate, placed_labels):
+    #             placed_labels.append(candidate)
+    #             return self._draw_label_text(ax, x, y, label, rotation, color=color)
+
+    #     x, y = self._choose_region_label_anchor(region_mask)
+    #     x_frac, y_frac = self._data_to_axes_fraction(x, y)
+    #     placed_labels.append((x_frac, y_frac, width, height))
+    #     return self._draw_label_text(ax, x, y, label, rotation, color=color)
+
+    def _region_label_placement_flags(self, pH_stable, eU_stable, label, rotation, placed_labels):
         pH_span = max(pH_stable) - min(pH_stable)
         eU_span = max(eU_stable) - min(eU_stable)
         pH_axis_span = max(self.pH_range) - min(self.pH_range)
@@ -354,12 +506,32 @@ class GridPlotter:
         x_frac, y_frac = self._data_to_axes_fraction(np.mean(pH_stable), np.mean(eU_stable))
         width, height = self._label_extent(label, rotation)
         overlaps_existing_label = self._label_overlaps((x_frac, y_frac, width, height), placed_labels)
-        return thin_region or overlaps_existing_label
+        return thin_region or overlaps_existing_label, overlaps_existing_label
 
-    def _place_nonoverlapping_label(self, ax, x, y, label, rotation, placed_labels, force_offset=False, color='k'):
+    def _label_indicator_props(self, label_indicator, color):
+        if label_indicator is None or label_indicator == 'none':
+            return None
+        arrowstyle_by_indicator = {
+            'line': '-',
+            'arrow': '->',
+        }
+        if label_indicator not in arrowstyle_by_indicator:
+            raise ValueError("label_indicator must be 'line', 'arrow', 'none', or None.")
+        return dict(
+            arrowstyle=arrowstyle_by_indicator[label_indicator],
+            lw=0.6,
+            color=color,
+            shrinkA=2,
+            shrinkB=2,
+        )
+
+    def _place_nonoverlapping_label(
+        self, ax, x, y, label, rotation, placed_labels, force_offset=False,
+        color='k', label_indicator='line', font_size=AREA_LABEL_FONT_SIZE
+    ):
         rotation = 90 if abs(rotation) == 90 else 0
         x_frac, y_frac = self._data_to_axes_fraction(x, y)
-        width, height = self._label_extent(label, rotation)
+        width, height = self._label_extent(label, rotation, font_size=font_size)
         candidate_offsets = [(0, 0)]
         if force_offset:
             candidate_offsets = []
@@ -370,14 +542,16 @@ class GridPlotter:
         ]
 
         for dx, dy in candidate_offsets:
-            label_x_frac = min(max(x_frac + dx, 0.03), 0.97)
-            label_y_frac = min(max(y_frac + dy, 0.03), 0.97)
+            label_x_frac = min(max(x_frac + dx, 0.01), 1)
+            label_y_frac = min(max(y_frac + dy, 0.01), 0.995)
             candidate = (label_x_frac, label_y_frac, width, height)
             if not self._label_overlaps(candidate, placed_labels):
                 label_x, label_y = self._axes_fraction_to_data(label_x_frac, label_y_frac)
                 placed_labels.append(candidate)
                 if dx == 0 and dy == 0:
-                    return self.place_label_within_bounds(ax, label_x, label_y, label, rotation, color=color)
+                    return self._draw_label_text(
+                        ax, label_x, label_y, label, rotation, color=color, font_size=font_size
+                    )
                 return ax.annotate(
                     label,
                     xy=(x, y),
@@ -386,14 +560,13 @@ class GridPlotter:
                     va='center',
                     color=color,
                     rotation=rotation,
-                    fontsize=AREA_LABEL_FONT_SIZE,
+                    fontsize=font_size,
                     zorder=5,
-                    arrowprops=dict(arrowstyle='-', lw=0.6, color=color, shrinkA=2, shrinkB=2),
+                    arrowprops=self._label_indicator_props(label_indicator, color),
                 )
 
         placed_labels.append((x_frac, y_frac, width, height))
-        return self.place_label_within_bounds(ax, x, y, label, rotation, color=color)
-
+        return self._draw_label_text(ax, x, y, label, rotation, color=color, font_size=font_size)
 
     def count_species_by_category(self, stable_regions):
         totals = {
@@ -471,7 +644,10 @@ class GridPlotter:
         return rotation
         
     
-    def plot_stable_regions(self, stable_regions, species_label_dict, rxn_box = True, show_legend = True):
+    def plot_stable_regions(
+        self, stable_regions, species_label_dict, rxn_box=True, show_legend=True,
+        avoid_label_overlap=False, label_indicator='none', overlap_label_font_size=10
+    ):
         self.apply_publication_style()
         fig, ax = plt.subplots(figsize=(8, 8))
         ax.set_xlabel('pH')
@@ -524,15 +700,26 @@ class GridPlotter:
 
                 centroid_pH = np.mean(pH_stable)
                 centroid_eU = np.mean(eU_stable)
-                
+
                 rotation = self.compute_rotation(pH_stable, eU_stable)
-                force_offset = self._region_needs_offset_label(
-                    pH_stable, eU_stable, product_label, rotation, placed_labels
-                )
-                self._place_nonoverlapping_label(
-                    ax, centroid_pH, centroid_eU, product_label, rotation,
-                    placed_labels, force_offset=force_offset
-                )
+                if avoid_label_overlap:
+                    force_offset, overlaps_existing_label = self._region_label_placement_flags(
+                        pH_stable, eU_stable, product_label, rotation, placed_labels
+                    )
+                    label_font_size = (
+                        overlap_label_font_size
+                        if overlaps_existing_label and overlap_label_font_size is not None
+                        else AREA_LABEL_FONT_SIZE
+                    )
+                    self._place_nonoverlapping_label(
+                        ax, centroid_pH, centroid_eU, product_label, rotation,
+                        placed_labels, force_offset=force_offset, label_indicator=label_indicator,
+                        font_size=label_font_size
+                    )
+                else:
+                    self.place_label_within_bounds(
+                        ax, centroid_pH, centroid_eU, product_label, rotation
+                    )
                 
         self.add_H2_O2_lines(ax, legend_elements)
         self.add_plot_accessories(ax, legend_elements, rxn_box=rxn_box)
@@ -547,7 +734,8 @@ class GridPlotter:
                 base_filename = f'{self.data.metal}-NH3-H2O_T={self.data.T}_activity={activity:.0e}_[NH3]={self.data.ligand_concentration["NH3"]}M_[Gly]={self.data.ligand_concentration["Gly"]}M_[CN]={self.data.ligand_concentration["CN"]}'
             else:
                 base_filename = os.path.splitext(self.filename)[0]
-            for extension in ['png', 'pdf']:
+            # for extension in ['png', 'pdf', 'svg']:
+            for extension in ['png']:
                 output_path = f'{output_dir}/{base_filename}.{extension}'
                 plt.savefig(output_path, bbox_inches='tight')
                 print('saved figure to', output_path)

@@ -65,9 +65,9 @@ def build_reaction_string(reaction: Reaction) -> str:
         reactants.append((-mb["n_H2O"], r"\ce{H2O}"))
 
     if mb["n_charge"] > 0:
-        reactants.append((mb["n_charge"], r"\ce{e-}"))
+        products.append((mb["n_charge"], r"\ce{e-}"))
     elif mb["n_charge"] < 0:
-        products.append((-mb["n_charge"], r"\ce{e-}"))
+        reactants.append((-mb["n_charge"], r"\ce{e-}"))
 
     for ligand, count in mb["n_L"].items():
         ligand_tex = fr"\ce{{{ligand}}}"
@@ -110,9 +110,9 @@ def build_species_for_metal(
     complex_energies = target_df.set_index("species")["del_G_eV"].to_dict()
 
     if metal == "Pd":
-        complex_energies.setdefault("Pd(CN)4[2+]", 6.467825128)
+        complex_energies.setdefault("Pd(CN)4[2-]", 6.467825128)
     if metal == "Pt":
-        complex_energies.setdefault("Pt(CN)4[2+]", 5.646346039)
+        complex_energies.setdefault("Pt(CN)4[2-]", 5.646346039)
 
     metal_data = Data(
         metal=metal,

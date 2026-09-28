@@ -28,6 +28,10 @@ MU_LIGAND = {
 }
 
 
+def kJmol_to_eV(value):
+    return value / 96.485
+
+
 def species_latex(formula: str, phase: str) -> str:
     suffix = "(s)" if phase == "bulk" else "(aq)"
     return f"\\ce{{{formula}}}{suffix}"
@@ -41,6 +45,8 @@ def coeff_str(value: float) -> str:
         return ""
     if isinstance(value, float) and value.is_integer():
         value = int(value)
+    if isinstance(value, float):
+        return f"{value:.8g} "
     return f"{value} "
 
 
@@ -64,16 +70,16 @@ def build_reaction_string(reaction: Reaction) -> str:
         reactants.append((-mb["n_H2O"], r"\ce{H2O}"))
 
     if mb["n_charge"] > 0:
-        reactants.append((mb["n_charge"], r"\ce{e-}"))
+        products.append((mb["n_charge"], r"\ce{e-}"))
     elif mb["n_charge"] < 0:
-        products.append((-mb["n_charge"], r"\ce{e-}"))
+        reactants.append((-mb["n_charge"], r"\ce{e-}"))
 
     for ligand, count in mb["n_L"].items():
         ligand_tex = fr"\ce{{{ligand}}}"
         if count > 0:
-            reactants.append((count, ligand_tex))
+            products.append((count, ligand_tex))
         elif count < 0:
-            products.append((-count, ligand_tex))
+            reactants.append((-count, ligand_tex))
 
     left = " + ".join(f"{coeff_str(c)}{sp}" for c, sp in reactants)
     right = " + ".join(f"{coeff_str(c)}{sp}" for c, sp in products)
@@ -89,12 +95,23 @@ def touches(mask_a: np.ndarray, mask_b: np.ndarray) -> bool:
     )
 
 
+def is_pure_metal_solid(species: Species) -> bool:
+    return species.phase == "bulk" and species.formula == species.metal
+
+
+def reaction_with_preferred_orientation(sp_a: Species, sp_b: Species, thermo, metal_data) -> Reaction:
+    if is_pure_metal_solid(sp_b) and not is_pure_metal_solid(sp_a):
+        return Reaction(sp_b, sp_a, thermo, metal_data)
+    return Reaction(sp_a, sp_b, thermo, metal_data)
+
+
 def build_species_for_metal(
     metal: str,
     activity: float,
     temperature: float,
     ligand_conc: Dict[str, float],
     complex_df,
+    adjust_complex_energies: bool,
 ):
     thermo = Thermodynamics(T=temperature)
 
@@ -104,12 +121,20 @@ def build_species_for_metal(
         ion_eng = json.load(f)
 
     target_df = complex_df[complex_df["metal"] == metal]
-    complex_energies = target_df.set_index("species")["del_G_eV"].to_dict()
+    if adjust_complex_energies:
+        target_df = target_df.copy()
+        target_df["del_G_eV_adjusted"] = (
+            target_df["del_G_eV"]
+            + kJmol_to_eV(target_df["G_ligand (kJ/mol)"]) * target_df["n_complex"]
+        )
+        complex_energies = target_df.set_index("species")["del_G_eV_adjusted"].to_dict()
+    else:
+        complex_energies = target_df.set_index("species")["del_G_eV"].to_dict()
 
     if metal == "Pd":
-        complex_energies.setdefault("Pd(CN)4[2+]", 6.467825128)
+        complex_energies.setdefault("Pd(CN)4[2-]", 6.467825128)
     if metal == "Pt":
-        complex_energies.setdefault("Pt(CN)4[2+]", 5.646346039)
+        complex_energies.setdefault("Pt(CN)4[2-]", 5.646346039)
 
     metal_data = Data(
         metal=metal,
@@ -139,13 +164,14 @@ def build_species_for_metal(
     return thermo, metal_data, all_species
 
 
-def generate_reaction_table_for_metal(
+def compute_stable_regions_for_metal(
     metal: str,
     activity: float,
     temperature: float,
     ligand_conc: Dict[str, float],
     complex_df,
     grid_size: int,
+    adjust_complex_energies: bool,
 ):
     thermo, metal_data, all_species = build_species_for_metal(
         metal=metal,
@@ -153,6 +179,7 @@ def generate_reaction_table_for_metal(
         temperature=temperature,
         ligand_conc=ligand_conc,
         complex_df=complex_df,
+        adjust_complex_energies=adjust_complex_energies,
     )
 
     plotter = GridPlotter(
@@ -166,7 +193,32 @@ def generate_reaction_table_for_metal(
     )
 
     stable_regions = StabilityCalculator(plotter, all_species, thermo, metal_data).compute_stable_regions()
-    species_with_area = [sp for sp, mask in stable_regions.items() if np.any(mask)]
+    return thermo, metal_data, stable_regions
+
+
+def species_with_visible_regions(stable_regions):
+    return [sp for sp, mask in stable_regions.items() if np.any(mask)]
+
+
+def generate_reaction_table_for_metal(
+    metal: str,
+    activity: float,
+    temperature: float,
+    ligand_conc: Dict[str, float],
+    complex_df,
+    grid_size: int,
+    adjust_complex_energies: bool,
+):
+    thermo, metal_data, stable_regions = compute_stable_regions_for_metal(
+        metal=metal,
+        activity=activity,
+        temperature=temperature,
+        ligand_conc=ligand_conc,
+        complex_df=complex_df,
+        grid_size=grid_size,
+        adjust_complex_energies=adjust_complex_energies,
+    )
+    species_with_area = species_with_visible_regions(stable_regions)
 
     reactions = []
     for i, sp_a in enumerate(species_with_area):
@@ -178,7 +230,11 @@ def generate_reaction_table_for_metal(
 
             forward = Reaction(sp_a, sp_b, thermo, metal_data)
             backward = Reaction(sp_b, sp_a, thermo, metal_data)
-            if (sp_b.formula, sp_b.phase) < (sp_a.formula, sp_a.phase):
+            if is_pure_metal_solid(sp_b) and not is_pure_metal_solid(sp_a):
+                sp_left, sp_right, rxn = sp_b, sp_a, backward
+            elif is_pure_metal_solid(sp_a) and not is_pure_metal_solid(sp_b):
+                sp_left, sp_right, rxn = sp_a, sp_b, forward
+            elif (sp_b.formula, sp_b.phase) < (sp_a.formula, sp_a.phase):
                 sp_left, sp_right, rxn = sp_b, sp_a, backward
             else:
                 sp_left, sp_right, rxn = sp_a, sp_b, forward
@@ -195,7 +251,39 @@ def generate_reaction_table_for_metal(
     return reactions
 
 
-def write_latex_table(metal: str, reactions: List[dict], output_dir: Path, caption_suffix: str) -> None:
+def generate_reactions_for_metal(
+    metal: str,
+    activity: float,
+    temperature: float,
+    ligand_conc: Dict[str, float],
+    complex_df,
+    grid_size: int,
+    adjust_complex_energies: bool,
+) -> List[str]:
+    thermo, metal_data, stable_regions = compute_stable_regions_for_metal(
+        metal=metal,
+        activity=activity,
+        temperature=temperature,
+        ligand_conc=ligand_conc,
+        complex_df=complex_df,
+        grid_size=grid_size,
+        adjust_complex_energies=adjust_complex_energies,
+    )
+    species_with_area = species_with_visible_regions(stable_regions)
+
+    reactions: List[str] = []
+    for i, sp_a in enumerate(species_with_area):
+        for sp_b in species_with_area[i + 1 :]:
+            if not touches(stable_regions[sp_a], stable_regions[sp_b]):
+                continue
+            reactions.append(
+                build_reaction_string(reaction_with_preferred_orientation(sp_a, sp_b, thermo, metal_data))
+            )
+
+    return sorted(set(reactions))
+
+
+def write_region_latex_table(metal: str, reactions: List[dict], output_dir: Path, caption_suffix: str) -> None:
     output_dir.mkdir(parents=True, exist_ok=True)
     path = output_dir / f"{metal}_region_reactions.tex"
 
@@ -212,7 +300,35 @@ def write_latex_table(metal: str, reactions: List[dict], output_dir: Path, capti
     rows = []
     for row in reactions:
         rows.append(f"{row['region_a']} & {row['region_b']} & {row['reaction']} \\\\ \\hline")
+    if not rows:
+        rows.append(
+            r"\multicolumn{3}{|l|}{No adjacent stable-region boundaries were found for these conditions.} \\ \hline"
+        )
 
+    content = header + "\n".join(rows) + "\n\\end{longtable}\n"
+    path.write_text(content, encoding="utf-8")
+    print(f"Wrote {path}")
+
+
+def write_reaction_latex_table(metal: str, reactions: List[str], output_dir: Path, caption_suffix: str) -> None:
+    output_dir.mkdir(parents=True, exist_ok=True)
+    path = output_dir / f"{metal}_reactions.tex"
+
+    header = rf"""\begin{{longtable}}{{|p{{0.9cm}}|p{{13.3cm}}|}}
+\caption{{Balanced reactions appearing at equilibrium boundaries in the {metal} NH$_3$-H$_2$O Pourbaix diagram ({caption_suffix}).}}\\
+\hline
+\textbf{{No.}} & \textbf{{Balanced reaction}} \\ \hline
+\endfirsthead
+\hline
+\textbf{{No.}} & \textbf{{Balanced reaction}} \\ \hline
+\endhead
+"""
+
+    rows = [f"{idx} & {reaction} \\\\ \\hline" for idx, reaction in enumerate(reactions, start=1)]
+    if not rows:
+        rows.append(
+            r"\multicolumn{2}{|l|}{No adjacent stable-region boundaries were found for these conditions.} \\ \hline"
+        )
     content = header + "\n".join(rows) + "\n\\end{longtable}\n"
     path.write_text(content, encoding="utf-8")
     print(f"Wrote {path}")
@@ -220,33 +336,67 @@ def write_latex_table(metal: str, reactions: List[dict], output_dir: Path, capti
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Generate balanced boundary reactions and LaTeX tables for NH3-H2O Pourbaix diagrams."
+        description="Generate balanced boundary reaction LaTeX tables for NH3-H2O Pourbaix diagrams."
     )
     parser.add_argument("--metals", nargs="*", default=["Ti", "Cu", "Au", "Pd", "Pt", "Ni"])
     parser.add_argument("--temperature", type=float, default=298.15)
     parser.add_argument("--activity", type=float, default=1e-4)
     parser.add_argument("--nh3", type=float, default=0.02)
+    parser.add_argument("--gly", type=float, default=0.0)
+    parser.add_argument("--cn", type=float, default=0.0)
     parser.add_argument("--grid-size", type=int, default=220)
     parser.add_argument("--output-dir", default="data/paper/reactions")
+    parser.add_argument(
+        "--include-regions",
+        action="store_true",
+        help="Write three-column region-pair tables instead of compact reaction-only tables.",
+    )
+    parser.add_argument(
+        "--raw-complex-energies",
+        action="store_true",
+        help="Deprecated compatibility flag; raw complex energies are now the default.",
+    )
+    parser.add_argument(
+        "--adjust-complex-energies",
+        action="store_true",
+        help="Use the ligand-adjusted complex energies used by the Pourbaix diagram script.",
+    )
     args = parser.parse_args()
 
-    ligand_conc = {"NH3": args.nh3, "NO2": 0.0, "Gly": 0.0, "CN": 0.0}
-    caption_suffix = f"T={args.temperature} K, a(M^n+)={args.activity:.0e}, [NH$_3$]={args.nh3} M"
+    ligand_conc = {"NH3": args.nh3, "NO2": 0.0, "Gly": args.gly, "CN": args.cn}
+    caption_suffix = (
+        f"$T={args.temperature}$ K, $a(M^{{n+}})={args.activity:.0e}$, "
+        f"[NH$_3$]={args.nh3} M, [Gly]={args.gly} M, [CN]={args.cn} M"
+    )
+    adjust_complex_energies = args.adjust_complex_energies and not args.raw_complex_energies
 
     data_loader = MetalComplexDataLoader(str(ROOT / "data" / "metal_complex_del_G.json"))
     complex_df = data_loader.load()
 
     out_dir = ROOT / args.output_dir
     for metal in args.metals:
-        reactions = generate_reaction_table_for_metal(
-            metal=metal,
-            activity=args.activity,
-            temperature=args.temperature,
-            ligand_conc=ligand_conc,
-            complex_df=complex_df,
-            grid_size=args.grid_size,
-        )
-        write_latex_table(metal, reactions, out_dir, caption_suffix)
+        if args.include_regions:
+            reactions = generate_reaction_table_for_metal(
+                metal=metal,
+                activity=args.activity,
+                temperature=args.temperature,
+                ligand_conc=ligand_conc,
+                complex_df=complex_df,
+                grid_size=args.grid_size,
+                adjust_complex_energies=adjust_complex_energies,
+            )
+            write_region_latex_table(metal, reactions, out_dir, caption_suffix)
+        else:
+            reactions = generate_reactions_for_metal(
+                metal=metal,
+                activity=args.activity,
+                temperature=args.temperature,
+                ligand_conc=ligand_conc,
+                complex_df=complex_df,
+                grid_size=args.grid_size,
+                adjust_complex_energies=adjust_complex_energies,
+            )
+            write_reaction_latex_table(metal, reactions, out_dir, caption_suffix)
 
 
 if __name__ == "__main__":
