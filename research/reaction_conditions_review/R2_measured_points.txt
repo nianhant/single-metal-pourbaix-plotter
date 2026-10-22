@@ -1,0 +1,87 @@
+R2: map measured E-pH points onto Figs 1 and 3
+
+Finding that changes the revision
+submission/SI.tex:269 explicitly states that Cu did not reach the target
+2.0 V vs RHE because the potentiostat reached 22 V compliance.
+submission/main.tex:361 nevertheless says all experiments were held at
+2.0 V vs RHE. Correct this contradiction in the methods, figure captions,
+and comparisons of Cu dissolution and catalytic activity.
+
+Available evidence
+The SI pH image gives initial (labelled Blank) and 120 min values, with
+intermediate samples. Exact numerical pH data and time-resolved corrected
+potentials were not found in the three project folders. The CSV/XLS files
+found contain thermodynamic inputs or computational sensitivity results.
+The manuscript's blanket nominal target cannot substitute for measured E.
+The pH figure includes Pd in its legend, but a distinct Pd trace is not
+clearly identifiable by visual inspection. Obtain the original data for Pd.
+
+Required table
+Complete measured_conditions_to_complete.csv for all seven electrodes.
+For each endpoint obtain bulk pH, the paired achieved iR-corrected potential,
+sampling time, uncertainties if available, and the original record reference.
+Record the actual time represented by "initial": an unpolarized feed pH has
+no paired applied electrode potential. If using feed pH with the first
+polarized potential, state that pairing explicitly rather than implying a
+simultaneous measurement. Add intermediate measured points if available.
+
+If only raw Hg/HgO potentials are available, obtain the simultaneous signed
+current and uncompensated resistance and establish how much compensation
+the instrument already applied. Under the usual anodic-positive convention,
+E_interface,SHE = E_recorded,Hg/HgO + E_reference,SHE - I*Ru;
+E_interface,RHE = E_interface,SHE + (2.303 RT/F)*pH.
+Verify the instrument convention and avoid correcting twice. The SI wording
+"iR drop was added back" needs clarification; a compliance voltage is a
+whole-cell/instrument limit, not Cu's working-electrode potential vs RHE.
+
+How to draw the requested conditions
+Fig 1: Au, Cu, Ni, Pd receive their corresponding measured points. Pt and
+Ti are computational comparisons here; do not invent experimental points.
+Fig 3: TiNi, TiCu, PdAu receive their respective measured points.
+Use an open circle for the first polarized condition and a filled circle
+for 120 min, with a thin connecting arrow denoting endpoint order only.
+If intermediate paired records exist, plot them and label selected times.
+Do not claim that a straight endpoint connector is a measured trajectory.
+Use a black or contrasting marker with a white halo to preserve visibility
+on phase colors. Add x/y error bars only where uncertainties are supported.
+On existing SHE axes, plot each point at
+    (bulk_pH, E_RHE_iR_corrected - 0.05916*bulk_pH), at 298.15 K.
+Use one consistent temperature-dependent prefactor in production code.
+Remove the old broad "experimental window", or label it as a separate
+screening envelope. A common nominal potential band cannot replace points.
+The earlier generated SVG bands are layout studies and must not be submitted
+as measured-condition overlays, particularly for Cu.
+
+Draft methods correction, pending verification of all achieved potentials
+"Electrolysis was conducted with a target potential of 2.0 V vs RHE.
+The Cu experiment reached the potentiostat compliance limit and did not
+attain this target. Achieved electrode potentials, corrected for ohmic
+losses and converted using the paired bulk-pH measurements, are reported
+for each electrode in Table S[...]."
+
+Sentence to complete after filling the data table and plotting
+"Measured bulk-pH and iR-corrected electrode-potential pairs at [first
+polarized sampling time] and 120 min are overlaid in Figs 1 and 3 using
+open and filled markers, respectively (Table S[...]); Cu attained
+[measured initial/final potentials] V vs RHE because of potentiostat
+compliance, rather than the nominal 2.0 V target."
+Do not fill the brackets with inferred target values.
+
+Reviewer-response draft: future tense until work is actually done
+"We agree that widening a nominal reaction window does not locate the
+experiments on the phase diagrams. We will overlay the measured bulk-pH
+and achieved iR-corrected potential pairs for Au, Cu, Ni, Pd, PdAu, TiNi,
+and TiCu, with distinct initial and final markers, and tabulate their
+values and reference conversions in the SI. We also identified and will
+correct an inconsistency: Cu did not reach the nominal 2.0 V vs RHE target
+because the potentiostat reached its compliance limit. The revised
+discussion will compare the predicted phases at the achieved conditions."
+
+Interpretation after plotting
+Identify the predicted phase at each actual endpoint and along any actual
+sampled trajectory. Reassess statements claiming dissolution-field overlap
+using those points. If measured points fall in a solid oxide field, report
+that result and discuss the limitations of an equilibrium bulk phase map
+instead of moving or widening the overlay to encompass an aqueous field.
+Keep assumed NH3/CN pools and metal activity distinct from measured feed
+composition and achieved E-pH conditions.

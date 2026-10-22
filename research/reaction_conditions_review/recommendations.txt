@@ -1,0 +1,120 @@
+SUPERSEDED BY R2_measured_points.txt
+The nominal-band previews below are layout studies only. They do NOT answer R2.
+Cu explicitly failed to reach 2.0 V RHE (SI.tex:269). Do not use the common
+2.0 V overlay as measured data, or copy the earlier generic response below.
+
+Reaction conditions on Pourbaix diagrams: proposed revision
+
+Evidence reviewed
+The active manuscript is ../updated_stability_manuscript/submission/main.tex;
+SI.tex inputs pourbaix_figures_SI.tex and the two sensitivity figure blocks.
+The submission README identifies these as the submission sources.
+No separate reviewer/coauthor comment text was found in the inspected sources.
+This proposal addresses the reaction-window inconsistency in those sources.
+
+The electrochemical setup (main.tex, line 361) reports 2.0 V vs RHE,
+approximately 0.1 V potential uncertainty, and time-dependent pH measurements.
+The captions instead call -2.0 to +2.0 V vs RHE the experimental window.
+Those are different experimental claims. A broad potential screening range
+must not be presented as the conditions of the constant-potential experiment.
+
+Recommended drawing
+1. Draw the nominal electrolysis potential at +2.0 V vs RHE with a black line.
+2. Add a translucent green band from +1.9 to +2.1 V vs RHE. Describe this as
+   the approximately 0.1 V reported potential uncertainty, not a confidence
+   interval or proof that this entire range was deliberately sampled.
+3. Use each electrode's measured bulk-pH interval when original numerical
+   data become available. The SI pH image visually spans roughly 10.7--12.0
+   across materials; these are visual estimates, not extracted measurements.
+   The previews retain pH 10.5--13.5 solely as a conservative envelope.
+   The actual measured bulk pH does not establish interfacial pH.
+4. Existing axes are SHE. At 298.15 K use
+      E_SHE = E_RHE - (2.303 R T/F) pH,
+   with 2.303 R T/F approximately 0.05916 V. Existing plotters use 0.0591.
+   At pH 10.5 and 13.5, the nominal line is approximately 1.379 and
+   1.201 V vs SHE using the current code's prefactor. Its uncertainty edges
+   are the same sloping line shifted vertically by +/-0.1 V.
+   A horizontal +2 V line on an SHE axis would be incorrect.
+5. If showing actual measured time points, convert each paired pH and
+   measured potential, and mark the sampling times. Do not invent trajectories
+   by combining independently observed extrema. If the potentiostat held a
+   fixed Hg/HgO potential and RHE was calculated afterward, the RHE potential
+   will vary with pH: use recorded potentials instead of assuming constant RHE.
+   The methods currently need clarification on this control/conversion detail.
+6. Apply the same convention to pure-metal, Pd/Pt cyanide, binary-metal,
+   and SI sensitivity panels. An alternative is to transform every phase-map
+   coordinate to RHE, where the +2 V line is horizontal; merely relabeling
+   the existing SHE axis would be wrong.
+
+Interpretation changes
+Reassess claims at the narrow experimental band, separately from lower-
+potential dissolution fields. An aqueous field encountered below +2 V does
+not alone demonstrate equilibrium dissolution at the electrolysis potential.
+If the band predicts an oxide but ICP-OES detects dissolution, describe this
+as a limitation of the bulk-equilibrium comparison and discuss conditional
+ligand chemistry, transient surface states, and kinetics as possible causes.
+Do not use proximity to a lower-potential aqueous field as direct validation.
+Likewise, an oxide stability field establishes a thermodynamic preference;
+it does not demonstrate that a protective, continuous oxide film forms.
+
+Keep model composition separate from the experimental overlay. The feed
+is 0.1 M KOH plus 0.1 M glycine; NH3=0.02 M, CN=0 or 1e-4 M, and metal
+activity=1e-4 are prescribed model conditions. They are not all measured
+initial electrolyte concentrations. In particular, the cyanide case is a
+conditional sensitivity scenario, not a measured cyanide exposure.
+
+Suggested caption replacement for the CURRENT PREVIEWS
+"The black segment denotes the nominal electrolysis potential of 2.0 V vs
+RHE; the green band denotes the approximately +/-0.1 V reported potential
+uncertainty. Both are converted to the plotted SHE scale at 298.15 K.
+The pH interval 10.5--13.5 is a conservative comparison envelope rather than
+the measured pH trajectory. Ligand pools and aqueous metal activity are
+prescribed thermodynamic model inputs, as specified above."
+
+Preferred final caption after checking numerical pH records
+Replace the conservative-envelope sentence with:
+"The segment spans the measured bulk-pH interval for the corresponding
+electrode during electrolysis (Table S[insert verified table number])."
+Only use this version after actually replacing the pH endpoints in artwork.
+
+Suggested main-text replacement
+"Experimental electrolysis conditions are indicated by the nominal applied
+potential of 2.0 V vs RHE and its approximately 0.1 V uncertainty, converted
+to the SHE scale used in the diagrams. We distinguish the phases predicted
+at these conditions from dissolution regions encountered at lower
+potentials. Comparisons are conditional on the specified ligand pools and
+aqueous metal activity and do not establish rates of corrosion or the
+formation of a protective surface film."
+
+Draft response to the comment (use past tense only AFTER final revision)
+"We agree that the reaction conditions should be distinguished from the
+potential range used for thermodynamic screening. We will replace the
+broad -2 to +2 V outline with the nominal electrolysis potential of +2.0 V
+vs RHE and a band showing the approximately +/-0.1 V reported uncertainty.
+These conditions will be converted to the SHE scale used in the diagrams,
+and the pH extent will be tied to the measured bulk-pH data. We will revise
+the captions and discussion to distinguish phase predictions at the
+electrolysis conditions from lower-potential dissolution fields, and clarify
+that ligand concentrations and aqueous metal activity are model inputs."
+
+Implementation and validation
+tools/preview_reaction_conditions.py generated three review SVGs from saved
+phase maps: six pure-metal panels, two Pd/Pt panels, and three binary-metal
+panels. It removes only the old four-line box and adds the band/centerline;
+it preserves phase maps, phase labels, axes, and all other original artwork.
+It checks the four-segment geometry and expected pH slope in every panel.
+No production manuscript, plotter, or submission figure was overwritten.
+The SVGs are review drafts, pending confirmation of reference control and
+numerical pH data. No raster rendering or phase-map recalculation was done.
+
+Relevant code
+methods/grid_plotter.py::GridPlotter.add_plot_accessories
+../Alloy-Pourbaix-Diagram-Plotter/methods/visualization.py::add_plot_accessories
+Both already convert RHE bounds into SHE, but their default pH and potential
+ranges differ from the submission scripts. Update these defaults and all
+explicit figure-generator overrides together when finalizing the revision.
+
+Reference for the potential scales
+Huang, Scully, and Rondinelli, Modeling Corrosion with First-Principles
+Electrochemical Phase Diagrams (2019), reference-electrode-potential section:
+https://www.numis.northwestern.edu/MURI/Publications/Papers/2019-Huang-AnnuRevMaterRes.pdf

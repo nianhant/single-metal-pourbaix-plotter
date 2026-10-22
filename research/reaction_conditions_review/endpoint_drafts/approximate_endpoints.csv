@@ -1,0 +1,15 @@
+electrode,endpoint,pH_estimated_from_SI_image,E_RHE_nominal_V,E_SHE_for_draft_V
+Au,Blank,11.15,2.0,1.341035
+Au,120 min,11.03,2.0,1.348127
+Ni,Blank,11.3,2.0,1.33217
+Ni,120 min,10.84,2.0,1.359356
+Cu,Blank,11.37,2.0,1.328033
+Cu,120 min,10.75,2.0,1.364675
+Pd,Blank,11.49,2.0,1.320941
+Pd,120 min,10.86,2.0,1.358174
+TiNi,Blank,12.03,2.0,1.289027
+TiNi,120 min,11.49,2.0,1.320941
+TiCu,Blank,11.59,2.0,1.315031
+TiCu,120 min,11.14,2.0,1.341626
+PdAu,Blank,11.71,2.0,1.307939
+PdAu,120 min,10.71,2.0,1.367039

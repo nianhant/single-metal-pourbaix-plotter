@@ -1,0 +1,15 @@
+electrode,timepoint,time_min,bulk_pH,E_RHE_iR_corrected_V,pH_uncertainty,E_uncertainty_V,source,status
+Au,initial,,,,,,,missing; nominal target 2.0 V is not measured data
+Au,final,120,,,,,,missing; nominal target 2.0 V is not measured data
+Cu,initial,,,,,,,missing; Cu did not reach target
+Cu,final,120,,,,,,missing; Cu did not reach target
+Ni,initial,,,,,,,missing; nominal target 2.0 V is not measured data
+Ni,final,120,,,,,,missing; nominal target 2.0 V is not measured data
+Pd,initial,,,,,,,missing; nominal target 2.0 V is not measured data
+Pd,final,120,,,,,,missing; nominal target 2.0 V is not measured data
+PdAu,initial,,,,,,,missing; nominal target 2.0 V is not measured data
+PdAu,final,120,,,,,,missing; nominal target 2.0 V is not measured data
+TiNi,initial,,,,,,,missing; nominal target 2.0 V is not measured data
+TiNi,final,120,,,,,,missing; nominal target 2.0 V is not measured data
+TiCu,initial,,,,,,,missing; nominal target 2.0 V is not measured data
+TiCu,final,120,,,,,,missing; nominal target 2.0 V is not measured data
