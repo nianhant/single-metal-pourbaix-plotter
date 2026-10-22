@@ -95,8 +95,8 @@ data_loader.save_to_csv('../data/metal_complex_energies.csv')
 # Target Metals and Constants
 # -------------------------------------
 metal_list = ['Cu','Au','Ni','Pt','Pd','Ti','Co','Cd','Sr','Mg','Mn','Zn','Fe', 'Ag']
-# metal_list = ['Cu','Au','Ni','Pt','Pd','Ti']
-metal_list = ['Pt',]
+metal_list = ['Cu','Au','Ni','Pt','Pd','Ti']
+# metal_list = ['Cu',]
 
 metal_stable_regions = {}
 T = 298.15
@@ -188,8 +188,8 @@ for metal in metal_list:
             # filename = f'Pd-NH3-H2O_T={T}_activity={activity:.0e}_[NH3]={ligand_conc["NH3"]}M_[Gly]={ligand_conc["Gly"]}M_[CN]={ligand_conc["CN"]}_Smith1989CriticalConstants.png'
             # filename = f'Pt-NH3-H2O_T={T}_activity={activity:.0e}_[NH3]={ligand_conc["NH3"]}M_[Gly]={ligand_conc["Gly"]}M_[CN]={ligand_conc["CN"]}_Harrington.png'
             # paper_dir = f'/home/x-ntian/pourbaix_paper/Accelerated-Computational-Materials-Discovery-for-Electrochemical-Nutrient-Recovery/Figures/pourbaix_diagrams{metal}'
-            # dir = f'figures/pourbaix_diagrams/{metal}'
-            dir = f'/global/homes/n/nianhant/data/stability_paper/updated_stability_manuscript/Figures/pourbaix_diagrams/{metal}'
+            dir = f'figures/pourbaix_diagrams/{metal}'
+            # dir = f'/global/homes/n/nianhant/data/stability_paper/updated_stability_manuscript/Figures/pourbaix_diagrams/{metal}'
             plotter = GridPlotter(pH_range, V_range, metal_data, grid_size, save_fig=True, dir = dir, filename=filename)
 
             # Stability and plotting

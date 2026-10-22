@@ -1,0 +1,458 @@
+{
+  "source_hashes": {
+    "/global/homes/n/nianhant/data/stability_paper/updated_stability_manuscript/submission/pourbaix_figures_SI.tex": "5a9d116e395ebfde10b2d0326a872c2c8bcc0bd6d1cea4f1919a2b4b2aa22500",
+    "/global/homes/n/nianhant/data/stability_paper/updated_stability_manuscript/submission/SI.tex": "ab4547b7ef197a091f86e77b27adddf11ecefa0845eee7928aae50c765c246ec",
+    "/global/homes/n/nianhant/data/stability_paper/updated_stability_manuscript/submission/pbx_Ni_Ti_NH3_Gly.png": "bf0079f3c3963f9b0152532b70510ba2be0724309566ecc40beb345759cf60d4",
+    "/global/homes/n/nianhant/data/stability_paper/updated_stability_manuscript/submission/pbx_Ni_Ti_NH3_Gly_CN.png": "ac2ea6ded6d03fb0eab0d20aac3f4ec5bd80225a30ead109627447a89ee33e40",
+    "/global/homes/n/nianhant/data/stability_paper/updated_stability_manuscript/submission/pbx_Cu_Ti_H2O.png": "25c4732cf0771a54630a75404957baa11d0cb2960a62b247771e45f52cb22abb",
+    "/global/homes/n/nianhant/data/stability_paper/updated_stability_manuscript/submission/pbx_Cu_Ti_NH3_Gly_CN.png": "69080f9dc5061b303b8cebd835cdb5e5ffa9222f93ab3d79a3c042a273966bf1",
+    "/global/homes/n/nianhant/data/stability_paper/updated_stability_manuscript/submission/pbx_Ti_Fe_NH3_Gly.png": "db2eb55014c99b191b61e14a99832d67dcf06aa02eac0779802ec88944ad6763",
+    "/global/homes/n/nianhant/data/stability_paper/updated_stability_manuscript/submission/pbx_Ti_Fe_NH3_Gly_CN.png": "3c50fd24c450cfb6ac727387ffd5250d814d126ea6b753345176fabfbdd4b882",
+    "/global/homes/n/nianhant/data/stability_paper/updated_stability_manuscript/submission/pbx_Ti_Mg_NH3_Gly.png": "05ebb5c047108b1f197420fc319c82b4d14fb76eaa91e16dfbdb956bca97e5b2",
+    "/global/homes/n/nianhant/data/stability_paper/updated_stability_manuscript/submission/pbx_Ti_Mn_NH3_Gly.png": "91b04e74b56dc7b0ee01a213af4132c1ebdcdc88a6f3230d62c862750f613ae3",
+    "/global/homes/n/nianhant/data/stability_paper/updated_stability_manuscript/submission/pbx_Ti_Zn_NH3_Gly_CN.png": "d095137199553be6dce99eae50dcf462c11bbf1517751d5dc51685dc5950dc7d",
+    "/global/homes/n/nianhant/data/stability_paper/updated_stability_manuscript/submission/pbx_Pd_Ag_NH3_Gly.png": "c9dfd760675606a806adf67a745d1b7c13ed974674a2db27689ccca61ae1832c",
+    "/global/homes/n/nianhant/data/stability_paper/updated_stability_manuscript/submission/pbx_Pd_Ag_NH3_Gly_CN.png": "9d1a44e2005afb46df16080d405c350a5a97cd64ec9c7020c690e2559d57866a",
+    "/global/homes/n/nianhant/data/stability_paper/updated_stability_manuscript/submission/pbx_Pd_Cu_NH3_Gly.png": "a15c06d597c0c3b53e3d7c7d4cfdf67e87b48fd6ca1eb24f5c7068cbd19727fd",
+    "/global/homes/n/nianhant/data/stability_paper/updated_stability_manuscript/submission/pbx_Pd_Cu_NH3_Gly_CN.png": "fae7b998ebddb4e430e7a807a156f4f87ad5fcbf1bcf138f44edee7c871ddc0f",
+    "/global/homes/n/nianhant/data/stability_paper/updated_stability_manuscript/submission/pbx_Pd_Ni_NH3_Gly.png": "323f9859a09c8e08de424ab46d7316ffbb1829953c5f63a36e6816d49c570533",
+    "/global/homes/n/nianhant/data/stability_paper/updated_stability_manuscript/submission/pbx_Pd_Ni_NH3_Gly_CN.png": "d5533f699a8c4c677c1ba5b50f8363e9441ce1e6b6ed9af88976aac062170d9e",
+    "/global/homes/n/nianhant/data/stability_paper/updated_stability_manuscript/submission/pbx_Pd_Pt_NH3_Gly.png": "14db82de2cd67e4c03d074c15a0c402287f41bf66a6fb8e92c1603fcec4c2588",
+    "/global/homes/n/nianhant/data/stability_paper/updated_stability_manuscript/submission/pbx_Pd_Pt_NH3_Gly_CN.png": "aa09f4db423ee5e1a4a8d18c6f27f7c7614843ddea2b565d839e6182a2302e5d",
+    "/global/homes/n/nianhant/data/stability_paper/updated_stability_manuscript/submission/pbx_Au_Pd_H2O.png": "51a40a24bb7b1518f1b20839e6a6fd9e2bc44224aefe7c9b9f0e176b4dfc4953",
+    "/global/homes/n/nianhant/data/stability_paper/updated_stability_manuscript/submission/pbx_Au_Pd_NH3_Gly_CN.png": "8f03eb6f7c4a2c5732dff0739040da12072cf10e0a4facfa91d401367de554e5"
+  },
+  "grid_size": 1000,
+  "temperature_K": 298.15,
+  "mu_ligand_eV": {
+    "NH3": -0.276037,
+    "Gly": -3.263014109,
+    "CN": 1.786800089
+  },
+  "pH_range": [
+    -2,
+    16
+  ],
+  "E_SHE_range": [
+    -2,
+    3
+  ],
+  "experimental_pH": [
+    10.5,
+    13.5
+  ],
+  "experimental_E_RHE": [
+    -2,
+    2.0
+  ],
+  "ambiguous_baseline_choice": "artwork",
+  "figures": [
+    {
+      "alloy": "TiNi",
+      "parameter": "CN",
+      "size_cm": [
+        17.848187847222224,
+        5.891794444444444
+      ],
+      "stem": "SI_TiNi_2panel_side_colors",
+      "conditions": [
+        {
+          "activity": 0.0001,
+          "NH3": 0.02,
+          "Gly": 0.1,
+          "CN": 0.0
+        },
+        {
+          "activity": 0.0001,
+          "NH3": 0.02,
+          "Gly": 0.1,
+          "CN": 0.0001
+        }
+      ],
+      "source_images": [
+        "pbx_Ni_Ti_NH3_Gly.png",
+        "pbx_Ni_Ti_NH3_Gly_CN.png"
+      ],
+      "source_modes": [
+        "NH3_Gly",
+        "NH3_Gly_CN"
+      ],
+      "resolved_modes": [
+        "NH3_Gly",
+        "NH3_Gly_CN"
+      ],
+      "figure_label": "fig:Ti_Ni_Pourbaix_SI"
+    },
+    {
+      "alloy": "TiCu",
+      "parameter": "CN",
+      "size_cm": [
+        17.39098784722222,
+        5.891794444444444
+      ],
+      "stem": "SI_TiCu_2panel_side_colors",
+      "conditions": [
+        {
+          "activity": 0.0001,
+          "NH3": 0.0,
+          "Gly": 0.0,
+          "CN": 0.0
+        },
+        {
+          "activity": 0.0001,
+          "NH3": 0.02,
+          "Gly": 0.1,
+          "CN": 0.0001
+        }
+      ],
+      "source_images": [
+        "pbx_Cu_Ti_H2O.png",
+        "pbx_Cu_Ti_NH3_Gly_CN.png"
+      ],
+      "source_modes": [
+        "H2O",
+        "NH3_Gly_CN"
+      ],
+      "resolved_modes": [
+        "H2O",
+        "NH3_Gly_CN"
+      ],
+      "figure_label": "fig:Ti_Cu_Pourbaix_SI"
+    },
+    {
+      "alloy": "TiFe",
+      "parameter": "CN",
+      "size_cm": [
+        18.15298784722222,
+        5.891794444444444
+      ],
+      "stem": "SI_TiFe_2panel_side_colors",
+      "conditions": [
+        {
+          "activity": 0.0001,
+          "NH3": 0.02,
+          "Gly": 0.1,
+          "CN": 0.0
+        },
+        {
+          "activity": 0.0001,
+          "NH3": 0.02,
+          "Gly": 0.1,
+          "CN": 0.0001
+        }
+      ],
+      "source_images": [
+        "pbx_Ti_Fe_NH3_Gly.png",
+        "pbx_Ti_Fe_NH3_Gly_CN.png"
+      ],
+      "source_modes": [
+        "NH3_Gly",
+        "NH3_Gly_CN"
+      ],
+      "resolved_modes": [
+        "NH3_Gly",
+        "NH3_Gly_CN"
+      ],
+      "figure_label": "fig:Ti_Fe_Pourbaix_SI"
+    },
+    {
+      "alloy": "TiMg",
+      "parameter": "CN",
+      "size_cm": [
+        9.76999392361111,
+        5.891794444444444
+      ],
+      "stem": "SI_TiMg_1panel_side_colors",
+      "conditions": [
+        {
+          "activity": 0.0001,
+          "NH3": 0.02,
+          "Gly": 0.1,
+          "CN": 0.0
+        }
+      ],
+      "source_images": [
+        "pbx_Ti_Mg_NH3_Gly.png"
+      ],
+      "source_modes": [
+        "NH3_Gly"
+      ],
+      "resolved_modes": [
+        "NH3_Gly"
+      ],
+      "figure_label": "fig:Ti_Mg_Pourbaix_SI"
+    },
+    {
+      "alloy": "TiMn",
+      "parameter": "CN",
+      "size_cm": [
+        8.855593923611112,
+        5.891794444444444
+      ],
+      "stem": "SI_TiMn_1panel_side_colors",
+      "conditions": [
+        {
+          "activity": 0.0001,
+          "NH3": 0.02,
+          "Gly": 0.1,
+          "CN": 0.0
+        }
+      ],
+      "source_images": [
+        "pbx_Ti_Mn_NH3_Gly.png"
+      ],
+      "source_modes": [
+        "NH3_Gly"
+      ],
+      "resolved_modes": [
+        "NH3_Gly"
+      ],
+      "figure_label": "fig:Ti_Mn_Pourbaix_SI"
+    },
+    {
+      "alloy": "TiZn",
+      "parameter": "CN",
+      "size_cm": [
+        9.490593923611112,
+        5.891794444444444
+      ],
+      "stem": "SI_TiZn_1panel_side_colors",
+      "conditions": [
+        {
+          "activity": 0.0001,
+          "NH3": 0.02,
+          "Gly": 0.1,
+          "CN": 0.0001
+        }
+      ],
+      "source_images": [
+        "pbx_Ti_Zn_NH3_Gly_CN.png"
+      ],
+      "source_modes": [
+        "NH3_Gly_CN"
+      ],
+      "resolved_modes": [
+        "NH3_Gly_CN"
+      ],
+      "figure_label": "fig:Ti_Zn_Pourbaix_SI"
+    },
+    {
+      "alloy": "PdAg",
+      "parameter": "CN",
+      "size_cm": [
+        18.864187847222222,
+        5.891794444444444
+      ],
+      "stem": "SI_PdAg_2panel_side_colors",
+      "conditions": [
+        {
+          "activity": 0.0001,
+          "NH3": 0.02,
+          "Gly": 0.1,
+          "CN": 0.0
+        },
+        {
+          "activity": 0.0001,
+          "NH3": 0.02,
+          "Gly": 0.1,
+          "CN": 0.0001
+        }
+      ],
+      "source_images": [
+        "pbx_Pd_Ag_NH3_Gly.png",
+        "pbx_Pd_Ag_NH3_Gly_CN.png"
+      ],
+      "source_modes": [
+        "NH3_Gly",
+        "NH3_Gly_CN"
+      ],
+      "resolved_modes": [
+        "NH3_Gly",
+        "NH3_Gly_CN"
+      ],
+      "figure_label": "fig:Pd_Ag_Pourbaix_SI"
+    },
+    {
+      "alloy": "PdCu",
+      "parameter": "CN",
+      "size_cm": [
+        19.19438784722222,
+        5.891794444444444
+      ],
+      "stem": "SI_PdCu_2panel_side_colors",
+      "conditions": [
+        {
+          "activity": 0.0001,
+          "NH3": 0.02,
+          "Gly": 0.1,
+          "CN": 0.0
+        },
+        {
+          "activity": 0.0001,
+          "NH3": 0.02,
+          "Gly": 0.1,
+          "CN": 0.0001
+        }
+      ],
+      "source_images": [
+        "pbx_Pd_Cu_NH3_Gly.png",
+        "pbx_Pd_Cu_NH3_Gly_CN.png"
+      ],
+      "source_modes": [
+        "NH3_Gly",
+        "NH3_Gly_CN"
+      ],
+      "resolved_modes": [
+        "NH3_Gly",
+        "NH3_Gly_CN"
+      ],
+      "figure_label": "fig:Pd_Cu_Pourbaix_SI"
+    },
+    {
+      "alloy": "PdNi",
+      "parameter": "CN",
+      "size_cm": [
+        18.940387847222222,
+        5.891794444444444
+      ],
+      "stem": "SI_PdNi_2panel_side_colors",
+      "conditions": [
+        {
+          "activity": 0.0001,
+          "NH3": 0.02,
+          "Gly": 0.1,
+          "CN": 0.0
+        },
+        {
+          "activity": 0.0001,
+          "NH3": 0.02,
+          "Gly": 0.1,
+          "CN": 0.0001
+        }
+      ],
+      "source_images": [
+        "pbx_Pd_Ni_NH3_Gly.png",
+        "pbx_Pd_Ni_NH3_Gly_CN.png"
+      ],
+      "source_modes": [
+        "NH3_Gly",
+        "NH3_Gly_CN"
+      ],
+      "resolved_modes": [
+        "NH3_Gly",
+        "NH3_Gly_CN"
+      ],
+      "figure_label": "fig:Pd_Ni_Pourbaix_SI"
+    },
+    {
+      "alloy": "PdPt",
+      "parameter": "CN",
+      "size_cm": [
+        18.229187847222217,
+        5.891794444444444
+      ],
+      "stem": "SI_PdPt_2panel_side_colors",
+      "conditions": [
+        {
+          "activity": 0.0001,
+          "NH3": 0.02,
+          "Gly": 0.1,
+          "CN": 0.0
+        },
+        {
+          "activity": 0.0001,
+          "NH3": 0.02,
+          "Gly": 0.1,
+          "CN": 0.0001
+        }
+      ],
+      "source_images": [
+        "pbx_Pd_Pt_NH3_Gly.png",
+        "pbx_Pd_Pt_NH3_Gly_CN.png"
+      ],
+      "source_modes": [
+        "NH3_Gly",
+        "NH3_Gly_CN"
+      ],
+      "resolved_modes": [
+        "NH3_Gly",
+        "NH3_Gly_CN"
+      ],
+      "figure_label": "fig:Pd_Pt_Pourbaix_SI"
+    },
+    {
+      "alloy": "AuPd",
+      "parameter": "CN",
+      "size_cm": [
+        18.38158784722222,
+        5.891794444444444
+      ],
+      "stem": "SI_AuPd_2panel_side_colors",
+      "conditions": [
+        {
+          "activity": 0.0001,
+          "NH3": 0.0,
+          "Gly": 0.0,
+          "CN": 0.0
+        },
+        {
+          "activity": 0.0001,
+          "NH3": 0.02,
+          "Gly": 0.1,
+          "CN": 0.0001
+        }
+      ],
+      "source_images": [
+        "pbx_Au_Pd_H2O.png",
+        "pbx_Au_Pd_NH3_Gly_CN.png"
+      ],
+      "source_modes": [
+        "H2O",
+        "NH3_Gly_CN"
+      ],
+      "resolved_modes": [
+        "H2O",
+        "NH3_Gly_CN"
+      ],
+      "figure_label": "fig:Au_Pd_Pourbaix_SI"
+    }
+  ],
+  "data_sha256": {
+    "data/Ti_Fe_solid_formation_energy.json": "1712cf9ada2d2bc49f00c04baf5d20b88f1844d689c02849cb61bb1c733550fc",
+    "data/Ti_Mn_ion_formation_energy.json": "48abb2109b40d8fbea8026fac435c49fcf59dd8fedd1c096d79e3c2bc2dbaac7",
+    "data/Ti_Zn_solid_formation_energy.json": "b05bb604d5ddc0d81d1d954ccff0b35b1c43a297d0691f94bcd7bdf4273c5016",
+    "data/Ti_Mn_solid_formation_energy.json": "1cd1e7a3cf98e81a8b9e48bfd5ca526f62c4fb7532452934e781842ef2a46f04",
+    "data/Ti_Zn_ion_formation_energy.json": "92e2ec58d2f59867ad329b6bd9e8669b81f389abe1be16ed18e858f6b43c3484",
+    "data/Pd_Ag_solid_formation_energy.json": "9c23456ba2e856ff562481b060ef56862c5e9cad84db158b9820cd71e52e85d9",
+    "data/Pd_Pt_solid_formation_energy.json": "d8a173512197afa8d94279c78413aaabff2eee4094dad9546ed8a73af1bbc25b",
+    "data/Pd_Au_solid_formation_energy.json": "daac265a9f823c76beeb063510e9253e583977b642fba8527c22e4473614dabd",
+    "data/Ni_Co_ion_formation_energy.json": "0e399c57935c27a53d036d1518bed494f664b03a79297d44d3003480bc195439",
+    "data/Pd_Cu_ion_formation_energy.json": "94c79cba31cc7faacf9a98e6a2952b685a6da06a8e91ee7acc1599cdb09c2c65",
+    "data/metal_complex_del_G.json": "c37d7cd715489f0979d637498321c76382d19730396c7c066e29fcd2ca39da01",
+    "data/Pd_Cu_solid_formation_energy.json": "ed3ba8c3e6fb74e48ea19a8749a59eaab34edb2e32ef4cdd18148a8aad6a0232",
+    "data/Ni_Cu_solid_formation_energy.json": "8231e769e1212c884851f37eea76f5b7753ae142b21972151dbae08774fe9134",
+    "data/Pd_Ni_ion_formation_energy.json": "acdecb1f069ede95a8536742416e19991da9bed4ecef94533da7db1a2bd83728",
+    "data/Ti_Pt_ion_formation_energy.json": "5a5226558e206ca47e46b645ca7d8557059ac6be4b4ba72624eeea2491c3f4b1",
+    "data/metal_stable_species.json": "a274465fbbae1ad76af9d338281471b2eccb9e046da011e676bd23647263b7c6",
+    "data/Ti_Au_solid_formation_energy.json": "49a78473c7f3338625afa351ce729881800ad06766f807729d988b2d7ef9794a",
+    "data/Pd_Ni_solid_formation_energy.json": "9a5a18cf93a523b9d3ecf633c186c1f8d97d56f2d76807bf433a7fab3fbaf64d",
+    "data/Cu_Ti_ion_formation_energy.json": "ff4334f7f20fad7468dab616cdeb436e63570f27a801a4a5da96223bb23636f5",
+    "data/Ni_Cu_ion_formation_energy.json": "dff2d5679e48cc34864e82af30de3c05d5632cc95bed260bd1135c1129c1b934",
+    "data/Ti_Pt_solid_formation_energy.json": "8d9f6b3093f997956c32c3b850b63becca1ddac37ffd70ff3b6db663e7f6e158",
+    "data/Ni_Co_solid_formation_energy.json": "6770857368a85e9f83fdb50a211812ea98ab12c585e104c5b0468995fa0fc24b",
+    "data/Ti_Pd_ion_formation_energy.json": "c3647aba109c70ac768d55e8d5ab70a9d367e7fef90fb0b47e12bb148ded7443",
+    "data/Pd_Ag_ion_formation_energy.json": "71ea22572856835450a33f9d1bdc6409c2b351d8b6c730c1f8f90ff7f525bd63",
+    "data/Ni_Ti_ion_formation_energy.json": "2f581539e56ab28948013241e14160f05b4729f9317b28c92cc4a8d450fa81cf",
+    "data/Ti_Mg_solid_formation_energy.json": "d3b39cfb9241d93bd0b55732fa746cdff092e38b05a1818cdda6a1dba1452a7b",
+    "data/Ti_Fe_ion_formation_energy.json": "e6f816a85647c4c65355c02ad8d36b75314cd26808314c7a82ac9e34c23546ab",
+    "data/Ni_Ti_solid_formation_energy.json": "c4e337b2260901c69336a8ef9a285e7074d3f699f253acd4c60bf0c19e09bd64",
+    "data/Cu_Ti_solid_formation_energy.json": "30d29dd81142a74b9bdb55cf4ee20a69cba3a0cf42edf552ace8d47dcf2d6cb5",
+    "data/Pd_Pt_ion_formation_energy.json": "b0d0bcb268305c3b92f9960473b06888d81614b0c3328c44d1076f43b8279964",
+    "data/Ti_Au_ion_formation_energy.json": "dd0ad405ceb75c66d3c518aedcbeb4cbcdb35612b7fc3007b8161af59abe9737",
+    "data/Pd_Au_ion_formation_energy.json": "6e9a99aece4e60916d50b5b9e132623ad70252a95a0788241e845fbe824d2727",
+    "data/Ti_Mg_ion_formation_energy.json": "b81bf40404754512829f559e8e1aba68299e9bf6051649eb8a113fb099d446ba",
+    "data/Ti_Ag_ion_formation_energy.json": "9a354b497dc7fde561c27ca96292df600b2b9f2da8ffd6f8f690acce4ffbc44d",
+    "data/Ti_Ag_solid_formation_energy.json": "d32af2f780ce7b5d5571dc6f22bcfa7ad75bb85fc3bcb4eec3642bbe0b1a7e45",
+    "data/Ti_Pd_solid_formation_energy.json": "4371e6f8e319d7849b5dc1e1dacd1ee053f8f0ef9803f2d19cc40c8e03be26ab"
+  }
+}

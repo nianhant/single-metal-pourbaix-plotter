@@ -1,0 +1,794 @@
+{
+  "reference": {
+    "path": "/global/homes/n/nianhant/data/stability_paper/single-metal-pourbaix-plotter/examples/generate_sensitivity_triptychs.py",
+    "sha256": "a9bad9270e0d51d6b270b07a2fd52931ec65a28a3f4b438feccde464be9fbd75"
+  },
+  "baseline": {
+    "activity": 0.0001,
+    "NH3": 0.02,
+    "Gly": 0.1,
+    "CN": 0.0
+  },
+  "levels": {
+    "activity": [
+      1e-06,
+      0.0001,
+      0.01
+    ],
+    "NH3": [
+      0.002,
+      0.02,
+      0.1
+    ],
+    "Gly": [
+      0.01,
+      0.1,
+      1.0
+    ],
+    "CN": [
+      0.0,
+      0.0001,
+      0.001
+    ]
+  },
+  "temperature_K": 298.15,
+  "grid_size": 1600,
+  "pH_range": [
+    -2,
+    16
+  ],
+  "E_SHE_range": [
+    -2,
+    3
+  ],
+  "experimental_pH": [
+    10.5,
+    13.5
+  ],
+  "experimental_E_RHE": [
+    -2,
+    2.0
+  ],
+  "mu_ligand_eV": {
+    "NH3": -0.276037,
+    "Gly": -3.263014109,
+    "CN": 1.786800089
+  },
+  "data_sha256": {
+    "data/Cu_Ti_ion_formation_energy.json": "ff4334f7f20fad7468dab616cdeb436e63570f27a801a4a5da96223bb23636f5",
+    "data/Cu_Ti_solid_formation_energy.json": "30d29dd81142a74b9bdb55cf4ee20a69cba3a0cf42edf552ace8d47dcf2d6cb5",
+    "data/Ni_Co_ion_formation_energy.json": "0e399c57935c27a53d036d1518bed494f664b03a79297d44d3003480bc195439",
+    "data/Ni_Co_solid_formation_energy.json": "6770857368a85e9f83fdb50a211812ea98ab12c585e104c5b0468995fa0fc24b",
+    "data/Ni_Cu_ion_formation_energy.json": "dff2d5679e48cc34864e82af30de3c05d5632cc95bed260bd1135c1129c1b934",
+    "data/Ni_Cu_solid_formation_energy.json": "8231e769e1212c884851f37eea76f5b7753ae142b21972151dbae08774fe9134",
+    "data/Ni_Ti_ion_formation_energy.json": "2f581539e56ab28948013241e14160f05b4729f9317b28c92cc4a8d450fa81cf",
+    "data/Ni_Ti_solid_formation_energy.json": "c4e337b2260901c69336a8ef9a285e7074d3f699f253acd4c60bf0c19e09bd64",
+    "data/Pd_Ag_ion_formation_energy.json": "71ea22572856835450a33f9d1bdc6409c2b351d8b6c730c1f8f90ff7f525bd63",
+    "data/Pd_Ag_solid_formation_energy.json": "9c23456ba2e856ff562481b060ef56862c5e9cad84db158b9820cd71e52e85d9",
+    "data/Pd_Au_ion_formation_energy.json": "6e9a99aece4e60916d50b5b9e132623ad70252a95a0788241e845fbe824d2727",
+    "data/Pd_Au_solid_formation_energy.json": "daac265a9f823c76beeb063510e9253e583977b642fba8527c22e4473614dabd",
+    "data/Pd_Cu_ion_formation_energy.json": "94c79cba31cc7faacf9a98e6a2952b685a6da06a8e91ee7acc1599cdb09c2c65",
+    "data/Pd_Cu_solid_formation_energy.json": "ed3ba8c3e6fb74e48ea19a8749a59eaab34edb2e32ef4cdd18148a8aad6a0232",
+    "data/Pd_Ni_ion_formation_energy.json": "acdecb1f069ede95a8536742416e19991da9bed4ecef94533da7db1a2bd83728",
+    "data/Pd_Ni_solid_formation_energy.json": "9a5a18cf93a523b9d3ecf633c186c1f8d97d56f2d76807bf433a7fab3fbaf64d",
+    "data/Pd_Pt_ion_formation_energy.json": "b0d0bcb268305c3b92f9960473b06888d81614b0c3328c44d1076f43b8279964",
+    "data/Pd_Pt_solid_formation_energy.json": "d8a173512197afa8d94279c78413aaabff2eee4094dad9546ed8a73af1bbc25b",
+    "data/Ti_Ag_ion_formation_energy.json": "9a354b497dc7fde561c27ca96292df600b2b9f2da8ffd6f8f690acce4ffbc44d",
+    "data/Ti_Ag_solid_formation_energy.json": "d32af2f780ce7b5d5571dc6f22bcfa7ad75bb85fc3bcb4eec3642bbe0b1a7e45",
+    "data/Ti_Au_ion_formation_energy.json": "dd0ad405ceb75c66d3c518aedcbeb4cbcdb35612b7fc3007b8161af59abe9737",
+    "data/Ti_Au_solid_formation_energy.json": "49a78473c7f3338625afa351ce729881800ad06766f807729d988b2d7ef9794a",
+    "data/Ti_Fe_ion_formation_energy.json": "e6f816a85647c4c65355c02ad8d36b75314cd26808314c7a82ac9e34c23546ab",
+    "data/Ti_Fe_solid_formation_energy.json": "1712cf9ada2d2bc49f00c04baf5d20b88f1844d689c02849cb61bb1c733550fc",
+    "data/Ti_Mg_ion_formation_energy.json": "b81bf40404754512829f559e8e1aba68299e9bf6051649eb8a113fb099d446ba",
+    "data/Ti_Mg_solid_formation_energy.json": "d3b39cfb9241d93bd0b55732fa746cdff092e38b05a1818cdda6a1dba1452a7b",
+    "data/Ti_Mn_ion_formation_energy.json": "48abb2109b40d8fbea8026fac435c49fcf59dd8fedd1c096d79e3c2bc2dbaac7",
+    "data/Ti_Mn_solid_formation_energy.json": "1cd1e7a3cf98e81a8b9e48bfd5ca526f62c4fb7532452934e781842ef2a46f04",
+    "data/Ti_Pd_ion_formation_energy.json": "c3647aba109c70ac768d55e8d5ab70a9d367e7fef90fb0b47e12bb148ded7443",
+    "data/Ti_Pd_solid_formation_energy.json": "4371e6f8e319d7849b5dc1e1dacd1ee053f8f0ef9803f2d19cc40c8e03be26ab",
+    "data/Ti_Pt_ion_formation_energy.json": "5a5226558e206ca47e46b645ca7d8557059ac6be4b4ba72624eeea2491c3f4b1",
+    "data/Ti_Pt_solid_formation_energy.json": "8d9f6b3093f997956c32c3b850b63becca1ddac37ffd70ff3b6db663e7f6e158",
+    "data/Ti_Zn_ion_formation_energy.json": "92e2ec58d2f59867ad329b6bd9e8669b81f389abe1be16ed18e858f6b43c3484",
+    "data/Ti_Zn_solid_formation_energy.json": "b05bb604d5ddc0d81d1d954ccff0b35b1c43a297d0691f94bcd7bdf4273c5016",
+    "data/metal_complex_del_G.json": "c37d7cd715489f0979d637498321c76382d19730396c7c066e29fcd2ca39da01",
+    "data/metal_stable_species.json": "a274465fbbae1ad76af9d338281471b2eccb9e046da011e676bd23647263b7c6"
+  },
+  "figures": [
+    {
+      "alloy": "TiNi",
+      "parameter": "activity",
+      "size_cm": [
+        26.586781770833337,
+        5.922838888888888
+      ],
+      "stem": "TiNi_activity_three_levels_1x3_side_colors"
+    },
+    {
+      "alloy": "TiNi",
+      "parameter": "NH3",
+      "size_cm": [
+        26.586781770833337,
+        5.891794444444444
+      ],
+      "stem": "TiNi_NH3_three_levels_1x3_side_colors"
+    },
+    {
+      "alloy": "TiNi",
+      "parameter": "Gly",
+      "size_cm": [
+        26.586781770833337,
+        5.897438888888889
+      ],
+      "stem": "TiNi_Gly_three_levels_1x3_side_colors"
+    },
+    {
+      "alloy": "TiNi",
+      "parameter": "CN",
+      "size_cm": [
+        26.84078177083333,
+        5.891794444444444
+      ],
+      "stem": "TiNi_CN_three_levels_1x3_side_colors"
+    },
+    {
+      "alloy": "TiCu",
+      "parameter": "activity",
+      "size_cm": [
+        26.30738177083333,
+        5.922838888888888
+      ],
+      "stem": "TiCu_activity_three_levels_1x3_side_colors"
+    },
+    {
+      "alloy": "TiCu",
+      "parameter": "NH3",
+      "size_cm": [
+        26.916981770833335,
+        5.891794444444444
+      ],
+      "stem": "TiCu_NH3_three_levels_1x3_side_colors"
+    },
+    {
+      "alloy": "TiCu",
+      "parameter": "Gly",
+      "size_cm": [
+        26.205781770833333,
+        5.897438888888889
+      ],
+      "stem": "TiCu_Gly_three_levels_1x3_side_colors"
+    },
+    {
+      "alloy": "TiCu",
+      "parameter": "CN",
+      "size_cm": [
+        27.06938177083333,
+        5.891794444444444
+      ],
+      "stem": "TiCu_CN_three_levels_1x3_side_colors"
+    },
+    {
+      "alloy": "PdAu",
+      "parameter": "activity",
+      "size_cm": [
+        27.221781770833335,
+        5.922838888888888
+      ],
+      "stem": "PdAu_activity_three_levels_1x3_side_colors"
+    },
+    {
+      "alloy": "PdAu",
+      "parameter": "NH3",
+      "size_cm": [
+        28.21238177083334,
+        5.891794444444444
+      ],
+      "stem": "PdAu_NH3_three_levels_1x3_side_colors"
+    },
+    {
+      "alloy": "PdAu",
+      "parameter": "Gly",
+      "size_cm": [
+        27.348781770833334,
+        5.897438888888889
+      ],
+      "stem": "PdAu_Gly_three_levels_1x3_side_colors"
+    },
+    {
+      "alloy": "PdAu",
+      "parameter": "CN",
+      "size_cm": [
+        28.821981770833336,
+        5.891794444444444
+      ],
+      "stem": "PdAu_CN_three_levels_1x3_side_colors"
+    }
+  ],
+  "palettes": {
+    "TiNi": [
+      {
+        "combination": [
+          "Ni(CN)4[2+]_complex_False",
+          "Ti4O8_solid_False"
+        ],
+        "display_color": "#fbb5c7"
+      },
+      {
+        "combination": [
+          "Ni(Gly)1[2+]_complex_False",
+          "Ti4O8_solid_False"
+        ],
+        "display_color": "#fa9db6"
+      },
+      {
+        "combination": [
+          "Ni(Gly)2[2+]_complex_False",
+          "Ti4O8_solid_False"
+        ],
+        "display_color": "#f875a8"
+      },
+      {
+        "combination": [
+          "Ni(Gly)3[2+]_complex_False",
+          "Ti4O8_solid_False"
+        ],
+        "display_color": "#e2459e"
+      },
+      {
+        "combination": [
+          "Ni(OH)3[1-]_ion_False",
+          "Ti4O8_solid_False"
+        ],
+        "display_color": "#b6d7e8"
+      },
+      {
+        "combination": [
+          "Ni(OH)4[2-]_ion_False",
+          "Ti4O8_solid_False"
+        ],
+        "display_color": "#c6deee"
+      },
+      {
+        "combination": [
+          "Ni2H6_solid_False",
+          "TiH2_solid_False"
+        ],
+        "display_color": "#c6c6c6"
+      },
+      {
+        "combination": [
+          "Ni4O10_solid_False",
+          "Ti4O14_solid_False"
+        ],
+        "display_color": "#fed27b"
+      },
+      {
+        "combination": [
+          "Ni5O11_solid_False",
+          "Ti4O14_solid_False"
+        ],
+        "display_color": "#febf6a"
+      },
+      {
+        "combination": [
+          "Ni5O11_solid_False",
+          "Ti4O8_solid_False"
+        ],
+        "display_color": "#fbac5b"
+      },
+      {
+        "combination": [
+          "Ni5O11_solid_False",
+          "TiO2[2+]_ion_False"
+        ],
+        "display_color": "#b2d5e8"
+      },
+      {
+        "combination": [
+          "Ni6O8_solid_False",
+          "Ti4O8_solid_False"
+        ],
+        "display_color": "#d87841"
+      },
+      {
+        "combination": [
+          "NiH_solid_False",
+          "Ti4O8_solid_False"
+        ],
+        "display_color": "#e68849"
+      },
+      {
+        "combination": [
+          "NiH_solid_False",
+          "TiH2_solid_False"
+        ],
+        "display_color": "#d1d1d1"
+      },
+      {
+        "combination": [
+          "NiH_solid_False",
+          "Ti[2+]_ion_False"
+        ],
+        "display_color": "#8ec1df"
+      },
+      {
+        "combination": [
+          "NiH_solid_False",
+          "Ti[3+]_ion_False"
+        ],
+        "display_color": "#a1cce4"
+      },
+      {
+        "combination": [
+          "NiO2_solid_False",
+          "Ti4O8_solid_False"
+        ],
+        "display_color": "#f39951"
+      },
+      {
+        "combination": [
+          "NiO2_solid_False",
+          "TiO2[2+]_ion_False"
+        ],
+        "display_color": "#b2d5e8"
+      },
+      {
+        "combination": [
+          "NiO3_solid_False",
+          "Ti4O14_solid_False"
+        ],
+        "display_color": "#fee199"
+      },
+      {
+        "combination": [
+          "Ni[2+]_ion_False",
+          "Ti4O8_solid_False"
+        ],
+        "display_color": "#afd3e7"
+      },
+      {
+        "combination": [
+          "Ni[2+]_ion_False",
+          "TiO2[2+]_ion_False"
+        ],
+        "display_color": "#c9dfef"
+      },
+      {
+        "combination": [
+          "Ni[2+]_ion_False",
+          "Ti[2+]_ion_False"
+        ],
+        "display_color": "#cbe0f0"
+      },
+      {
+        "combination": [
+          "Ni[2+]_ion_False",
+          "Ti[3+]_ion_False"
+        ],
+        "display_color": "#cbe0f0"
+      },
+      {
+        "combination": [
+          "Ni_solid_False",
+          "Ti4O8_solid_False"
+        ],
+        "display_color": "#c06d42"
+      },
+      {
+        "combination": [
+          "Ni_solid_False",
+          "Ti[2+]_ion_False"
+        ],
+        "display_color": "#cbe0f0"
+      },
+      {
+        "combination": [
+          "Ni_solid_False",
+          "Ti[3+]_ion_False"
+        ],
+        "display_color": "#cbe0f0"
+      },
+      {
+        "combination": [
+          "Ti4Ni15O24_solid_True",
+          "Ti4O8_solid_False"
+        ],
+        "display_color": "#925d44"
+      },
+      {
+        "combination": [
+          "Ti4Ni4O12_solid_True"
+        ],
+        "display_color": "#a96443"
+      }
+    ],
+    "TiCu": [
+      {
+        "combination": [
+          "Cu(CN)2[1+]_complex_False",
+          "Ti4O8_solid_False"
+        ],
+        "display_color": "#fbb5c7"
+      },
+      {
+        "combination": [
+          "Cu(CN)3[1+]_complex_False",
+          "Ti4O8_solid_False"
+        ],
+        "display_color": "#f485b7"
+      },
+      {
+        "combination": [
+          "Cu(Gly)2[1+]_complex_False",
+          "Ti4O8_solid_False"
+        ],
+        "display_color": "#fba9ba"
+      },
+      {
+        "combination": [
+          "Cu(Gly)2[2+]_complex_False",
+          "Ti4O8_solid_False"
+        ],
+        "display_color": "#fba9ba"
+      },
+      {
+        "combination": [
+          "Cu(Gly)3[2+]_complex_False",
+          "Ti4O8_solid_False"
+        ],
+        "display_color": "#f875a8"
+      },
+      {
+        "combination": [
+          "Cu(NH3)2[1+]_complex_False",
+          "Ti4O8_solid_False"
+        ],
+        "display_color": "#d555a8"
+      },
+      {
+        "combination": [
+          "Cu16O24_solid_False",
+          "Ti4O8_solid_False"
+        ],
+        "display_color": "#e08146"
+      },
+      {
+        "combination": [
+          "Cu2H2_solid_False",
+          "TiH2_solid_False"
+        ],
+        "display_color": "#c3c3c3"
+      },
+      {
+        "combination": [
+          "Cu2H2_solid_False",
+          "Ti[2+]_ion_False"
+        ],
+        "display_color": "#99c7e2"
+      },
+      {
+        "combination": [
+          "Cu2O2_solid_False",
+          "Ti4O8_solid_False"
+        ],
+        "display_color": "#f6a155"
+      },
+      {
+        "combination": [
+          "Cu4O2_solid_False",
+          "Ti4O8_solid_False"
+        ],
+        "display_color": "#925d44"
+      },
+      {
+        "combination": [
+          "CuO2[2-]_ion_False",
+          "Ti4O8_solid_False"
+        ],
+        "display_color": "#b2d5e8"
+      },
+      {
+        "combination": [
+          "CuO2_solid_False",
+          "Ti4O14_solid_False"
+        ],
+        "display_color": "#fee199"
+      },
+      {
+        "combination": [
+          "CuO2_solid_False",
+          "Ti4O8_solid_False"
+        ],
+        "display_color": "#fec36d"
+      },
+      {
+        "combination": [
+          "CuO2_solid_False",
+          "TiO2[2+]_ion_False"
+        ],
+        "display_color": "#c2dced"
+      },
+      {
+        "combination": [
+          "Cu[1+]_ion_False",
+          "Ti4O8_solid_False"
+        ],
+        "display_color": "#afd3e7"
+      },
+      {
+        "combination": [
+          "Cu[1+]_ion_False",
+          "Ti[3+]_ion_False"
+        ],
+        "display_color": "#84badc"
+      },
+      {
+        "combination": [
+          "Cu[2+]_ion_False",
+          "Ti4O8_solid_False"
+        ],
+        "display_color": "#afd3e7"
+      },
+      {
+        "combination": [
+          "Cu[2+]_ion_False",
+          "TiO2[2+]_ion_False"
+        ],
+        "display_color": "#c9dfef"
+      },
+      {
+        "combination": [
+          "Cu_solid_False",
+          "Ti4O8_solid_False"
+        ],
+        "display_color": "#bb6b42"
+      },
+      {
+        "combination": [
+          "Cu_solid_False",
+          "TiH2_solid_False"
+        ],
+        "display_color": "#d0d0d0"
+      },
+      {
+        "combination": [
+          "Cu_solid_False",
+          "Ti[2+]_ion_False"
+        ],
+        "display_color": "#cbe0f0"
+      },
+      {
+        "combination": [
+          "Cu_solid_False",
+          "Ti[3+]_ion_False"
+        ],
+        "display_color": "#cbe0f0"
+      }
+    ],
+    "PdAu": [
+      {
+        "combination": [
+          "Au(CN)2[1+]_complex_False",
+          "Pd(CN)4[2+]_complex_False"
+        ],
+        "display_color": "#f89dbf"
+      },
+      {
+        "combination": [
+          "Au(CN)2[1+]_complex_False",
+          "Pd[2+]_ion_False"
+        ],
+        "display_color": "#fbb5c7"
+      },
+      {
+        "combination": [
+          "Au(NH3)2[1+]_complex_False",
+          "Pd(NH3)4[2+]_complex_False"
+        ],
+        "display_color": "#e877af"
+      },
+      {
+        "combination": [
+          "Au(NH3)2[1+]_complex_False",
+          "Pd2O2_solid_False"
+        ],
+        "display_color": "#fa99b5"
+      },
+      {
+        "combination": [
+          "Au(NH3)2[1+]_complex_False",
+          "Pd2O4_solid_False"
+        ],
+        "display_color": "#fa99b5"
+      },
+      {
+        "combination": [
+          "Au4O6_solid_False",
+          "Pd(CN)4[2+]_complex_False"
+        ],
+        "display_color": "#f485b7"
+      },
+      {
+        "combination": [
+          "Au4O6_solid_False",
+          "Pd2O2_solid_False"
+        ],
+        "display_color": "#fbac5b"
+      },
+      {
+        "combination": [
+          "Au4O6_solid_False",
+          "Pd2O4_solid_False"
+        ],
+        "display_color": "#fee199"
+      },
+      {
+        "combination": [
+          "Au4O6_solid_False",
+          "Pd[2+]_ion_False"
+        ],
+        "display_color": "#aad0e6"
+      },
+      {
+        "combination": [
+          "AuO3[3-]_ion_False",
+          "Pd(CN)4[2+]_complex_False"
+        ],
+        "display_color": "#f485b7"
+      },
+      {
+        "combination": [
+          "AuO3[3-]_ion_False",
+          "Pd2O2_solid_False"
+        ],
+        "display_color": "#c0dcec"
+      },
+      {
+        "combination": [
+          "AuO3[3-]_ion_False",
+          "Pd2O4_solid_False"
+        ],
+        "display_color": "#b3d6e8"
+      },
+      {
+        "combination": [
+          "Au[3+]_ion_False",
+          "Pd(CN)4[2+]_complex_False"
+        ],
+        "display_color": "#f485b7"
+      },
+      {
+        "combination": [
+          "Au[3+]_ion_False",
+          "Pd2O4_solid_False"
+        ],
+        "display_color": "#acd2e6"
+      },
+      {
+        "combination": [
+          "Au[3+]_ion_False",
+          "Pd[2+]_ion_False"
+        ],
+        "display_color": "#84badc"
+      },
+      {
+        "combination": [
+          "Au_solid_False",
+          "H2Pd2_solid_False"
+        ],
+        "display_color": "#bebebe"
+      },
+      {
+        "combination": [
+          "Au_solid_False",
+          "H4Pd3_solid_False"
+        ],
+        "display_color": "#d0d0d0"
+      },
+      {
+        "combination": [
+          "Au_solid_False",
+          "Pd(CN)4[2+]_complex_False"
+        ],
+        "display_color": "#f485b7"
+      },
+      {
+        "combination": [
+          "Au_solid_False",
+          "Pd2O2_solid_False"
+        ],
+        "display_color": "#d87841"
+      },
+      {
+        "combination": [
+          "Au_solid_False",
+          "Pd[2+]_ion_False"
+        ],
+        "display_color": "#94c5e1"
+      },
+      {
+        "combination": [
+          "H2AuO3[1-]_ion_False",
+          "Pd(CN)4[2+]_complex_False"
+        ],
+        "display_color": "#f485b7"
+      },
+      {
+        "combination": [
+          "H2AuO3[1-]_ion_False",
+          "Pd2O2_solid_False"
+        ],
+        "display_color": "#b3d6e8"
+      },
+      {
+        "combination": [
+          "H2AuO3[1-]_ion_False",
+          "Pd2O4_solid_False"
+        ],
+        "display_color": "#b6d7e8"
+      },
+      {
+        "combination": [
+          "H2Pd2_solid_False",
+          "PdAu3_solid_True"
+        ],
+        "display_color": "#a8a8a8"
+      },
+      {
+        "combination": [
+          "HAuO3[2-]_ion_False",
+          "Pd(CN)4[2+]_complex_False"
+        ],
+        "display_color": "#f485b7"
+      },
+      {
+        "combination": [
+          "HAuO3[2-]_ion_False",
+          "Pd2O2_solid_False"
+        ],
+        "display_color": "#b2d5e8"
+      },
+      {
+        "combination": [
+          "HAuO3[2-]_ion_False",
+          "Pd2O4_solid_False"
+        ],
+        "display_color": "#b5d6e8"
+      },
+      {
+        "combination": [
+          "Pd(CN)4[2+]_complex_False",
+          "PdAu3_solid_True"
+        ],
+        "display_color": "#f485b7"
+      },
+      {
+        "combination": [
+          "Pd(NH3)4[2+]_complex_False",
+          "PdAu3_solid_True"
+        ],
+        "display_color": "#d555a8"
+      },
+      {
+        "combination": [
+          "Pd2O2_solid_False",
+          "PdAu3_solid_True"
+        ],
+        "display_color": "#925d44"
+      },
+      {
+        "combination": [
+          "Pd3Au_solid_True",
+          "PdAu3_solid_True"
+        ],
+        "display_color": "#7c7c7c"
+      },
+      {
+        "combination": [
+          "PdAu3_solid_True",
+          "Pd[2+]_ion_False"
+        ],
+        "display_color": "#cbe0f0"
+      }
+    ]
+  },
+  "note": "Saved stability grids reused; only reaction-window overlays changed."
+}

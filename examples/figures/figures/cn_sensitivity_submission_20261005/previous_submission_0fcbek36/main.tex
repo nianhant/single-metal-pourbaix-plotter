@@ -1,0 +1,720 @@
+
+
+\documentclass[twoside,twocolumn,9pt]{article}
+\usepackage{extsizes}
+\usepackage[super,sort&compress,comma]{natbib} 
+\usepackage[version=3]{mhchem}
+\usepackage[left=1.5cm, right=1.5cm, top=1.785cm, bottom=2.0cm]{geometry}
+\usepackage{balance}
+\usepackage{mathptmx}
+\usepackage{sectsty}
+\usepackage{graphicx} 
+\usepackage{lastpage}
+\usepackage[format=plain,justification=justified,singlelinecheck=false,font={stretch=1.125,small,sf},labelfont=bf,labelsep=space]{caption}
+\usepackage{float}
+\usepackage{fancyhdr}
+\usepackage{fnpos}
+\usepackage[english]{babel}
+\addto{\captionsenglish}{%
+  \renewcommand{\refname}{Notes and references}
+}
+\usepackage{array}
+\usepackage{droidsans}
+\usepackage{charter}
+\usepackage[T1]{fontenc}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{setspace}
+\usepackage[compact]{titlesec}
+
+\usepackage{siunitx}
+\usepackage{subcaption}
+% \usepackage{xr-hyper}
+% \usepackage{varioref}
+\usepackage{hyperref}
+\usepackage{cleveref}
+\usepackage{xr}
+\usepackage{booktabs}
+\usepackage[normalem]{ulem}
+
+% \usepackage{xr-hyper}
+\externaldocument{submission/SI}
+
+\usepackage{epstopdf}%This line makes .eps figures into .pdf - please comment out if not required.
+
+\definecolor{cream}{RGB}{222,217,201}
+
+
+%%%%%%%%% 
+
+\begin{document}
+
+\pagestyle{fancy}
+\thispagestyle{plain}
+\fancypagestyle{plain}{
+%%%HEADER%%%
+\renewcommand{\headrulewidth}{0pt}
+}
+%%%END OF HEADER%%%
+
+%%%PAGE SETUP - Please do not change any commands within this section%%%
+\makeFNbottom
+\makeatletter
+\renewcommand\LARGE{\@setfontsize\LARGE{15pt}{17}}
+\renewcommand\Large{\@setfontsize\Large{12pt}{14}}
+\renewcommand\large{\@setfontsize\large{10pt}{12}}
+\renewcommand\footnotesize{\@setfontsize\footnotesize{7pt}{10}}
+\makeatother
+
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+\renewcommand\footnoterule{\vspace*{1pt}% 
+\color{cream}\hrule width 3.5in height 0.4pt \color{black}\vspace*{5pt}} 
+\setcounter{secnumdepth}{5}
+
+\makeatletter 
+\renewcommand\@biblabel[1]{#1}            
+\renewcommand\@makefntext[1]% 
+{\noindent\makebox[0pt][r]{\@thefnmark\,}#1}
+\makeatother 
+\renewcommand{\figurename}{\small{Fig.}~}
+\sectionfont{\sffamily\Large}
+\subsectionfont{\normalsize}
+\subsubsectionfont{\bf}
+\setstretch{1.125} %In particular, please do not alter this line.
+\setlength{\skip\footins}{0.8cm}
+\setlength{\footnotesep}{0.25cm}
+\setlength{\jot}{10pt}
+\titlespacing*{\section}{0pt}{4pt}{4pt}
+\titlespacing*{\subsection}{0pt}{15pt}{1pt}
+%%%END OF PAGE SETUP%%%
+
+%%%FOOTER%%%
+\fancyfoot{}
+\fancyfoot[LO,RE]{\vspace{-7.1pt}\includegraphics[height=9pt]{rsc_LF}}
+\fancyfoot[CO]{\vspace{-7.1pt}\hspace{13.2cm}\includegraphics{rsc_RF}}
+\fancyfoot[CE]{\vspace{-7.2pt}\hspace{-14.2cm}\includegraphics{rsc_RF}}
+\fancyfoot[RO]{\footnotesize{\sffamily{1--\pageref{LastPage} ~\textbar  \hspace{2pt}\thepage}}}
+\fancyfoot[LE]{\footnotesize{\sffamily{\thepage~\textbar\hspace{3.45cm} 1--\pageref{LastPage}}}}
+\fancyhead{}
+\renewcommand{\headrulewidth}{0pt} 
+\renewcommand{\footrulewidth}{0pt}
+\setlength{\arrayrulewidth}{1pt}
+\setlength{\columnsep}{6.5mm}
+\setlength\bibsep{1pt}
+%%%END OF FOOTER%%%
+
+%%%FIGURE SETUP - please do not change any commands within this section%%%
+\makeatletter 
+\newlength{\figrulesep} 
+\setlength{\figrulesep}{0.5\textfloatsep} 
+
+\newcommand{\topfigrule}{\vspace*{-1pt}% 
+\noindent{\color{cream}\rule[-\figrulesep]{\columnwidth}{1.5pt}} }
+
+\newcommand{\botfigrule}{\vspace*{-2pt}% 
+\noindent{\color{cream}\rule[\figrulesep]{\columnwidth}{1.5pt}} }
+
+\newcommand{\dblfigrule}{\vspace*{-1pt}% 
+\noindent{\color{cream}\rule[-\figrulesep]{\textwidth}{1.5pt}} }
+
+\makeatother
+%%%END OF FIGURE SETUP%%%
+
+%%%TITLE, AUTHORS AND ABSTRACT%%%
+\twocolumn[
+  \begin{@twocolumnfalse}
+{\includegraphics[height=30pt]{rsc_journal_name}\hfill\raisebox{0pt}[0pt][0pt]{\includegraphics[height=55pt]{rsc_logo}}\\[1ex]
+\includegraphics[width=18.5cm]{rsc_header_bar}}\par
+\vspace{1em}
+\sffamily
+\begin{tabular}{m{4.5cm} p{13.5cm} }
+
+\includegraphics{rsc_DOI} & \noindent\LARGE{\textbf{Nitrogen ligands influence corrosion and catalyst stability in electrochemical nitrogen recovery$^\dag$}} \\%Article title goes here instead of the text "This is the title"
+\vspace{0.3cm} & \vspace{0.3cm} \\
+
+
+& \noindent\large{
+Nianhan Tian,\textit{$^{a}$}
+Ehsan Abbasi,\textit{$^{b}$}
+Haldrian Iriawan,\textit{$^{c}$}
+Paul Kohl,\textit{$^{a}$}
+Yang Shao-Horn,\textit{$^{c,d,e,f}$}
+Gerardine G. Botte,$^{\ast}$\textit{$^{b}$}
+and Andrew J. Medford,$^{\ast}$\textit{$^{a}$}
+}\\ % Author names
+
+\includegraphics{rsc_dates} 
+
+& \noindent\normalsize{
+% Ti based alloys outperform pure metals
+% Experiment validates Pourbaix predictions
+% Tradeoff: stability vs activity
+Nitrogen-containing ligands formed during electrochemical oxidation can accelerate metal electrode degradation, motivating a systematic study of ligand-induced corrosion under waste activated sludge treatment conditions. Here, we combine computational thermodynamic screening with experimental validation to investigate how ammonia, glycine, and cyanide influence the stability of transition metals and \sout{their alloys} \textcolor{red}{binary metal phases} under electrochemical wastewater treatment conditions. We show that ligand-driven complexation stabilizes dissolved metal species, shifting stability domains and promoting corrosion even when oxide phases are thermodynamically favored in ligand-free environments. In particular, trace cyanide expands dissolution regions for many metals, revealing the sensitivity of electrode stability to reaction intermediates. Guided by these insights, we identify TiNi and Pd-based \sout{alloys} \textcolor{red}{binary metal phases} as candidates that balance corrosion resistance and catalytic activity, while cyanide-sensitive systems such as TiCu remain vulnerable to ligand-driven dissolution. Experimental electrochemical measurements, spectroscopy, and microscopy support the predicted stability trends, linking ligand formation to accelerated dissolution pathways. These results demonstrate that electrode stability in nitrogen-rich environments is governed by ligand chemistry rather than oxide thermodynamics alone, and establish design principles for developing durable electrocatalysts for sustainable nitrogen recovery.
+}
+
+
+\\
+
+\end{tabular}
+
+ \end{@twocolumnfalse} \vspace{0.6cm}
+
+  ]
+%%%END OF TITLE, AUTHORS AND ABSTRACT%%%
+
+%%%FONT SETUP - please do not change any commands within this section
+\renewcommand*\rmdefault{bch}\normalfont\upshape
+\rmfamily
+\section*{}
+\vspace{-1cm}
+
+
+%%%FOOTNOTES%%%
+
+% \footnotetext{\textit{$^{a}$~Address, Address, Town, Country. Fax: XX XXXX XXXX; Tel: XX XXXX XXXX; E-mail: xxxx@aaa.bbb.ccc}}
+% \footnotetext{\textit{$^{b}$~Address, Address, Town, Country. }}
+\footnotetext{\textit{$^{a}$~School of Chemical and Biomolecular Engineering, Georgia Institute of Technology, Atlanta, Georgia 30318, USA. E-mail: ajm@gatech.edu}}
+\footnotetext{\textit{$^{b}$~Department of Chemical Engineering, Texas Tech University, Lubbock, Texas 79409, USA.}}
+\footnotetext{\textit{$^{c}$~Department of Materials Science \& Engineering, Massachusetts Institute of Technology, Cambridge, Massachusetts 02139, USA.}}
+\footnotetext{\textit{$^{d}$~Research Laboratory of Electronics, Massachusetts Institute of Technology, Cambridge, Massachusetts 02139, USA.}}
+\footnotetext{\textit{$^{e}$~Department of Mechanical Engineering, Massachusetts Institute of Technology, Cambridge, Massachusetts 02139, USA.}}
+\footnotetext{\textit{$^{f}$~Department of Chemistry, Massachusetts Institute of Technology, Cambridge, Massachusetts 02139, USA.}}
+
+%Please use \dag to cite the ESI in the main text of the article.
+%If you article does not have ESI please remove the the \dag symbol from the title and the footnotetext below.
+\footnotetext{\dag~Supplementary Information available: Pourbaix diagrams of the full set of metals and \sout{alloys} \textcolor{red}{binary metal phases} with and without cyanide ligands; electrode preparation and electroplating procedures; XRD patterns; additional cyclic voltammetry, FESEM/EDX images, and ion chromatography calibration; reaction tables and free-energy data. See DOI: 00.0000/00000000.}
+%additional addresses can be cited as above using the lower-case letters, c, d, e... If all authors are from the same address, no letter is required
+
+% \footnotetext{\dag~Additional footnotes to the title and authors can be included \textit{e.g.}\ `Present address:' or `These authors contributed equally to this work' as above using the symbols: \ddag, \textsection, and \P. Please place the appropriate symbol next to the author's name and include a \texttt{\textbackslash footnotetext} entry in the the correct place in the list.}
+
+
+%%%END OF FOOTNOTES%%%
+
+%%%MAIN TEXT%%%%
+\section{Introduction}
+Global demand for ammonia-based fertilizers continues to grow, yet their production remains heavily dependent on the energy-intensive Haber–Bosch process \cite{Schloegl2003CatalyticStory,Smil1999DetonatorExplosion,Erisman2008HowWorld}. Haber–Bosch operates at high temperature and pressure and relies on fossil-derived hydrogen, producing a substantial carbon footprint \cite{Liu2022ProspectsFixation,Suryanto2021NitrogenShuttle}. Alternative approaches for nitrogen recovery and recycling are therefore needed to make fertilizer production more sustainable.
+
+Electrochemical wastewater treatment, such as electrolysis of waste-activated sludge (E-WAS), offers a promising pathway to recover nitrogen species from organic waste streams under ambient conditions \cite{Botte2024InnovativeRecovery,Alvarez-Pugliese2024PerspectivesWaste,Zeng2019ElectrochemicalSulfide,Mulchandani2016RecoverySludges}. However, E-WAS operates under highly oxidative and alkaline environments, where high applied potentials and reactive intermediates can degrade electrode materials and limit their long-term sustainability \cite{Popov2015ThermodynamicsCorrosion,Sanchis2022NitrateOverview}.
+
+A central challenge in E-WAS is maintaining electrode stability under these harsh conditions. High anodic pulsing potentials and reactive oxygen species promote surface oxidation \cite{Mom-jacs.8b12284}, dissolution \cite{Kok-jacs.4c06284}, and structural degradation \cite{Schweinar-jpclett.0c01258}, while competing reactions such as the oxygen evolution reaction (OER) reduce catalytic efficiency \cite{Li2021Ru-DopedNitrate,Wang2022ElectrochemicalOxidation,Dai2020ElectrochemicalOxides}. Nitrogen-containing ligands formed during electrochemical oxidation can degrade metal electrodes \cite{Han2000FactorsSolutions,Young2022MetalAmmonia}, warranting further studies.
+
+Ammonia, glycine, and cyanide can coordinate with metal centers to form soluble complexes, which stabilize dissolved species and promote metal dissolution \cite{Meng1996PrinciplesReview,Wang2022AmmoniaSystem,Ma2021ALeaching,Li2025Glycine-mediatedStudy}. While such metal–ligand interactions are well established in hydrometallurgical systems \cite{Akcil2015PreciousReview,Azadi2021SustainableGlycine,Oraby2020GoldPermanganate,Sarvar2023ApplicationStructure,OConnor2018ElectrochemicalSolutions}, their role in electrode corrosion under electrochemical conditions remains poorly understood, especially at low concentrations and under high anodic potentials.
+
+Pourbaix diagrams are widely used to evaluate electrochemical stability by mapping the thermodynamically stable phases of metals as a function of pH and potential \cite{Pourbaix1974AtlasSolutions,Huang2015ElectrochemicalCalculations,wang2024optimal}. Most electrocatalyst stability analyses include metals, oxides, hydroxides, and simple aqueous ions, but omit metal ligand complexes \cite{Persson2012PredictionStates,Patel2019EfficientCompounds}. This omission can overestimate the stability of bulk metals and oxides in electrolytes containing ammonia, amino acids, cyanide, or other coordinating species. Including aqueous metal-ligand complexes reveals additional dissolution regions because these ligands stabilize dissolved metal species relative to solid phases. For first row transition metals, complexation free energies with amino acids, ammonia, and cyanide can span tens to more than one hundred kJ/mol \cite{molecules27082407,Smith1989CriticalConstants,Harrington2005DeterminationIon,Bjerrum1957StabilitySubstances}, comparable to oxide and hydroxide formation energies. Ligand formation during glycine oxidation can therefore shift predicted stability under E-WAS conditions.
+
+Ammonia is the primary target product of E-WAS, both because amino acids are major nitrogen constituents of activated sludge and because recovered ammonia can be directly valorized as fertilizer \cite{Jafari2022ElectrochemicalProduction}. The mechanism by which ammonia is liberated from amino acid oxidation during electrolysis, however, remains an open question, with at least three hypotheses proposed in the literature: (i) heterogeneous oxidation by metal oxyhydroxide species (e.g., NiOOH formed during the \ce{Ni^{2+}}/\ce{Ni^{3+}} transition) that cleave the C-N bond of adsorbed amino acids \cite{VEDHARATHINAM2012292}; (ii) molecular-oxidant mediation, in which highly oxidizing species such as hydroxyl radicals (\ce{^{.}OH}) generated at high anodic potentials abstract hydrogen and cleave the C--N bond \cite{Mahne_2017}; and (iii) solution phase redox mediation, in which dissolved metal ions form glycine complexes that are oxidized at the electrode and act as a homogeneous oxidant promoting oxidative deamination \cite{doi:10.1021/cr030717f,B409929J,doi:10.1021/jp803961s}. Mechanism~(iii) directly couples electrode instability to catalytic activity: dissolution can degrade the electrode while simultaneously generating the redox mediator responsible for ammonia production, and the strong metal--\ce{NH3} complexation may further protect the product from over-oxidation to \ce{NO_x}. In this framework, the most active electrodes may generate the very ligands and intermediates that accelerate their own dissolution. We therefore hypothesize that ammonia activity and electrode instability may be correlated, and by investigating both across a range of electrode materials, we aim to probe the coupling between dissolution and ammonia formation.
+
+To test this activity and stability coupling, we combined ligand-inclusive Pourbaix analysis with experimental electrochemical and spectroscopic measurements. We constructed thermodynamic stability diagrams for 14 transition metals and 6 binary \sout{alloys} \textcolor{red}{metal systems} in the presence of ammonia, glycine, and cyanide, then selected representative electrodes for experimental validation. Cyclic voltammetry (CV), field emission scanning electron microscopy (FESEM), inductively coupled plasma optical emission spectrometry (ICP-OES), gas phase electrochemical mass spectrometry (EC-MS), post electrolysis grazing incidence Fourier transform infrared spectroscopy (GI-FTIR), nuclear magnetic resonance (NMR), and ion chromatography (IC) were used to connect predicted stability regions with measured metal dissolution, surface intermediates, and solution phase products.
+
+Our results show that electrode stability during glycine oxidation cannot be predicted from oxide thermodynamics alone. Ligand stabilized aqueous complexes expand dissolution regions for several metals, especially when cyanide or ammonia stabilizes dissolved metal species. Experiments confirm these trends: Cu shows high ammonia production but severe ligand-driven dissolution, Au achieves relatively high ammonia selectivity but undergoes ammonia-assisted leaching, and Pd, PdAu, and TiNi show lower metal loss because ligand complexation is weaker or passivating phases remain stable. These activity and stability trends support ligand-inclusive Pourbaix analysis as a practical screening tool for identifying electrode materials that balance nitrogen conversion activity with durability in nitrogen rich electrochemical environments.
+
+
+
+
+
+\section{Methods}
+\subsection{Computational thermodynamic screening}
+Pourbaix diagrams were constructed to evaluate the thermodynamic stability of metals, \sout{alloys} \textcolor{red}{binary metal phases}, and metal–ligand complexes under E-WAS-relevant conditions. Free energies of bulk metals were obtained from the Materials Project database \cite{Jain2013TheInnovation}, based on generalized gradient approximation (GGA) density functional theory calculations. Free energies of aqueous ligands and metal–ligand complexes were derived from equilibrium constants reported in thermochemical handbooks \cite{Wagman1982TheUnits, Smith1989CriticalConstants, Bard2017StandardSolution, Bjerrum1957StabilitySubstances} and literature \cite{Meng1996PrinciplesReview, Azadi2019DataComplexes, Aviles2022ExploringNH3, Oraby2023SelectiveSolutions, Harrington2005DeterminationIon}.
+
+The metals considered include Au, Cu, Ni, Pt, Pd, Ti, Co, Mg, Mn,  Zn, Ag, Cd, Sr and Fe. The ligands considered include \ce{NH3}, glycine, and \ce{CN-}. A wide range of conditions, from \(-2.0\) to \(3.0~\mathrm{V}_{\mathrm{RHE}}\) and from pH 0 to 15, was explored. Chemical potentials of all species were derived from redox and acid–base equilibria using the Nernst equation as a function of applied potential and pH. For a general redox reaction,
+
+\begin{equation} \label{eq:reaction}
+aA + h\text{H}^+ + z\text{e}^- \leftrightarrow bB + \text{H}_2\text{O}
+\end{equation}
+
+the corresponding potential is given by
+
+\begin{equation} \label{eq:nernst}
+E = E^\circ - \frac{k}{z} \log \left(\frac{[A]^a}{[B]^b}\right) - \frac{k h}{z} \, \mathrm{pH},
+\end{equation}
+where \(E\) is the electrode potential, \(E^\circ\) is the standard electrode potential, and \(k = RT/(F \ln 10)\), with \(R\) the gas constant, \(T\) the temperature, and \(F\) the Faraday constant. The terms \([A]\) and \([B]\) represent the activities of the aqueous species \(A\) and \(B\), respectively, where \(A\) denotes the species appearing in the numerator of the reaction quotient and \(B\) denotes the species appearing in the denominator. The parameter \(z\) is the number of electrons transferred in the redox reaction. The coefficients \(a\) and \(b\) are the stoichiometric coefficients of species \(A\) and \(B\), respectively, and \(h\) is the stoichiometric coefficient of protons involved in the reaction.
+
+\sout{Aqueous ion activities were approximated by their concentrations and fixed at \SI{1e-4}{M}} \textcolor{red}{Aqueous-species activities were prescribed at $10^{-4}$, corresponding to a nominal concentration of \SI{1e-4}{M} under the ideal-solution approximation} \cite{Huang2017ImprovedCompounds, Wang2020PredictingFunctional}. \sout{Ligand concentrations were set to represent conservative concentrations of free ligands and transient intermediates, with initial \ce{NH3}, glycine, and cyanide concentrations fixed at \SI{0.02}{M}, \SI{0.1}{M}, and \SI{1e-4}{M}, respectively.} \textcolor{red}{The reference nominal ligand-pool concentrations were \SI{0.02}{M} ammonia, \SI{0.1}{M} glycine, and \SI{1e-4}{M} cyanide where included. These nominal concentrations, denoted $[L]_{\mathrm{tot}}$ in the figure captions, were assigned to the unbound ligand pools, $C_L^u$, without subtracting ligand incorporated into metal complexes. The cyanide concentration is a model input rather than a measured initial electrolyte concentration.}
+
+For \sout{alloy systems} \textcolor{red}{binary metal systems}, candidate phases were generated from stoichiometric combinations of elemental entries in the Materials Project database, subject to system-specific compositional constraints (e.g., Ni:Ti = 1:1) \cite{Thompson2011PourbaixSystems}. To maintain computational tractability, the analysis was restricted to binary \sout{alloys} \textcolor{red}{metal systems}.
+
+\textcolor{red}{The calculations compare the included ordered crystalline phases and their allowed phase assemblages at prescribed overall metal compositions. They do not explicitly describe configurational entropy, short-range order, or substitutionally disordered solid solutions. The resulting diagrams therefore assess oxidation and dissolution tendencies within the included phase set, rather than reproducing the complete phase constitution of the experimental electrodes.}
+
+Nitrogen-based ligands (\ce{NH3}, glycine, and \ce{CN^-}) exist in pH-dependent protonation states. Metal complexation was assumed to involve the unbound ligand in its coordinating protonation state: neutral \ce{NH3} for ammonia, glycinate for glycine, and \ce{CN^-} for cyanide. We therefore expressed ligand availability as
+\sout{\(\mathrm{pLigand} = -\log[\mathrm{Ligand}_{\mathrm{free}}]\), where square brackets denote molar concentrations of the unbound coordinating ligand, in analogy with $\text{pH} = -\log[\text{H}^+]$. These concentrations were used as approximations of activities in the Pourbaix calculations, consistent with the treatment of aqueous metal ion activities described above.} \textcolor{red}{$\mathrm{pLigand}=-\log_{10}a_L$, where $a_L$ is the dimensionless activity of the free coordinating ligand. Under the ideal-solution approximation, $a_L\simeq[L]_{\mathrm{free}}/c^\circ$, with $c^\circ=1~\mathrm{mol\,L^{-1}}$. The unbound pool $C_L^u$ includes all uncomplexed protonation states of ligand $L$; acid--base equilibria determine the fraction present in its coordinating form.}
+
+% Nitrogen based ligands (\ce{NH3}, glycine, and \ce{CN^-}) exist in pH dependent protonation states. Metal complexation was assumed to involve the unbound ligand in its coordinating protonation state: neutral \ce{NH3} for ammonia, glycinate for glycine, and \ce{CN^-} for cyanide. We therefore expressed ligand availability as
+% \(\mathrm{pLigand} = -\log[\mathrm{Ligand}_{\mathrm{free}}]\), where square brackets denote molar concentrations of the unbound coordinating ligand, in analogy with \(\mathrm{pH} = -\log[\ce{H+}]\). These concentrations were used as approximations to activities in the Pourbaix calculations, consistent with the treatment of aqueous metal ion activities described above.
+
+For ammonia, the relevant acid-base equilibrium is
+
+\begin{equation} \label{eq:NH4_equilibrium}
+    \ce{NH4+ <=> NH3 + H+}, \quad pK_a = 9.26 .
+\end{equation}
+
+Here, \(pK_a\) is the pH at which \([\ce{NH4+}] = [\ce{NH3}]\). Below this pH, protonated ammonium dominates and the concentration of free \ce{NH3} available for metal coordination decreases. Above this pH, neutral \ce{NH3} dominates, and the free ammonia concentration approaches \sout{the total ammonia concentration}\textcolor{red}{the prescribed unbound ammonia pool}.
+
+\sout{The analytical total ammonia concentration, excluding metal-bound ammonia, is} \textcolor{red}{The prescribed unbound ammonia pool is}
+
+\begin{equation} \label{eq:NH3_massbalance}
+    \textcolor{red}{C_{\mathrm{NH_3}}^u}
+    = [\ce{NH3}] + [\ce{NH4+}] 
+    = [\ce{NH3}]\left(1 + 10^{pK_a - \mathrm{pH}}\right),
+\end{equation}
+
+\sout{where \([\mathrm{NH}_3]_{\mathrm{tot}}\) is the experimentally specified total concentration of ammonia-containing species and \([\ce{NH3}]\) is the free neutral ammonia concentration available for metal complexation. Solving for \([\ce{NH3}]\) and taking \(-\log\) gives} \textcolor{red}{where $[\ce{NH3}]$ is the free neutral ammonia concentration available for metal complexation. Solving for this concentration and taking $-\log_{10}([\ce{NH3}]/c^\circ)$ gives}
+
+\begin{equation} \label{eq:pNH3}
+    \mathrm{pNH}_3 
+    = \textcolor{red}{-\log_{10}\!\left(C_{\mathrm{NH_3}}^u/c^\circ\right)}
+    + \log\left(1 + 10^{pK_a - \mathrm{pH}}\right).
+\end{equation}
+
+Analogous expressions were derived for glycine and \ce{CN^-}. Glycine was treated as a diprotic acid with three acid-base forms: the protonated cation \ce{H2Gly+}, the neutral zwitterionic form \ce{HGly}, and the deprotonated glycinate form \ce{Gly^-}. The glycinate form was taken as the coordinating ligand in the metal complexation reactions. The two acid dissociation equilibria are
+
+\begin{align} \label{eq:Gly_equilibria}
+    \ce{H2Gly+ &<=> HGly + H+},  \quad pK_{a_1} = 2.37 \nonumber \\
+    \ce{HGly   &<=> Gly^- + H+}, \quad pK_{a_2} = 9.80 .
+\end{align}
+
+Here, \(pK_{a_1}\) describes deprotonation of the carboxylic acid group, while \(pK_{a_2}\) describes deprotonation of the ammonium group. Increasing pH therefore shifts glycine speciation toward \ce{Gly^-}, increasing the concentration of the free coordinating ligand.
+
+\sout{The total glycine concentration, excluding metal-bound glycine, is} \textcolor{red}{The prescribed unbound glycine pool is}
+
+\begin{equation} \label{eq:Gly_massbalance}
+    \textcolor{red}{C_{\mathrm{Gly}}^u}
+    = [\ce{Gly^-}]
+      \left(
+          1 + 10^{pK_{a_2}-\mathrm{pH}} + 10^{pK_{a_1}+pK_{a_2}-2\,\mathrm{pH}}
+      \right).
+\end{equation}
+
+\sout{Taking \(-\log\) of the free glycinate concentration gives} \textcolor{red}{Taking $-\log_{10}$ of the free glycinate activity gives}
+
+\begin{equation} \label{eq:pGly}
+    \mathrm{pGly}
+    = \textcolor{red}{-\log_{10}\!\left(C_{\mathrm{Gly}}^u/c^\circ\right)}
+      + \log\!\left(
+            1 + 10^{pK_{a_2}-\mathrm{pH}}
+              + 10^{pK_{a_1}+pK_{a_2}-2\,\mathrm{pH}}
+        \right).
+\end{equation}
+
+For cyanide, protonation is governed by a single equilibrium,
+
+\begin{equation} \label{eq:HCN_equilibrium}
+    \ce{HCN <=> CN^- + H+}, \quad pK_a = 9.2 .
+\end{equation}
+
+Here, \(pK_a\) is the pH at which \([\ce{HCN}] = [\ce{CN^-}]\). At pH values above \(pK_a\), free \ce{CN^-} dominates and can coordinate strongly to metal ions.
+
+\sout{The total cyanide concentration, excluding metal-bound cyanide, is} \textcolor{red}{The prescribed unbound cyanide pool is}
+
+\begin{equation} \label{eq:CN_massbalance}
+    \textcolor{red}{C_{\mathrm{CN}}^u}
+    = [\ce{CN^-}] + [\ce{HCN}]
+    = [\ce{CN^-}]\left(1 + 10^{pK_a - \mathrm{pH}}\right),
+\end{equation}
+
+which yields
+
+\begin{equation} \label{eq:pCN}
+    \mathrm{pCN}^-
+    = \textcolor{red}{-\log_{10}\!\left(C_{\mathrm{CN}}^u/c^\circ\right)}
+      + \log\!\left(1 + 10^{pK_a - \mathrm{pH}}\right).
+\end{equation}
+
+\textcolor{red}{\sout{Because the coordinating ligand concentration depends nonlinearly on pH, the chemical potential of ligand-containing aqueous complexes is also nonlinear in pH. Consequently, phase-boundary equations involving these complexes are generally curved rather than linear in the potential–pH plane, and the corresponding stability regions need not be convex.}}
+
+\sout{In each case, the pLigand quantity captures the pH dependence of the free ligand concentration at a fixed analytical total ligand concentration. Ligand-metal interactions are not treated self-consistently through coupled mass balances. Instead, total ligand concentrations are held constant at each grid point in the potential pH space.}
+
+\textcolor{red}{Ligand activities were calculated using established acid--base equilibrium relationships; incorporation of ligand speciation into thermodynamic analyses of complexing electrolytes has been described previously \cite{Smith1989CriticalConstants,Murase1999Potential-pHBaths,Puente-Siller2013ASolutions}. Fixed activity is appropriate when free-ligand activity is maintained or independently specified; the present approximation accounts for protonation when the unbound pool is prescribed and depletion by metal binding is negligible. When the coordinating form dominates at sufficiently high pH, the present treatment approaches the fixed-activity limit associated with that unbound pool.}
+
+\textcolor{red}{For a complex containing $n$ coordinating ligands, the ligand-activity contribution to its effective formation free energy relative to the ligand reservoir is}
+\begin{equation}\label{eq:ligand_activity_free_energy}
+    \textcolor{red}{\Delta G_L=-nRT\ln a_L=nRT\ln(10)\,\mathrm{pLigand}.}
+\end{equation}
+\textcolor{red}{\sout{Pourbaix diagrams were generated by evaluating the chemical potentials of all species on a 1000 $\times$ 1000 potential–pH grid and identifying the most stable phase at each point. Reactions and equilibrium relationships are provided in the Supplementary Information.}}
+\textcolor{red}{Stability domains were determined by evaluating the effective free energies of all candidate phases and phase assemblages pointwise on uniform potential--pH grids and selecting the lowest-energy state, rather than using a half-space intersection construction. The main-text single-metal panels used $800\times800$ grid points, and the main-text binary-metal panel used $1600\times1600$ grid points. Reactions and equilibrium relationships are provided in the Supplementary Information. The ligand-pool approximation and its conservation limits are described in the Supporting Information, Section~\ref{sec:si_ligand_mass_balance}.}
+
+\textcolor{red}{To assess sensitivity to the assumed concentrations, we independently varied the total ammonia concentration from $0.002$ to $0.1\,\mathrm{M}$ and the total glycine concentration from $0.01$ to $1.0\,\mathrm{M}$, while holding other concentrations at their reference values. The nominal aqueous metal-ion concentration was separately varied from $10^{-6}$ to $10^{-2}\,\mathrm{M}$. Sensitivity diagrams for single-metal and binary metal systems are provided in the Supplementary Information (\Crefrange{fig:Au_activity_sensitivity_SI}{fig:Pd_NH3_sensitivity_SI} and \Crefrange{fig:TiNi_activity_sensitivity_SI}{fig:PdAu_NH3_sensitivity_SI}, respectively).}
+
+Although not present in the feed, we hypothesized that cyanide could form via C–C cleavage during high-potential glycine oxidation \cite{Oraby2020GoldPermanganate, Chen2013AdsorptionStudy}. To test how such transient intermediates might impact stability, we included \ce{CN^-} in our thermodynamic screening as a \sout{bounding case}\textcolor{red}{conditional scenario} for strong-field ligand complexation. As discussed in \Cref{sec:intermediates}, isotopic labeling later provided evidence consistent with the formation of cyanide or closely related carbon nitrogen species. \sout{Its inclusion, therefore, provides a conservative assessment of ligand-induced metal dissolution under E-WAS conditions.} \textcolor{red}{Its inclusion tests the thermodynamic effect of cyanide complexation under the assumed ligand availability.}
+
+Cyanide complexes were included only when formation constants for the corresponding M-\ce{CN^-} species were available in the thermodynamic sources used here. For metals without reported M-\ce{CN^-} formation constants, including Ti, Mg, and Mn, the corresponding cyanide complexes were omitted. The absence of reported formation constants was treated as insufficient information to include the corresponding complexes. If stable but unreported complexes exist, the calculated diagrams may underestimate ligand assisted dissolution. The same criterion was used for metal-glycine and metal-ammonia complexes. Complexes lacking reported formation constants in the sources used here, such as Pt-glycine species, were excluded from the Pourbaix construction.
+
+\sout{Pourbaix diagrams were generated by evaluating the chemical potentials of all species on a 1000 $\times$ 1000 potential–pH grid and identifying the most stable phase at each point. Reactions and equilibrium relationships are provided in the Supplementary Information.}
+
+\subsection{Experimental}
+\subsubsection{Materials}
+Glycine (C$_2$H$_5$NO$_2$, $\geq$99\%, ultrapure, molecular biology grade) and potassium hydroxide (KOH, 1~N) were purchased from Thermo Fisher Scientific. Isotopically labeled glycine (glycine-2-$^{13}$C), palladium(II) chloride (PdCl$_2$, 99.995\%), and gold(III) chloride trihydrate (HAuCl$_4\cdot$3H$_2$O, 99.9\%) were obtained from Sigma-Aldrich. Perchloric acid (70\%) was purchased from Fisher Scientific. Titanium and nickel sheets were obtained from ESPI Metals; TiNi and TiCu alloy sheets (50:50~wt\%) were acquired from American Elements. Nickel foil electrodes (0.25 mm thick, annealed, 99.5\% metal basis) were purchased from Thermo Scientific.
+
+\subsubsection{Characterization}
+Surface morphology was examined by FESEM using Zeiss Crossbeam and Hitachi S-4700 instruments. FESEM images were processed using ImageJ. Elemental mapping was performed by energy-dispersive X-ray spectroscopy (EDX). Crystal structures were characterized on a SmartLab 3~kW X-ray diffractometer (Rigaku). Ammonia, formate, glycolate, nitrate, nitrite, and glyoxylic acid were quantified by ion chromatography (IC; Thermo Fisher Scientific). Liquid phase reaction products were identified by nuclear magnetic resonance (NMR) on a JEOL 400~MHz spectrometer. Leached metals in solution were quantified by inductively coupled plasma–optical emission spectrometry (ICP-OES; Agilent 5800). Surface adsorbates after electrolysis were probed by grazing-incidence FTIR (GI-FTIR; Bruker Hyperion II). Electrochemical measurements were performed with a Gamry 1010E potentiostat.
+
+\subsubsection{Electrochemical mass spectrometry (EC-MS)}
+Electrochemical mass spectrometry was performed using a SpectroInlets electrochemical mass spectrometry system equipped with a stagnant thin-layer electrochemical cell. Volatile and gaseous products generated during electrolysis were transported to the mass spectrometer using He as the carrier gas at a flow rate of 1 mL min$^{-1}$. Electron-impact ionization was operated at an ionization energy of 70 eV. 
+
+Electrochemical measurements were conducted in a three-electrode configuration. The working electrode was a polished Au or Cu disk electrode with a 5 mm diameter (Pine Instruments). Prior to each experiment, the electrode surface was mechanically polished, rinsed thoroughly with ultrapure water, and dried under an inert gas stream. A Pt wire was used as the counter electrode, and an Ag/AgCl electrode was used as the reference electrode. Electrolytes consisted of 0.1 M KOH, 0.1 M KOH + 0.1 M \ce{NH3}, and 0.1 M KOH + 0.1 M glycine prepared using ultrapure water. 
+
+Before each measurement, the electrolyte was introduced into the stagnant thin-layer cell, and the system was allowed to stabilize under He flow. Electrochemical measurements were performed while continuously monitoring selected mass-to-charge ratios corresponding to expected gaseous or volatile products and background species. Mass spectrometric signals were recorded simultaneously with the electrochemical data. Background signals were collected under open-circuit conditions or at non-faradaic potentials and subtracted where appropriate. 
+
+Potentials measured versus Ag/AgCl were converted to the reversible hydrogen electrode (RHE) scale using
+
+\begin{equation}
+V_{\mathrm{RHE}} = V_{\mathrm{Ag/AgCl}} + E_{\mathrm{Ag/AgCl}}^{\circ} + 0.0591 \cdot \mathrm{pH},
+\end{equation}
+
+where \(V_{\mathrm{Ag/AgCl}}\) is the measured potential versus the Ag/AgCl reference electrode and \(E_{\mathrm{Ag/AgCl}}^{\circ} = 0.197\) V is the potential of the Ag/AgCl reference electrode versus standard hydrogen electrode (SHE) for 3.0 M KCl at 25 \(^\circ\)C. The \(0.0591 \cdot \mathrm{pH}\) term converts the SHE referenced potential to the RHE scale at the measured electrolyte pH. pH values for \SI{0.1}{M} KOH, \SI{0.1}{M} KOH $+$ \SI{0.1}{M} \ce{NH3}, and \SI{0.1}{M} KOH $+$ \SI{0.1}{M} glycine were determined experimentally as 13.0, 12.9, and 10.7, respectively, using a calibrated pH meter ($\pm$ 0.2 units). No \textit{iR} correction was applied to the mass spectrometry signals because electrochemical currents were minimal (less than \SI{500}{\micro\ampere}).
+
+
+
+\subsubsection{Electrochemical setup}
+
+All experiments were performed in an H-cell (Dek Research, 100~mL per compartment) equipped with an anion exchange membrane (Selemion), as illustrated in \Cref{fig:hcell}. A platinum sheet was used as the counter electrode, and a Hg/HgO (1~M KOH) reference electrode with a capillary Luggin probe was employed to minimize ohmic drop. The working electrode area was 3.5~cm$^2$, and each compartment contained 70~mL of electrolyte and glycine. The feed solution consisted of equimolar 0.1~M KOH and glycine in both compartments. Both compartments were continuously mixed using 3 mm stir bars at 300 rpm. The applied potential was corrected for ohmic loss using the measured current and solution resistance obtained by electrochemical impedance spectroscopy at 100~kHz. The potential was then converted to the RHE scale using the measured solution pH at each sampling time. The resulting potential uncertainty was estimated to be approximately 0.1~V. CV activation was performed using 25 cycles at a scan rate of 100~mV/s in 0.1~M KOH. Two-milliliter samples were collected at 15, 30, 60, and 120~min for product quantification, and the 120-min sample was subsequently analyzed by ICP-OES to quantify leached metals. The applied potential was held at 2.0~V$_{\mathrm{RHE}}$ for all experiments. The RHE conversion was calculated based on the following equations. \[
+E_{\mathrm{RHE}} = E_{\mathrm{Hg/HgO}} + 0.0591 \times \mathrm{pH} + E^\circ_{\mathrm{Hg/HgO}\,(1\,\mathrm{M\,KOH})}
+\]
+\[
+E^\circ_{\mathrm{Hg/HgO}\,(1\,\mathrm{M\,KOH})} = 0.098~\mathrm{V}
+\]
+
+% \begin{figure}
+%     \centering
+%     \includegraphics[width=0.85\linewidth]{si_hcell.pdf}
+%     \caption{Schematic of the H-cell electrochemical setup. Working and counter electrode compartments are separated by a Selemion anion exchange membrane; a Hg/HgO (1~M KOH) reference electrode with a Luggin capillary minimizes ohmic drop.}
+%     \label{fig:hcell}
+% \end{figure}
+
+\section{Results and discussion}
+\subsection{Computational thermodynamic screening} 
+\label{sec:computational_screening} 
+\subsubsection{Pure metals} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Collage of Pourbaix Diagrams %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure*}[ht]
+% \includegraphics[width=\textwidth]{fig_pure_metal_pourbaix.pdf}
+% \includegraphics[width=17.1cm]{fig_pure_metal_pourbaix.pdf}
+\centering
+\includegraphics[width=17.1cm]{figure1.pdf}
+\caption{Metal Pourbaix diagrams for (a) Au, (b) Ni, (c) Cu, (d) Pd, (e) Pt, and (f) Ti, generated with ion activity \(= \num{1e-4}~\mathrm{M}\), \([\ce{NH3}]_{\mathrm{tot}} = 0.02~\mathrm{M}\), and \([\mathrm{Gly}]_{\mathrm{tot}} = 0.1~\mathrm{M}\). Orange, gray, blue, and pink regions denote solid metal oxides, bulk metals or metal hydrides, aqueous metal species, and metal ligand complexes, respectively. \textcolor{red}{Phase assignments are listed to the right of each panel. The black outline marks the E-WAS reaction window, pH 10.5--13.5 and $-2.0$ to $2.3$~V$_{\mathrm{RHE}}$ at 298.15~K.}}
+
+\label{fig:metal_pourbaix_collage_1}
+\end{figure*}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+We screened a range of pure metals to evaluate their stability under E-WAS conditions. \textcolor{red}{Representative diagrams for Au, Ni, Cu, Pd, Pt, and Ti in ammonia- and glycine-containing solution are shown in \Cref{fig:metal_pourbaix_collage_1}; the corresponding Pd and Pt diagrams with added cyanide are shown in \Cref{fig:metal_pourbaix_collage_2}.} The full set is provided in the Supplementary Information (\Cref{fig:Au_Pourbaix_SI,fig:Pd_Pourbaix_SI,fig:Ni_Pourbaix_SI,fig:Cu_Pourbaix_SI,fig:Fe_Pourbaix_SI,fig:Mn_Pourbaix_SI,fig:Zn_Pourbaix_SI,fig:Cd_Pourbaix_SI,fig:Co_Pourbaix_SI,fig:Sr_Pourbaix_Harrington_SI}). Each diagram maps the thermodynamically most stable species as a function of pH and applied potential. Solid metal oxides are shown in orange, bulk metals and metal hydrides in gray, aqueous metal species in blue, and metal ligand complexes in pink. \textcolor{red}{The black outline marks the E-WAS reaction window, corresponding to pH 10.5--13.5 and potentials from $-2.0$ to $2.3$~V$_{\mathrm{RHE}}$.}
+
+% Within this window, the diagrams can be read from low to high potential as transitions among metallic, ligand complex, and oxide stability regions. At a representative pH of approximately 13, the experimentally applied potential of 2.0~V$_{\mathrm{RHE}}$ lies near or within the metal oxide portion of each diagram. The identity of the stable phase at this condition differs strongly among the metals: Au, Ni, and Cu contain aqueous ligand complex regions within or adjacent to the operating window, whereas Pd, Pt, and Ti remain predominantly in metallic or solid oxide regions.
+
+Across the metals considered, two contrasting regimes emerge. The first is \emph{ligand-driven dissolution}, observed for Au, Ni, and Cu through different complexation pathways. For Au, the E-WAS window at pH \sout{11.5} \textcolor{red}{10.5} to 13.5 spans a sequence from metallic Au at lower potentials to soluble Au ammine species at intermediate anodic potentials and Au oxide at more positive potentials (\Cref{fig:metal_pourbaix_collage_1}a and \Cref{fig:Au_Pourbaix_NH3_Gly_CN_SI}). The presence of an aqueous ammine field within the operating window indicates that Au dissolution is thermodynamically accessible before oxide formation becomes dominant, consistent with its known leaching behavior in ammoniacal and cyanide containing environments \cite{Gong2009SurfaceGold,Sarvar2023ApplicationStructure,Hilson2006AlternativesFuture,SPARROW1995CyanideApplications}. Ni and Cu provide more direct examples of ligand-driven dissolution among first row transition metals (\Cref{fig:metal_pourbaix_collage_1}b,c). For Ni, the alkaline E-WAS window contains a sequence of Ni hydrides, metallic Ni, Ni-glycine complexes, and oxidized Ni phases as the potential increases. At approximately pH 13, the aqueous ligand field lies between the lower potential metallic region and the higher potential oxide region, indicating that ligand assisted dissolution is thermodynamically accessible before complete passivation. For Cu, the operating window intersects closely spaced metallic Cu and Cu oxide regions, while aqueous Cu-glycine ligand complexes appear adjacent to this range. The proximity of these phase boundaries indicates that relatively small changes in potential or ligand availability can shift Cu from oxide formation toward soluble complex formation. For both Ni and Cu, the adjacency of oxide and metal ligand complex regions is consistent with oxide formation preceding ligand assisted solubilization \cite{Liao2012EffectsCopper,Broeksma2023EvaluatingBoards}. This behavior agrees with hydrometallurgical studies in which ammonia and amino acids act as lixiviants for oxidized metals \cite{Yao2021SelectivePhosphide,Ma2021ALeaching}.
+
+
+
+
+\begin{figure*}[ht]
+\centering
+\includegraphics[width=17.1cm]{figure2.pdf}
+% \includegraphics[width=17.1cm]{fig_PdPt_cyanide_pourbaix.pdf}
+\caption{Metal Pourbaix diagrams for (a) Pd and (b) Pt generated with ion activity \(= \num{1e-4}~\mathrm{M}\), \([\ce{NH3}]_{\mathrm{tot}} = 0.02~\mathrm{M}\), \([\mathrm{Gly}]_{\mathrm{tot}} = 0.1~\mathrm{M}\), and \([\mathrm{CN}]_{\mathrm{tot}} = \SI{1e-4}{M}\). Orange, gray, blue, and pink regions denote solid metal oxides, bulk metals or metal hydrides, aqueous metal species, and metal ligand complexes, respectively. \textcolor{red}{Phase assignments are listed to the right of each panel. The black outline marks the E-WAS reaction window, pH 10.5--13.5 and $-2.0$ to $2.3$~V$_{\mathrm{RHE}}$ at 298.15~K.}}
+\label{fig:metal_pourbaix_collage_2}
+\end{figure*}
+
+The second regime is \emph{oxide driven passivation}. At pH values near 13, Pd and Pt remain metallic over the lower potential portion of the E-WAS window and transition to solid oxide phases as the potential increases (\Cref{fig:metal_pourbaix_collage_1}d,e). For the ligand complexes included in the thermodynamic database, broad aqueous ammonia or glycine complex regions do not interrupt this metallic to oxide sequence. This result indicates that ammonia and glycine do not substantially expand the predicted dissolution regions of Pd under these conditions. The corresponding conclusion for Pt is more limited because Pt glycine complexes were not included, as no formation constants were identified in the thermodynamic sources used here \cite{Smith1989CriticalConstants}. Ti shows the strongest predicted oxide passivation among the screened metals. \ce{TiO2} occupies nearly the entire anodic portion of the alkaline E-WAS window and remains the stable phase at the experimental potential of 2.0~V$_{\mathrm{RHE}}$ across pH \sout{11.5} \textcolor{red}{10.5} to 13.5 (\Cref{fig:metal_pourbaix_collage_1}f). This broad \ce{TiO2} field is consistent with the persistence of the spontaneous passivating layer in ammonia and glycine containing electrolytes \cite{Kiss1991CriticalGlycine,Knauss2001TiIV300C,Schmidt2006DissolutionEffect,Pocsi1988ComplexAcid}. Ti-cyanide complexes were omitted because no Ti \ce{CN^-} formation constants were identified in the thermodynamic compilations used here. The calculated Ti stability should therefore be interpreted as applying to the included species, although the strong oxophilicity of Ti supports \ce{TiO2} passivation as the dominant stability mechanism in aqueous environments.
+
+
+
+Cyanide introduces an additional dissolution pathway for the noble metals. At a total cyanide concentration of \SI{1e-4}{M}, soluble metal cyanide complexes appear in the Pd and Pt diagrams, although the extent of destabilization differs between the two metals (\Cref{fig:metal_pourbaix_collage_2}). Within the alkaline E-WAS window, the Pd cyanide complex occupies only a limited portion of the potential range near the transition between metallic Pd and Pd oxide. Most of the window remains assigned to solid Pd containing phases. In contrast, the Pt cyanide region extends across a broader fraction of the alkaline potential window and replaces part of the metallic or oxide stability field. Thus, cyanide destabilizes both metals, but the reduction in the solid phase stability region is substantially greater for Pt. Pd and Pt remain comparatively stable in ammonia and glycine containing electrolytes but remain susceptible to cyanide assisted dissolution. For Ti, the limitation to practical use is electronic rather than chemical: the wide \ce{TiO2} band gap suppresses conductivity, motivating \sout{alloying} \textcolor{red}{combining metals} and compositional modification to recover catalytic activity \cite{Gardon2013ImprovedSpray,Hui2022VacancyBatteries}.
+
+\subsubsection{Binary \sout{alloys} \textcolor{red}{metal systems}} \label{sec:alloy_screening}
+
+The pure metal screening identifies Ti and Pd as stable base metals, but pure Ti is limited by insulating \ce{TiO2} passivation and Pd requires further tuning of activity and material use. We therefore extended the Pourbaix analysis to binary \sout{alloys} \textcolor{red}{metal systems} to test whether \sout{alloying} \textcolor{red}{combining two metals} can preserve corrosion resistance while improving the balance between conductivity, catalytic activity, and durability.
+
+Across the systems examined, Pd-based \sout{alloys} \textcolor{red}{binary metal phases} and TiNi show the most favorable predicted stability candidates from the thermodynamic stability screening because they combine corrosion resistant parent metals with stable \sout{alloy or alloy oxide phases} \textcolor{red}{binary metal phases or their oxides}. Ti-based \sout{alloys} \textcolor{red}{binary metal phases} are more nuanced: while TiNi retains passivation, TiCu remains susceptible to cyanide-driven Cu dissolution, as discussed below.
+
+\begin{figure*}[ht]
+\centering
+% \includegraphics[width=17.1cm]{fig_alloy_pourbaix.pdf}
+\includegraphics[width=17.1cm]{figure3.pdf}
+
+\caption{Pourbaix diagrams of equiatomic binary \sout{alloys} \textcolor{red}{metal systems} under glycine-containing conditions: (a) TiNi, (b) TiCu, (c) PdAu. Ion activity = \SI{1e-4}{M}, $[\ce{NH3}]_{\mathrm{tot}}= 0.02$ M, $[\text{Gly}]_{\mathrm{tot}}=0.1$ M. \textcolor{red}{The black outline marks the E-WAS reaction window, pH 10.5--13.5 and $-2.0$ to $2.3$~V$_{\mathrm{RHE}}$ at 298.15~K.}}
+\label{fig:alloy_pourbaix_collage}
+\end{figure*}
+
+For \sout{Ti alloys} \textcolor{red}{Ti-based binary metal phases}, mixed metal oxide regions appear near or within the E-WAS window (\Cref{fig:alloy_pourbaix_collage}a,b and \Cref{fig:Ti_Ni_Pourbaix_SI,fig:Ti_Cu_Pourbaix_SI,fig:Ti_Fe_Pourbaix_SI,fig:Ti_Mg_Pourbaix_SI,fig:Ti_Mn_Pourbaix_SI,fig:Ti_Zn_Pourbaix_SI}). In the TiNi diagram, a narrow \ce{TiNiO3} stability field appears near the high pH edge of the black box and extends across only a limited potential interval. At lower pH or lower potential within the operating window, separate Ti and Ni derived phases remain stable. Compared with the pure Ni diagram, where aqueous Ni glycine complexes occupy part of the corresponding region, \sout{Ti alloying} \textcolor{red}{the incorporation of Ti into the binary metal phase} shifts part of the predicted stability window from Ni ligand dissolution toward mixed oxide formation. However, the mixed oxide field lies mainly at conditions slightly more alkaline than the experimental window. Cyanide related ligands can still stabilize soluble Ni complexes and may promote leaching in Ni containing \sout{alloys} \textcolor{red}{binary metal phases} despite the presence of passivating oxides (\Cref{fig:TiNi_Pourbaix_NH3_Gly_CN_SI}).
+
+Within the TiCu operating window, \ce{TiO2} remains stable over much of the anodic range, while the Cu component changes among metallic Cu, Cu oxide, and aqueous Cu ligand species. The diagram therefore predicts selective destabilization of Cu while the Ti containing framework remains passivated. TiCu is consequently better described as a combination of stable Ti oxide and condition dependent Cu phases than as a uniformly stable \sout{alloy} \textcolor{red}{binary metal phase}. Cyanide related ligands provide the strongest predicted dissolution pathway by stabilizing soluble \ce{Cu(CN)_x} complexes (\Cref{fig:TiCu_Pourbaix_NH3_Gly_CN_SI}).
+
+\sout{Pd alloys} \textcolor{red}{Pd-based binary metal phases} exhibit broadly favorable thermodynamic stability across the targeted pH and potential ranges, including combinations with Au, Pt, Cu, Ni, and Ag (\Cref{fig:alloy_pourbaix_collage}c and \Cref{fig:Pd_Pt_Pourbaix_SI,fig:Pd_Cu_Pourbaix_SI,fig:Pd_Ag_Pourbaix_SI,fig:Pd_Ni_Pourbaix_SI,fig:Au_Pd_Pourbaix_SI}). PdAu illustrates the balance between \sout{alloy stability} \textcolor{red}{solid-phase stability} and selective component dissolution. At pH \sout{11.5} \textcolor{red}{10.5} to 13.5, \sout{solid PdAu alloy and oxide containing phases} \textcolor{red}{solid PdAu and Pd-containing oxide phases} occupy much of the lower and intermediate potential range. At more positive potentials, the stable state changes to a mixed region containing solid \ce{PdO} and soluble \ce{Au(NH3)2+}. The diagram therefore predicts selective Au dissolution through ammonia complexation while Pd remains in a solid passivating phase. Introducing \ce{CN^-} further reduces the PdAu stability region by stabilizing soluble Au and Pd cyanide complexes (\Cref{fig:Au_Pd_Pourbaix_SI}).
+
+
+
+\textcolor{red}{The concentration sensitivity is system-dependent: varying glycine changes the predicted phase maps for TiNi and TiCu, whereas varying ammonia changes that for PdAu (\Cref{fig:TiNi_Gly_sensitivity_SI,fig:TiCu_Gly_sensitivity_SI,fig:PdAu_NH3_sensitivity_SI}).}
+
+\subsection{The activity-stability tradeoff during glycine oxidation}
+
+\label{sec:activity_stability}
+\begin{figure*}[!h]
+    \centering
+    \includegraphics[width=17.1cm]{fig_experimental_main.pdf}
+    \caption{Electrode dependent glycine oxidation activity, ammonia production, and metal dissolution in alkaline electrolyte after 2~h electrolysis at 2.0~V$_{\mathrm{RHE}}$ in 0.1 M KOH with 0.1 M glycine. (a) Cyclic voltammograms collected on Au, Cu, Ni, and TiNi in 0.1~M KOH and in an equimolar electrolyte containing 0.1~M KOH and 0.1~M glycine. (b) Ammonia production and total metal dissolution as a function of mean current density at 2.0~V$_{\mathrm{RHE}}$. Light gray symbols represent \ce{NH_3} formation, dark gray symbols represent dissolved metal species, and vertical guide lines connect the \ce{NH_3} and metal dissolution values for each electrode. (c) Faradaic efficiencies toward detected products, including \ce{NH_3}, NO$_2^-$/NO$_3^-$, and dissolved metal species. Faradaic efficiencies were calculated assuming 6 e$^-$ for \ce{NH_3} formation from glycine, 12 e$^-$ for NO$_2^-$ formation, and 14 e$^-$ for NO$_3^-$ formation, based on complete oxidation of the carbon atoms to carbonate. Metal dissolution Faradaic efficiencies were calculated using the assumed oxidation states Au(I), Cu(II), Ni(II), Pd(II), and Ti(IV), with alloy dissolution evaluated from the corresponding dissolved metal amounts. \ce{NH_3}, NO$_2^-$, and NO$_3^-$ were quantified by IC. Metal dissolution was quantified by ICP-OES.}
+    \label{CV_activity_product}
+\end{figure*}
+
+To test the thermodynamic predictions established in \Cref{sec:computational_screening}, we evaluate the electrochemical response, overall catalytic activity, and dissolution of representative electrodes under E-WAS conditions. The chosen electrodes span the predicted stability regimes: Cu and TiCu represent strong ligand-driven dissolution, Au and Ni occupy intermediate ligand sensitive regimes, and Pd, PdAu, and TiNi represent oxide passivated or stable \sout{alloy} \textcolor{red}{binary metal} systems.
+
+\subsubsection{Cyclic voltammetry confirms the predicted activity regimes}
+
+Cyclic voltammetry in 0.1~M KOH and in 0.1~M KOH with 0.1~M glycine (\Cref{CV_activity_product}a, and \Cref{CV.Pd,AuPd.CV,TiCu.CV}) provides an electrochemical signature of the predicted regimes. Because the Pourbaix diagrams predict the most stable thermodynamic phases, they do not directly specify reaction rates or current responses. Instead, the CVs test whether the predicted stability domains correspond to observable surface redox, ligand oxidation, or passivating behavior under operating conditions.
+
+For Au and Pd, adding glycine shifts native oxide features and suppresses oxygen evolution, indicating competitive glycine oxidation on noble metal surfaces \cite{Chadderdon2014,Arulmani2019} (\Cref{CV_activity_product}a and \Cref{CV.Pd}). For Ni, the characteristic nickel oxyhydroxide redox peaks are attenuated, consistent with consumption or modification of NiOOH during glycine oxidation \cite{Boggs2009}. This response agrees with the predicted susceptibility of Ni to ligand associated surface transformation and dissolution. Cu shows the most extreme response: a large anodic peak appears in glycine containing electrolyte, which we attribute to coupled Cu oxidation, Cu dissolution, and glycine oxidation. Conversely, TiNi shows little faradaic response, reflecting a passivated surface that suppresses both glycine oxidation and metal dissolution.
+
+\subsubsection{Activity and dissolution are coupled}
+
+Having characterized the electrochemical responses of the electrodes, we next quantify the tradeoff between ammonia production (IC) and metal dissolution (ICP-OES) after 2 hours of constant-potential electrolysis at 2.0~V$_{\mathrm{RHE}}$. \Cref{CV_activity_product}b plots absolute ammonia production against total metal dissolution as a function of mean current density, and \Cref{CV_activity_product}c maps the Faradaic efficiency toward each product. Together they reveal an activity-stability tradeoff that parallels the Pourbaix predictions and that spans three broad activity regimes.
+
+
+The first regime is characterized by high activity and low stability, as demonstrated by Cu. Cu sustains the highest mean current density (\SI{14}{\milli\ampere\per\square\centi\meter}) and generates the highest absolute ammonia yield (152~\si{\micro mol}). However, much of this activity is parasitic: 67.9\% of the passed charge is consumed by metal dissolution (\num{1.18e3}~\si{\micro mol}), leaving a modest Faradaic efficiency toward \ce{NH_3} (\Cref{CV_activity_product}c). High current and high ammonia yield therefore do not indicate efficient catalysis when corrosion dominates the charge. Dissolution also releases soluble Cu into the electrolyte, which may enable solution-mediated oxidation pathways.  At the opposite limit, TiNi produces the least ammonia (0.4~\si{\micro mol}) with negligible leaching, consistent with passivation suppressing both glycine oxidation and dissolution.
+
+The remaining electrodes fall between these limits and reveal that comparable activity can coincide with very different stability. Pd and Au produce similar amounts of ammonia ($\approx$6--10~\si{\micro mol}), yet Pd dissolves about 20 times less metal than Au. Au in fact reaches the highest \ce{NH_3} Faradaic efficiency of all electrodes (24.4\%), directing the largest fraction of charge toward ammonia, but its low total current keeps the absolute yield modest. PdAu is particularly informative: it passes the second-highest mean current density (\SI{8}{\milli\ampere\per\square\centi\meter}) while maintaining very low metal dissolution (0.1~\si{\micro mol}), indicating that most of its current is not accounted for by metal dissolution and is likely directed toward oxygen evolution or unquantified reaction products. Ni and TiCu occupy intermediate positions, with measurable \ce{NH_3} Faradaic efficiencies and measurable leaching.
+
+Two additional trends emerge from the Faradaic efficiency data. First, \ce{NO_x} products account for only a small fraction of the total charge across all electrodes; Au shows the highest \ce{NO_x} efficiency, followed by Ni and PdAu. PdAu shows comparable \ce{NH_3} (3.5\%) and \ce{NO_x} (3.4\%) efficiencies, consistent with alloying shifting selectivity away from ammonia toward more oxidized nitrogen products. Second, Faradaic corrosion accounts for less than 1\% of the total charge for every electrode except Cu, where it reaches 67.9\%. For the low-activity electrodes (Pd, TiNi), the low Faradaic efficiencies toward all measured nitrogen products indicate that much of the charge is likely directed toward oxygen evolution or unquantified products; at 2.0~V$_{\mathrm{RHE}}$ the OER overpotential is $\approx$770~mV, making water oxidation a major competing reaction when nitrogen oxidation is slow. Partial oxidation products detected by IC and NMR (\Cref{sec:NMR}) consume additional charge and contribute to the unaccounted fraction.
+
+\subsubsection{Dissolution hierarchy and morphological evidence}
+
+The ICP-OES ranking follows the Pourbaix predictions, and FESEM/EDX imaging (\Cref{CV_FESEM,SI.SEM,EDX.1,EDX.2}) provides corroborating morphological evidence. We group the electrodes into three dissolution regimes, which broadly track, but are not identical to, the activity regimes above.
+
+\paragraph{Severe ligand-driven dissolution (Cu, TiCu).}
+Copper is the most severe case. FESEM of the used Cu surface (\Cref{CV_FESEM}d) shows extensive corrosion with square-shaped dissolution features, and EDX reveals carbon and oxygen enrichment in the corroded regions (\Cref{EDX.1}), indicating glycine oxidation products in the surface attack. As established in \Cref{sec:computational_screening}, transient \ce{CN^-} or related strongly coordinating carbon nitrogen species, if formed during glycine oxidation (\Cref{sec:FTIR_NMR}), can stabilize \ce{Cu(CN)3^{2-}} complexes and displace passivating oxides (\Cref{fig:Cu_Pourbaix_NH3_Gly_CN_SI}). TiCu shows a similar signature: significant Cu leaching (0.94~\si{\micro mol}) despite a modest mean current density that appears inconsistent with the predicted \ce{TiO2}/Cu-oxide coexistence (\Cref{fig:alloy_pourbaix_collage}b). This difference between the glycine only Pourbaix prediction and the measured Cu leaching is consistent with transient formation of \ce{CN^-} or related strongly coordinating species, which selectively stabilizes \ce{Cu(CN)_{x}^{(x-1)-}} complexes while leaving \ce{TiO2} intact. These strongly coordinating species can drive dissolution through ligand complexation rather than direct oxidation, explaining why leaching and current density do not scale together. FESEM confirms that the overall TiCu morphology is retained (\Cref{SI.SEM}) with isolated voids indicating localized corrosion, and EDX shows oxygen and carbon enrichment in these regions (\Cref{EDX.1}), consistent with selective attack on Cu-rich domains.
+
+\paragraph{Intermediate ligand-driven dissolution (Au, Ni).}
+At the experimental pH and applied potential of 2.0~V$_{\mathrm{RHE}}$, Au lies near a transition between ligand stabilized aqueous species and oxidized solid phases. The measured Au leaching of 0.36~\si{\micro mol} is therefore consistent with ammonia-assisted stabilization of soluble Au ammine species following anodic oxidation (\Cref{fig:metal_pourbaix_collage_1}a). Locally generated \ce{NH3} can coordinate anodically formed \ce{Au+} and shift the equilibrium toward soluble \ce{Au(NH3)2+} species \cite{Armunanto2004}. FESEM of the used Au electrode (\Cref{CV_FESEM}e) shows no gross morphological change, although surface cluster sharpening indicates the onset of localized corrosion, and EDX confirms partial exposure of the underlying Ti substrate (\Cref{EDX.1}). Longer electrolysis may therefore increase Au leaching if ammonia continues to accumulate and the ammine dissolution pathway remains accessible.
+
+Nickel occupies the intermediate dissolution regime and illustrates the distinction between thermodynamic susceptibility and experimentally accessible corrosion pathways. The ligand-inclusive Pourbaix analysis predicts soluble Ni complexes, including \ce{Ni(Gly)+} and a broad \ce{Ni(CN)4^{2-}} stability region that extends into the E-WAS window, before passivating \ce{NiO2} or \ce{Ni3O4} phases become dominant (\Cref{fig:metal_pourbaix_collage_1}b and \Cref{fig:Ni_Pourbaix_NH3_Gly_CN_SI}). Ni is therefore thermodynamically susceptible to ligand driven dissolution if the corresponding ligands are available. Experimentally, however, Ni leaches only 0.36~\si{\micro mol}, comparable to Au and approximately three orders of magnitude less than Cu, while producing 27.4~\si{\micro mol} of ammonia. The limited Ni dissolution suggests that the \sout{cyanide} \textcolor{red}{cyanide-like} related pathway is accessed less extensively on Ni than on Cu, while kinetic passivation by surface oxide or oxyhydroxide phases further suppresses metal loss.
+
+% This discrepancy is plausibly explained by ligand availability and kinetic passivation: unlike Cu, Ni shows no strong \ce{CN} band by GI-FTIR (\Cref{products_experimental}c), indicating that the predicted \ce{Ni(CN)4^{2-}} complex could be limited. The measured Ni dissolution is therefore more consistent with limited access to the cyanide driven pathway, together with possible glycine or ammonia complexation and kinetic passivation by surface oxyhydroxide phases.
+
+\paragraph{Passivated / stable electrodes (Pd, PdAu, TiNi).}
+PdAu, Pd, and TiNi show low to negligible leaching, consistent with predicted oxide passivation and weak ligand complexation (\Cref{fig:metal_pourbaix_collage_1}d, \Cref{fig:alloy_pourbaix_collage}a,c).  For Pd and PdAu, FESEM shows no obvious corrosion features (\Cref{SI.SEM}), and EDX mapping of PdAu shows uniform co-presence of Au and Pd without detectable segregation (\Cref{EDX.2}). TiNi behaves differently: localized pitting is visible in FESEM (\Cref{CV_FESEM}f) and EDX (\Cref{EDX.1}), but ICP-OES shows little metal leaching, indicating that the morphological changes are confined to the near-surface region and do not correspond to significant bulk dissolution.
+
+Overall, the measured dissolution hierarchy agrees with the thermodynamic regimes predicted by the ligand-inclusive Pourbaix analysis. Cu shows the greatest metal loss and is predicted to be highly susceptible to stabilization of soluble Cu ligand complexes. TiCu retains its overall morphology but undergoes selective Cu leaching, consistent with the predicted coexistence of passivating \ce{TiO2} and soluble Cu species. Au exhibits intermediate dissolution, in agreement with the predicted formation of soluble Au ammine complexes, while Pd, PdAu, and TiNi show the lowest metal loss, consistent with broad metallic, \sout{alloy} \textcolor{red}{binary metallic}, or oxide stability fields.
+
+The comparison also highlights the distinction between thermodynamic susceptibility and experimental ligand formation. Cyanide complexes are predicted for \ce{Ni}, \ce{Au}, and \ce{Cu}, but cyanide related spectroscopic features are observed most clearly for \ce{Cu} and more weakly for TiCu. The experiments therefore determine whether the \sout{cyanide} \textcolor{red}{cyanide-like} related pathway is accessed under the operating conditions, while the Pourbaix diagrams indicate which complexes would be stable if the ligand were available. Differences between prediction and measured dissolution therefore reflect ligand availability, reaction pathway selectivity, kinetic barriers, and surface passivation rather than a failure specific to Ni.
+
+
+Taken together, \Cref{CV_activity_product}b,c show that ammonia production and electrode dissolution are coupled, but do not follow a universal monotonic relationship. Au gives the highest NH$_3$ Faradaic efficiency but remains vulnerable to ammonia-assisted dissolution, whereas PdAu offers the most favorable balance between relatively high ammonia production and low metal loss among the electrodes examined. Cu represents the most extreme case, in which high current and high ammonia production coincide with severe corrosion. For some electrodes, reaction derived nitrogen containing intermediates can also act as ligands that promote metal dissolution. This coupling is most evident for Cu, where \sout{cyanide} \textcolor{red}{cyanide-related} species are associated with severe dissolution, and for Au, where ammonia can stabilize soluble ammine complexes. To identify the specific intermediates responsible and to establish the link between the reaction and the corrosion pathways, we next track the gas, solution, and surface phase species generated during glycine oxidation.
+
+
+\subsection{Multi-phase identification of corrosive ligands}
+\label{sec:intermediates}
+
+To connect the activity-stability coupling to specific chemical species, we tracked the intermediates generated during glycine oxidation across three phases, each chosen to answer a distinct question. EC-MS resolves gas phase products as a function of potential and tests whether the large currents on Cu are balanced by gas phase products or instead diverted into solution phase chemistry. IC and NMR then identify and quantify the solution phase carbon and nitrogen products, including isotopically labeled species that provide evidence for cyanide or closely related carbon nitrogen products. Finally, GI-FTIR probes surface-bound species on the used electrodes, testing whether these ligands remain associated with the metal surface where corrosion occurs.
+
+\begin{figure*}[!t]
+    \centering
+    \includegraphics[width=17.1cm]{fig_products.pdf}
+     \caption{
+    Gas, liquid, and surface characterization of glycine electrolysis products. (a) Electrochemical mass spectrometry measurements on Au and Cu electrodes in 0.1 M KOH + 0.1 M glycine. The simultaneously recorded current density and mass signals show potential dependent formation of gaseous products. The monitored mass to charge ratios are assigned to CO or N$_2$ ($m/z = 28$), NO ($m/z = 30$), CO$_2$ or N$_2$O ($m/z = 44$), O$_2$ ($m/z = 32$), and H$_2$ ($m/z = 2$). (b) $^{13}$C NMR spectra of isotope labeled electrolytes before and after electrolysis on Cu at 2.0 V$_{\mathrm{RHE}}$ for 2~h. The post electrolysis spectrum shows formation of soluble carbon containing products, including signals assigned to glyoxylate, residual glycine, oxalate, and a cyanide or cyanide like species, relative to the $^{13}$C glycine control. Electrolysis conditions: 0.1 M KOH + 0.1 M glycine unless otherwise specified. (c) Grazing incidence Fourier transform infrared spectra of electrodes after glycine electrolysis. The spectra show surface adsorbates and solution derived species, including bands assigned to $\nu_s$(OH) from water or hydroxyl species, $\nu_s$(CH$_2$) from glycine derived species, $\nu_{2}$(\ce{O=C-O}) from carboxylate or CO$_2$ related species, $\nu_s$(C$\equiv$N) consistent with cyanide or a related nitrile species, and $\nu_2$(\ce{H-O-H}) from water.}
+    \label{products_experimental}
+\end{figure*}
+
+
+\subsubsection{Gas phase intermediates (EC-MS)}
+\label{sec:EC-MS}
+EC-MS was employed to probe gas phase products as a function of applied potential. Cyclic voltammetry was performed at 50 mV s$^{-1}$ on polished Au and Cu disk electrodes in three electrolytes: 0.1 M KOH, 0.1 M KOH + 0.1 M glycine, and 0.1 M KOH + 0.1 M \ce{NH3}. The complete cyclic voltammograms and corresponding mass-spectrometric traces for all electrolytes are provided in \Cref{fig:ECMS_full}.
+
+
+\Cref{products_experimental}a summarizes the representative cyclic voltammograms and corresponding mass-spectrometric signals. In the baseline 0.1 M KOH electrolyte, both Au and Cu display their characteristic redox features. Au exhibits the well-known Au/Au oxide transition centered at approximately 1.1~V$_{\mathrm{RHE}}$, while Cu shows multiple Cu/Cu oxide transformations. Consistent with these processes, the only detectable gaseous products are H$_2$ during the cathodic sweep and O$_2$ during the anodic sweep, with no significant mass signals at other m/z values.
+
+Upon addition of 0.1 M glycine or 0.1 M \ce{NH3}, both electrodes exhibit additional oxidative features and the emergence of nitrogen- and carbon-containing gaseous products. On Au, a pronounced oxidative feature appears at approximately 1.3~V$_{\mathrm{RHE}}$, coincident with signals at m/z = 28, 30, and 44 corresponding to N$_2$ (or N$_2$/CO for glycine), NO, and N$_2$O (or N$_2$O/CO$_2$ for glycine), indicating the formation of oxidized nitrogen species. O$_2$ evolution is markedly suppressed relative to the baseline electrolyte, consistent with surface poisoning by strongly adsorbed N-containing intermediates that compete with water oxidation.
+
+Cu behaves qualitatively differently. In the presence of glycine or \ce{NH3}, large anodic peaks emerge near 0.5~V$_{\mathrm{RHE}}$ with current densities far greater than on Au, indicating extensive oxidative processes. Despite these much higher anodic currents, the associated gas phase signals are modest, with only slight increases in the signals at m/z = 28, 30, and 44 being observed for glycine on Cu, and no m/z = 17 signal attributable to \ce{NH3} is detected, indicating that ammonia is not released to the gas phase. Similarly large cathodic currents accompany the large anodic currents on the reverse sweep, consistent with Cu stripping followed by partial redeposition on the reverse sweep (Cu $\to$ Cu$^{2+}$ $\to$ Cu).
+
+These observations distinguish Au and Cu reaction pathways. Au produces stronger gas phase nitrogen signals, whereas Cu passes much larger redox currents with comparatively weak gas phase product signals. For Cu, the large current that is not accompanied by proportionally large gas phase signals is likely associated with metal dissolution and nonvolatile solution phase products. This behavior is consistent with the severe Cu leaching measured by ICP-OES and motivates direct analysis of the post electrolysis electrolyte. We therefore used IC to quantify soluble carbon and nitrogen oxidation products and NMR to identify additional solution phase intermediates.
+
+\subsubsection{Solution phase intermediates (IC and NMR)}
+\label{sec:NMR}
+
+IC detected glyoxylate, oxalate, and formate, while NMR provided complementary evidence for additional carbon and nitrogen containing products after electrolysis. These measurements are especially important for Cu, where large electrochemical currents and severe metal leaching occur without proportionally large gas phase product signals.
+
+IC shows that soluble carbon oxidation products are strongly electrode dependent. Glyoxylate, an early product of glycine oxidation under alkaline conditions, is most prominent on Ni, followed by Pd, Cu, and PdAu, whereas TiNi, TiCu, and Au produce smaller amounts (\Cref{IC_product}a). Oxalate is also detected, indicating further oxidation of glyoxylate derived intermediates (\Cref{IC_product}b). Formate, a later carbon oxidation product, is highest on TiCu and Cu (\Cref{IC_product}c), consistent with more extensive solution phase glycine oxidation on these electrodes. Together, these trends indicate that both the initial glycine oxidation step and subsequent carbon oxidation pathways depend strongly on electrode identity.
+
+NMR further supports the formation of soluble glycine derived intermediates (\Cref{products_experimental}b). The $^1$H NMR spectra show electrode dependent product distributions, with formate, glycolate, residual glycine, and amine type resonances most apparent for Ni, TiCu, PdAu, and Cu, while Pd, Au, and TiNi show fewer product features. Detailed $^1$H NMR assignments are provided in \Cref{fig:NMR}. Because Cu showed the poorest stability at 2.0 V$_{\mathrm{RHE}}$, additional isotope labeling experiments were performed using $^{13}$C labeled glycine. Dissolved Cu species can cause paramagnetic broadening and chemical shift perturbations in NMR spectra; therefore, Chelex 100 ion exchange resin was used to remove Cu from the post electrolysis solution before $^{13}$C NMR analysis.
+
+
+The $^1$H $^{13}$C HSQC spectrum of the Cu sample shows one strong correlation from the glycine methylene group, while formate, oxalate, glyoxylate, glycolate, and cyanide-related species show weak or absent correlations (\Cref{HSQC}). This is consistent with the prevalence of carbonyl, carboxylate, and cyanide carbons that are not directly bonded to protons. Taken together, the IC and NMR results show that glycine oxidation produces soluble carbon and nitrogen containing intermediates whose distributions vary across electrodes. Most importantly, isotope labeled $^{13}$C NMR supports the formation of cyanide or \textcolor{red}{cyanide-like} species on Cu at high anodic potentials, motivating the GI-FTIR analysis below to determine whether cyanide containing species are also present on the electrode surface.
+
+
+
+\subsubsection{Surface intermediates (GI-FTIR)}
+\label{sec:FTIR_NMR}
+
+% \begin{figure*}[ht]
+%     \centering
+%     \includegraphics[width=0.85\linewidth]{Figures/Ehsan/FTIR.pdf}
+%     \caption{Grazing-incidence Fourier transform infrared (GI-FTIR) spectra of the electrodes after electrolysis. }
+%     \label{FTIR}
+% \end{figure*}
+
+GI-FTIR was used to determine whether solution phase intermediates identified by IC and NMR are also associated with the electrode surface after electrolysis (\Cref{products_experimental}c). Because grazing incidence spectra can be affected by surface selection rules, roughness, reflectivity, and overlapping fingerprint region modes, we focus on bands that can be assigned most directly to glycine derived surface species.
+
+Several electrodes show bands associated with oxygenated organic products. Features between 1650 and 1700~cm$^{-1}$ are consistent with carbonyl, carboxylate, or amide related vibrations, in agreement with IC and NMR detection of glyoxylate, glycolate, formate, oxalate, and other partially oxidized products. Bands in the 2910 to 2956~cm$^{-1}$ region are assigned to CH$_2$ or CH$_3$ stretching vibrations from residual glycine or surface retained organic oxidation products. These features indicate that soluble glycine oxidation products can also remain associated with the electrode surface after electrolysis.
+
+The most important surface feature is the strong band at 2152~cm$^{-1}$ on Cu, with a weaker counterpart on TiCu. This frequency is consistent with cyanide bound to Cu or related metal cyanide species. Although organic nitrile species can also absorb in this region, the accompanying $^{13}$C NMR evidence for cyanide or \textcolor{red}{cyanide like} carbon species (\Cref{products_experimental}b) supports an assignment to Cu associated cyanide or closely related nitrile species. The appearance of this band on Cu provides surface level evidence that cyanide containing species form during glycine oxidation at high anodic potentials.
+
+Together, the GI-FTIR and \(^{13}\)C NMR results provide complementary evidence for cyanide containing or closely related carbon nitrogen species in the Cu system. NMR indicates the presence of a compatible solution phase species, while GI-FTIR shows a corresponding carbon nitrogen stretching feature associated with the Cu surface. EC-MS independently indicates that the large Cu currents are not balanced by proportionally large gas phase product signals. These observations are consistent with a mechanism in which strongly coordinating carbon nitrogen species contribute to the severe Cu dissolution predicted by ligand-inclusive Pourbaix analysis and measured by ICP-OES.
+
+
+\subsubsection{Integrated mechanism and design implications}
+\begin{figure*}[!t]
+    \centering
+    \includegraphics[width=17.1cm]{figure_6.pdf}%{Figures/Ehsan/Reaction Tree.png}
+    \caption{Mechanistic map linking glycine oxidation pathways to electrode dependent dissolution. Pathway 1 represents a proposed carbon-nitrogen bond cleavage route that produces C$_2$ oxygenated intermediates, including glyoxylate, glycolate, and oxalate, followed by formation of NH$_3$, formate, gas phase products, and NO$_x$ species. NH$_3$ can stabilize dissolved metal ions through metal ammine complexation, contributing to moderate metal dissolution. Pathway 2 represents a proposed carbon-carbon bond cleavage route that produces methylamine and subsequently CN$^{-}$ or related carbon nitrogen species. Strong complexation by cyanide or related carbon nitrogen ligands can promote severe metal dissolution. Product assignments are supported by IC, NMR, EC-MS, and GI-FTIR, while dissolved metals were quantified by ICP-OES. The pathways represent electrode-dependent reaction trends rather than complete carbon or nitrogen balances.}
+    % \caption{Proposed reaction tree and mechanistic pathways during electrochemical oxidation of glycine. Bold intermediates (particularly cyanide) represent highly destabilizing species that accelerate metal dissolution through complexation.}
+    \label{fig:reaction_tree}
+\end{figure*}
+
+The combined Pourbaix, electrochemical, and spectroscopic results support two representative glycine oxidation pathways with different consequences for electrode stability (\Cref{fig:reaction_tree} and \Cref{tab:intermediate_stability_summary}). The Au associated pathway favors ammonia and oxidized nitrogen products, whereas the Cu associated pathway favors strongly coordinating cyanide related species. The Pourbaix calculations connect these product distributions to dissolution by showing that ammonia stabilizes soluble Au ammine species, while cyanide related ligands stabilize soluble Cu complexes over a broad alkaline range.
+
+The Au associated pathway exhibits higher \ce{NH3} Faradaic efficiency and stronger gas phase nitrogen signals, but ammonia assisted complexation also enables moderate Au dissolution. In contrast, Cu produces more \ce{NH3} in absolute amount because of its much higher current, while a much larger fraction of the charge is consumed by metal dissolution. The Cu pathway is also associated with weak gas phase signals and spectroscopic evidence for cyanide related species. These differences show that electrode dependent pathways affect both nitrogen product distributions and corrosion, but do not establish a universal relationship between bond cleavage pathway and ammonia selectivity.
+
+The most durable electrodes, \ce{Pd}, PdAu, and \ce{TiNi}, remain protected by stable \sout{metallic, alloy, or oxide phases} \textcolor{red}{elemental-metal, binary-metal, or oxide phases}. PdAu dissolves approximately five times less metal than pure \ce{Au} while sustaining a high current density, showing that alloying with \ce{Pd} suppresses ammonia-assisted Au dissolution and improves the balance between activity and durability.
+
+These results point to general design criteria for electrodes used in nitrogen-rich electrolytes. Durable catalysts should resist complexation by ammonia, cyanide, and amino acid derived ligands, while retaining sufficient activity for the desired nitrogen transformation. Reactor and electrolyte design may also matter because shorter intermediate residence times could limit the further oxidation of glycine derived products into more corrosive ligands. Thus, ligand-inclusive Pourbaix analysis can be used both to interpret electrode dependent corrosion and to screen candidate materials for a balance between nitrogen recovery and durability.
+
+% address limitations?
+
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\begin{table*}[ht]
+\centering
+\caption{Summary of electrode-dependent glycine oxidation pathways and stability trends after 2~h electrolysis at 2.0~V$_{\mathrm{RHE}}$. Intermediates detected by IC, NMR, and GI-FTIR are compared with ammonia production, ICP-OES metal leaching, and ligand-inclusive Pourbaix predictions.}
+\label{tab:intermediate_stability_summary}
+\small
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{L{1.1cm} L{2.7cm} L{4.0cm} L{2.8cm} L{1.8cm} L{2.0cm} L{3.2cm}}
+\toprule
+\textbf{Electrode} & 
+\textbf{IC intermediates} & 
+\textbf{NMR intermediates} & 
+\textbf{GI-FTIR surface species} & 
+\textbf{NH$_3$ produced (\si{\micro mol}) } & 
+\textbf{Metal leaching (\si{\micro mol})} & 
+\textbf{Theory prediction} \\
+\midrule
+
+Au & 
+minor formate & 
+glycine/glycolate; ammonia-related species & 
+organic residues & 
+{\( 10.8\)} & 
+{\( 0.36\)} & 
+ammonia-assisted Au leaching through soluble ammine complexes \\
+
+Ni & 
+glyoxylate, formate, oxalate & 
+formate; glycolate; amine-type species & 
+amine/\ce{NH3}-related bands; carbonyl species & 
+{\( 27.4\)} & 
+{\( 0.36\)} & 
+ligand assisted dissolution with glycine, ammonia, and cyanide when the corresponding ligands are available \\
+
+Cu & 
+formate, glyoxylate, oxalate & 
+cyanide or cyanide-like species; glycolate; glycine; formaldehyde/formamide-type species & 
+strong carbon nitrogen stretching band consistent with cyanide or a related nitrile & 
+{\( 152\)} & 
+{\( \num{1.18e3}\)} & 
+ligand-driven dissolution, especially with \ce{CN^-} \\
+
+Pd & 
+low/no formate & 
+glycine/glycolate; dimethylamine & 
+carbonyl/carbonate band & 
+{\( 6.2\)} & 
+{\( 0.02\)} & 
+stable in \ce{NH3}/glycine; limited cyanide complex region \\
+
+TiNi & 
+minimal products & 
+mostly glycine only & 
+weak organic features & 
+{\( 0.4\)} & 
+{\( 0.01\)} & 
+predominantly passivated; limited ligand-driven dissolution \\
+
+TiCu & 
+formate, oxalate & 
+formate; acetate/formyl-type species & 
+weaker carbon nitrogen stretching band; amine/\ce{NH3}-related bands & 
+{\( 20.4\)} & 
+{\( 0.94\)} & 
+partial Cu destabilization, especially with \ce{CN^-} \\
+
+PdAu & 
+glyoxylate, formate, oxalate & 
+formate; glycolate; glycine; amine-type species; amide/ammonia-related species & 
+carbonyl/organic surface species & 
+{\( 39.4\)} & 
+{\( 0.08~\)} & 
+\sout{broad solid alloy or oxide stability} \textcolor{red}{broad stability regions for solid binary metal or oxide phases} with selective Au ammine dissolution at higher potentials \\
+
+
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\section{Limitations}
+\subsection{Thermodynamic model limitations}
+While ligand-inclusive Pourbaix analysis provides a useful framework for evaluating thermodynamic stability, several limitations should be noted. The present approach assumes equilibrium among bulk phases and does not account for kinetic barriers, metastable states, or dynamic operating conditions typical of electrochemical systems. As a result, processes predicted to be thermodynamically favorable may be suppressed in practice.
+
+\sout{Ligand complexation is treated using fixed concentrations across the potential–pH grid rather than self-consistent speciation, which may overestimate the stability of aqueous metal–ligand complexes.} \textcolor{red}{The model accounts for acid--base partitioning of prescribed ligand pools but neglects ligand depletion through metal binding, which may overestimate free-ligand availability and the stability of aqueous metal--ligand complexes, particularly for cyanide. The diagrams describe conditional thermodynamic stability rather than quantitative dissolved-species concentrations. The corresponding mass-balance approximation is discussed in the Supporting Information, Section~\ref{sec:si_ligand_mass_balance}.} Real ligand compositions depend on feedstock, local pH gradients, and experimental setup, and other potential ligands such as sulfate or organic degradation products may further shift stability boundaries. \sout{The present approach therefore captures the upper bound of ligand-driven stabilization and indicates where such complexes are likely to form during electrocatalysis.}
+
+Surface-specific effects (reconstruction, segregation, interfacial phenomena) are not explicitly considered, and uncertainties in experimental stability constants and in database-derived \sout{alloy structures} \textcolor{red}{binary metal crystal structures} may introduce additional variability. 
+
+\subsection{Experimental scope limitations}
+This study is intended as a stability-centered model system rather than a complete process evaluation for wastewater nitrogen recovery. Glycine was selected as a representative amino acid feedstock to isolate ligand-driven corrosion pathways under controlled alkaline conditions. Real wastewater contains proteins, amino acid mixtures, salts, and organic contaminants that may change product distributions, ligand residence times, and electrode stability. The conclusions therefore focus on identifying ligand-induced electrode dissolution pathways rather than optimizing ammonia recovery efficiency. \textcolor{red}{ Furthermore, cyanide, which we propose contributes to electrode degradation through the formation of soluble copper–cyanide complexes, was identified only qualitatively (GI-FTIR, FTIR, and ¹³C NMR after copper removal). Its concentration and speciation (free cyanide versus copper-bound complexes) were not determined, because dissolved copper interferes with the available analytical methods. Quantitative speciation, for example by ligand-exchange flow-injection analysis or ion chromatography of metal–cyanide complexes, combined with time-resolved measurements of dissolved copper, would be needed to establish a direct correlation between cyanide formation and copper leaching and to fully resolve the degradation mechanism.}
+
+\section*{Conclusions}
+This study shows that electrode stability during electrochemical nitrogen recovery depends strongly on ligand complexation. Ligand-inclusive Pourbaix analysis predicts additional dissolution regions that are absent from conventional metal and oxide diagrams, particularly when ammonia or cyanide stabilizes soluble metal species.
+
+The experiments support the thermodynamic trends. Cu undergoes severe ligand associated dissolution, Au shows intermediate ammonia assisted leaching, and Pd, PdAu, and TiNi retain low metal loss. Cyanide complexes are predicted for several metals, but the corresponding ligand pathway is accessed most clearly on Cu, showing that corrosion depends on both complex stability and ligand formation.
+
+Electrode activity and stability are therefore coupled through reaction derived ligands and dissolved metal species. Durable materials should resist complexation while retaining sufficient catalytic activity and conductivity. Ligand-inclusive Pourbaix analysis provides a practical framework for screening this balance. Future work should extend this stability framework to realistic wastewater matrices and longer term continuous flow operation to determine whether corrosion caused by reactive ligands can be mitigated through catalyst design, electrolyte management, or reactor operation.
+
+
+
+
+
+
+
+\section*{Author contributions}
+Nianhan Tian: Conceptualization, Methodology, Formal analysis, Software, Visualization, Writing.  \\
+Ehsan Abbasi: Investigation, Validation, Writing.  \\
+Haldrian Iriawan: Investigation, Validation, Writing.  \\
+Paul Kohl: Resources, Writing -- Review \& Editing.  \\
+Yang Shao-Horn: Conceptualization, Supervision, Project administration, Writing -- Review \& Editing, Funding Acquisition.  \\
+Gerardine G. Botte: Conceptualization, Supervision, Project administration, Writing -- Review \& Editing, Funding Acquisition.  \\
+Andrew J. Medford: Conceptualization, Supervision, Project administration, Writing -- Review \& Editing, Funding Acquisition. \\
+
+
+\section*{Conflicts of interest}
+There are no conflicts to declare.
+
+\section*{Data availability}
+The computational scripts and thermodynamic data supporting this study are available in the Zenodo repository at DOI: \href{https://doi.org/10.5281/zenodo.21535789}{10.5281/zenodo.21535789}.
+% 10.5281/zenodo.20211738
+
+
+
+
+\section*{Acknowledgements}
+This material is based upon financial support by the National Science Foundation, EEC Division of Engineering Education and Centers, NSF Engineering Research Center for Advancing Sustainable and Distributed Fertilizer production (CASFER), NSF 20-553 Gen-4 Engineering Research Centers award \# 2133576. This work used the Hive cluster, which is supported by the National Science Foundation under grant number 1828187.  This research was supported in part through research cyberinfrastructure resources and services provided by the Partnership for an Advanced Computing Environment (PACE) at the Georgia Institute of Technology, Atlanta, Georgia, USA. RRID:SCR\_027619. The authors thank Dr. Joseph Gauthier and Samuel Olusegun for helpful discussion at the start of the project. Any opinions, findings, conclusions, or recommendations expressed in this material are those of the author(s) and do not necessarily reflect the views of the National Science Foundation. 
+
+%%%END OF MAIN TEXT%%%
+
+%The \balance command can be used to balance the columns on the final page if desired. It should be placed anywhere within the first column of the last page.
+
+\balance
+
+%If notes are included in your references you can change the title from 'References' to 'Notes and references' using the following command:
+%\renewcommand\refname{Notes and references}
+
+%%%REFERENCES%%%
+\bibliography{references}
+\bibliographystyle{rsc} %the RSC's .bst file
+\clearpage
+% \input{SI.tex}
+\end{document}

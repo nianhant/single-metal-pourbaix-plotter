@@ -1,0 +1,92 @@
+[
+  {
+    "metal": "Au",
+    "grid_size": 800,
+    "CN_M": [
+      0.0,
+      0.0001,
+      0.001
+    ],
+    "changed_fraction": [
+      0.0,
+      0.11181875,
+      0.1469078125
+    ],
+    "include": true
+  },
+  {
+    "metal": "Ni",
+    "grid_size": 800,
+    "CN_M": [
+      0.0,
+      0.0001,
+      0.001
+    ],
+    "changed_fraction": [
+      0.0,
+      0.2100578125,
+      0.2821015625
+    ],
+    "include": true
+  },
+  {
+    "metal": "Cu",
+    "grid_size": 800,
+    "CN_M": [
+      0.0,
+      0.0001,
+      0.001
+    ],
+    "changed_fraction": [
+      0.0,
+      0.1039546875,
+      0.1510390625
+    ],
+    "include": true
+  },
+  {
+    "metal": "Pd",
+    "grid_size": 800,
+    "CN_M": [
+      0.0,
+      0.0001,
+      0.001
+    ],
+    "changed_fraction": [
+      0.0,
+      0.0029453125,
+      0.036996875
+    ],
+    "include": true
+  },
+  {
+    "metal": "Pt",
+    "grid_size": 800,
+    "CN_M": [
+      0.0,
+      0.0001,
+      0.001
+    ],
+    "changed_fraction": [
+      0.0,
+      0.1060375,
+      0.1507328125
+    ],
+    "include": true
+  },
+  {
+    "metal": "Ti",
+    "grid_size": 800,
+    "CN_M": [
+      0.0,
+      0.0001,
+      0.001
+    ],
+    "changed_fraction": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "include": false
+  }
+]

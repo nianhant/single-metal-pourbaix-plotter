@@ -1,0 +1,47 @@
+[
+  {
+    "alloy": "TiNi",
+    "CN_M": [
+      0.0,
+      0.0001,
+      0.001
+    ],
+    "grid_size": 1600,
+    "changed_fraction": [
+      0.0,
+      0.210544140625,
+      0.282294140625
+    ],
+    "include": true
+  },
+  {
+    "alloy": "TiCu",
+    "CN_M": [
+      0.0,
+      0.0001,
+      0.001
+    ],
+    "grid_size": 1600,
+    "changed_fraction": [
+      0.0,
+      0.103282421875,
+      0.1504765625
+    ],
+    "include": true
+  },
+  {
+    "alloy": "PdAu",
+    "CN_M": [
+      0.0,
+      0.0001,
+      0.001
+    ],
+    "grid_size": 1600,
+    "changed_fraction": [
+      0.0,
+      0.224500390625,
+      0.27646171875
+    ],
+    "include": true
+  }
+]

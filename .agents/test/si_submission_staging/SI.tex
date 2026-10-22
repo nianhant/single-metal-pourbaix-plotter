@@ -1,0 +1,372 @@
+\documentclass[journal=jacsat,manuscript=article,email=false]{achemso}
+
+\usepackage[version=4]{mhchem}
+\usepackage{esint}
+\usepackage{threeparttable}
+\usepackage{subcaption}
+\usepackage{placeins}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{siunitx}
+\usepackage{float}
+
+\usepackage{xr-hyper}
+\usepackage{hyperref}
+\usepackage{cleveref}
+\externaldocument{submission/main}
+
+\renewcommand{\thesection}{S\arabic{section}}  
+\renewcommand{\thetable}{S\arabic{table}}  
+\renewcommand{\thefigure}{S\arabic{figure}}
+\renewcommand{\theequation}{S\arabic{equation}}
+
+
+
+% \pagestyle{fancy}
+% \fancyhf{}
+% \cfoot{S\thepage}
+% \renewcommand{\headrulewidth}{0pt}
+
+
+\author{Nianhan Tian}
+\affiliation[Georgia Institute of Technology]
+{School of Chemical and Biomolecular Engineering, Georgia Institute of Technology, Atlanta, Georgia 30318 USA}
+
+\author{Ehsan Abbasi}
+\affiliation[Texas Tech University]
+{Department of Chemical Engineering, Texas Tech University, Lubbock, Texas 79409 USA}
+
+\author{Haldrian Iriawan}
+\affiliation[Massachusetts Institute of Technology]
+{Department of Materials Science \& Engineering, Massachusetts Institute of Technology, Cambridge, Massachusetts 02139 USA}
+
+\author{Paul Kohl}
+\affiliation[Georgia Institute of Technology]
+{School of Chemical and Biomolecular Engineering, Georgia Institute of Technology, Atlanta, Georgia 30318 USA}
+
+\author{Yang Shao-Horn}
+\affiliation[Massachusetts Institute of Technology]
+{Department of Materials Science \& Engineering, Massachusetts Institute of Technology, Cambridge, Massachusetts 02139 USA}
+\affiliation[Massachusetts Institute of Technology]
+{Research Laboratory of Electronics, Massachusetts Institute of Technology, Cambridge, Massachusetts 02139, USA.}
+\affiliation[Massachusetts Institute of Technology]
+{Department of Mechanical Engineering, Massachusetts Institute of Technology, Cambridge, Massachusetts 02139, USA.}
+\affiliation[Massachusetts Institute of Technology]
+{Department of Chemistry, Massachusetts Institute of Technology, Cambridge, Massachusetts 02139, USA.}
+
+\author{Gerardine G. Botte}
+\affiliation[Texas Tech University]
+{Department of Chemical Engineering, Texas Tech University, Lubbock, Texas 79409 USA}
+\email{gerri.botte@ttu.edu}
+
+\author{Andrew J. Medford}
+\affiliation[Georgia Institute of Technology]
+{School of Chemical and Biomolecular Engineering, Georgia Institute of Technology, Atlanta, Georgia 30318 USA}
+\email{ajm@gatech.edu}
+
+\title{Nitrogen ligands influence corrosion and catalyst stability in electrochemical nitrogen recovery\\\vspace{8pt}\large{Supporting Information}}
+\begin{document}
+
+\newpage
+
+\section{Electrode Preparation}
+\subsection{H-Cell Setup}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{si_hcell.pdf}
+    \caption{Schematic of the H-cell electrochemical setup. Working and counter electrode compartments are separated by a Selemion anion exchange membrane; a Hg/HgO (1~M KOH) reference electrode with a Luggin capillary minimizes ohmic drop.}
+    \label{fig:hcell}
+\end{figure}
+
+\newpage
+\subsection{Substrate Preparation}
+To avoid any contribution from the substrate during the electrochemical reaction, a titanium sheet was used as the support material. The titanium sheet was cleaned by washing with 85\% phosphoric acid and sandblasting, followed by rinsing with acetone and deionized (DI) water, respectively. The cleaned titanium sheet was then placed in a plasma cleaner at high power for 30 minutes under an argon atmosphere.
+\subsection{Electroplating Palladium}
+The electroplating bath contained 5~g\,L$^{-1}$ PdCl$_2$ and 80~g\,L$^{-1}$ NH$_4$Cl. Palladium electroplating was carried out under chronoamperometric conditions at an applied potential of 400~mV versus the reference electrode. The average current density was 8~mA\,cm$^{-2}$ with an electrode area of 5~cm$^{2}$. The bath temperature was maintained at 25~$^\circ$C, and the electroplating duration was 40~min.
+
+\subsection{Electroplating Palladium PdAu}
+
+The titanium substrate preparation followed the same procedure used for the palladium electrode. The electroplating bath consisted of 0.1~M perchloric acid (HClO$_4$), 0.1~M hydrochloric acid (HCl), 100~mg of gold(III) chloride trihydrate (HAuCl$_3\cdot$3H$_2$O), and palladium(II) chloride (PdCl$_2$, 99.995\%). Electroplating was performed under chronoamperometric conditions at an applied potential of 420~mV for 30~min. The bath temperature was maintained at 25~$^\circ$C.
+
+\newpage
+\section{Pourbaix Diagrams}
+\label{sec:si_pure_metal_pourbaix}
+\input{pourbaix_figures_SI}
+
+\clearpage
+\section{Single-Metal Pourbaix Sensitivity Analysis}
+\label{sec:si_pourbaix_sensitivity}
+\input{pourbaix_sensitivity_SI}
+
+\clearpage
+\section{Cyclic Voltammetry}
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=0.6\linewidth]{si_Pd_photo.png}
+    \caption{ Palladium Cyclic voltammogram of the electrocatalyst recorded in 0.1 M KOH and in an equimolar solution of 0.1~M KOH and 0.1~M glycine.}
+    \label{CV.Pd}
+\end{figure}
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=0.6\linewidth]{si_AuPd_photo.png}
+    \caption{PdAu Cyclic voltammogram of the electrocatalyst recorded in 0.1 M KOH and in an equimolar solution of 0.1~M KOH and 0.1~M glycine.}
+    \label{AuPd.CV}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\linewidth]{si_TiCu_photo.png}
+    \caption{TiCu Cyclic voltammogram of the electrocatalyst recorded in 0.1 M KOH and in an equimolar solution of 0.1~M KOH and 0.1~M glycine.}
+    \label{TiCu.CV}
+\end{figure}
+% \FloatBarrier
+
+\newpage
+\section{Field Emission Scanning Electron Microscopy}
+\begin{figure*}[ht]
+    \centering
+    \includegraphics[width=0.9\linewidth]{si_FESEM.pdf}
+    % \includegraphics[width=0.6\linewidth]{Figures/Ehsan/Figure 1.pdf}
+    \caption{FESEM images of fresh electrodes: (a) Cu, (b) Au, and (c) TiNi, and electrodes after electrolysis: (d) Cu, (e) Au, and (f) TiNi.
+    }
+    \label{CV_FESEM}
+\end{figure*}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{si_SEM.pdf}
+    \caption{Field-emission scanning electron microscopy (FESEM) images of fresh and used electrodes. 
+Fresh electrodes: (a) PdAu, (c) Pd, (e) TiCu and (g) Ni. 
+Used electrodes after 2 h of electrolysis at 2.0 V vs RHE in 0.1 M KOH containing 0.1 M glycine: 
+(b) PdAu, (d) Pd, (f) TiCu and (h) Ni.}
+    \label{SI.SEM}
+\end{figure}
+
+\FloatBarrier
+\newpage
+\section{Energy Dispersive X-ray (EDX) mapping}
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=0.8\linewidth]{si_EDX_1.pdf}
+    \caption{Energy-dispersive X-ray (EDX) elemental mapping of used electrodes after 2 h of electrolysis at 2.0 V vs RHE in 0.1 M KOH containing 0.1 M glycine: (a) Cu, (b) Au, and (c) TiNi.}
+    \label{EDX.1}
+\end{figure}
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=0.9\linewidth]{si_EDX_2.pdf}
+    \caption{Energy-dispersive X-ray (EDX) elemental mapping of used electrodes after 2 h of electrolysis at 2.0 V vs RHE in 0.1 M KOH containing 0.1 M glycine: (a) TiCu, (b) PdAu, and (c) Pd.}
+    \label{EDX.2}
+\end{figure}
+
+
+\FloatBarrier
+\newpage
+\section{Electrochemistry-mass spectrometry (EC-MS)}
+\begin{figure*}[!ht]
+    \centering
+    \includegraphics[width=0.9\textwidth]{si_ECMS.pdf}
+    \caption{Electrochemistry-mass spectrometry of Au and Cu electrodes in N-ligand-containing electrolytes. Electrochemistry and mass signals for 0.1 M KOH (a--f), 0.1 M KOH + 0.1 M glycine (g--l), and 0.1 M KOH + 0.1 M \ce{NH3} (m--r) are shown in the respective panels. Monitored m/z values correspond to H$_2$ (m/z = 2), CO or N$_2$ (m/z = 28), NO (m/z = 30), O$_2$ (m/z = 32), and CO$_2$ or N$_2$O (m/z = 44).}
+    \label{fig:ECMS_full}
+\end{figure*}
+
+\FloatBarrier
+\newpage
+\section{Ion chromatography (IC) detection of oxalate, formate and glyoxylate}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.95\linewidth]{si_IC_production.pdf}
+    \caption{Product formation after 2 h electrolysis at 2.0 V$_{\mathrm{RHE}}$ in 0.1 M KOH with 0.1 M glycine, by IC. (a) Oxalate, (b) formate, and (c) glyoxylate formation as functions of accumulated charge.}
+    \label{IC_product}
+\end{figure}
+
+
+\FloatBarrier
+\newpage
+\section{Nuclear Magnetic Resonance (NMR)}
+
+\begin{figure*}[ht]
+    \centering
+    \includegraphics[width=\textwidth]{si_NMR.pdf}
+    \caption{NMR characterization of the post-electrolysis electrolytes (2~h at 2.0~V$_{\mathrm{RHE}}$; D$_2$O 15\%, 400~MHz). (a) $^1$H NMR spectra of Cu, Au, TiNi, TiCu, Pd, and PdAu electrodes. (b) $^{13}$C NMR spectra of an isotope-labeled control (0.1~M $^{13}$C-glycine + 0.1~M KOH) and of a Cu electrode after 2~h of electrolysis in 0.1~M $^{13}$C-glycine + 0.1~M KOH.}
+    \label{fig:NMR}
+\end{figure*}
+
+\Cref{fig:NMR}a presents the proton NMR spectra (400~MHz, D$_2$O 15\%) of the tested electrodes. The spectra can be grouped by the extent of glycine oxidation. The first group, Ni, TiCu, PdAu, and Cu, shows clear formate resonances ($\delta$ 8.28~ppm on Ni, TiCu, and PdAu; $\delta$ 8.52~ppm on Cu), along with glycolate ($\delta$ 3.6--3.65~ppm), glycine ($\delta$ 3.4--3.7~ppm), and amine type signals, including alkyl amines, dimethylamine, and branched methyl groups in the 1.0--3.2~ppm range. TiCu additionally shows resonances at $\delta$ 7.93 and 7.40~ppm, assigned to formyl or imine type species, and a peak at $\delta$ 2.06~ppm attributed to acetate. PdAu exhibits the broadest product distribution, with additional features at $\delta$ 7.93--7.07~ppm, assigned to amide or ammonia species at near neutral pH, and $\delta$ 2.23~ppm, assigned to amine type species. Cu uniquely shows formamide ($\delta$ 8.03~ppm), formaldehyde ($\delta$ 3.28 and 3.24~ppm), and methylamine ($\delta$ 2.90~ppm), supporting the formation of partially oxidized nitrogen containing intermediates. The second group, Pd and Au, lacks the formate resonance, consistent with the IC results. The remaining peaks, including glycolate, glycine, and dimethylamine, resemble those observed for Ni; Au additionally shows ammonia related species at $\delta$ 7.53~ppm and $\delta$ 2.71~ppm. The third group, TiNi, shows no significant product related peaks, indicating low catalytic activity, with glycine as the only detectable species in solution.
+
+\Cref{fig:NMR}b presents the $^{13}$C NMR spectra of the control sample and the Cu electrode after 2~h of electrolysis, with observed resonances at $\delta$ 179.61, 179.08, 173.39, 171.81, 167.1, 164.32, 162.91, 161.37, 129.20, 128.82, 107.71, 82.50, 65.96, 45.84, 45.20, and 43.45~ppm. Based on reference spectra, peaks at $\delta$ 173.39, 171.81, 45.20, and 43.45~ppm are assigned to residual glycine; the downfield resonance at $\delta$ 179.08~ppm is assigned to glyoxylic acid, where electron withdrawing carbonyl groups produce pronounced deshielding; $\delta$ 162.91 and 161.37~ppm are assigned to oxalate, consistent with IC detection and previous reports \cite{Fukushima2021}; and the peaks at $\delta$ 179.61 and 65.96~ppm are assigned to glycolate, in agreement with reported $^{13}$C values \cite{Cui2008}. The peak at $\delta$ 167.1~ppm is assigned to formate, further supporting the IC results. The peak at $\delta$ 164.32~ppm is attributed to cyanide formation during glycine oxidation at high anodic potentials \cite{Fell2023}, also supported by the GI\nobreakdash-FTIR analysis below. Two minor features remain: a weak signal at $\delta$ 128.82~ppm associated with alkene type carbon species, and a resonance at $\delta$ 107.71~ppm associated with nitrile species. The latter was not clearly identified in the $^1$H NMR spectrum, likely because of its low concentration or limited proton observability.
+
+\begin{figure*}
+    \centering
+    \includegraphics[width=0.9\linewidth]{si_HSQC.pdf}
+    \caption{2D $^{1}$H--$^{13}$C HSQC spectrum of the Cu post-electrolysis solution.}
+    \label{HSQC}
+\end{figure*}
+
+\newpage
+\section{X-ray diffraction analysis}
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=0.9\linewidth]{si_XRD.png}
+    \caption{X-ray diffraction (XRD) patterns of the Cu, Au, Pd, PdAu, TiCu, TiNi, and Ni electrodes.}
+    \label{XRD}
+\end{figure}
+The X-ray diffraction (XRD) patterns of all electrodes are presented in \Cref{XRD}. All diffraction data were collected in Bragg--Brentano geometry over a 2$\theta$ range of 5--90$^\circ$. Phase identification was performed using the ICDD PDF databases.
+
+The TiNi electrode was indexed to a mixture of Ti$_2$Ni (cubic, JCPDS No.~04-007-1531) and TiNi (monoclinic, JCPDS No.~04-014-2533). For the Ti$_2$Ni phase, the most intense reflections were observed at 2$\theta$ = 42.46$^\circ$ (110), 61.61$^\circ$ (200), and 77.69$^\circ$ (211), whereas the TiNi phase exhibited characteristic peaks at 2$\theta$ = 39.14$^\circ$ (020), 41.30$^\circ$ ($\bar{1}$11), and 44.88$^\circ$ (111).
+
+The gold electrode was indexed to face-centered cubic (fcc) Au (JCPDS No.~98-000-0230), with prominent diffraction peaks at 2$\theta$ = 38.18$^\circ$ (111), 44.38$^\circ$ (200), and 77.56$^\circ$ (311). The nickel electrode matched metallic Ni (JCPDS No.~01-071-4654), displaying reflections at 2$\theta$ = 44.48$^\circ$ (111), 51.83$^\circ$ (200), and 76.35$^\circ$ (220).
+
+The palladium electrode was assigned to fcc Pd (JCPDS No.~98-000-0344), with diffraction peaks at 2$\theta$ = 40.11$^\circ$ (111), 46.66$^\circ$ (200), and 82.11$^\circ$ (311). The PdAu alloy (JCPDS No.~01-072-5376) exhibited characteristic reflections at 2$\theta$ = 39.17$^\circ$ (111), 45.54$^\circ$ (200), and 79.86$^\circ$ (311), confirming alloy formation.
+
+Finally, the TiCu-based electrodes were indexed to TiCu$_2$ (JCPDS No.~01-081-5269), with reflections at 2$\theta$ = 39.94$^\circ$ (002), 40.99$^\circ$ (200), and 44.48$^\circ$ (131), as well as TiCu (JCPDS No.~04-003-6221), exhibiting peaks at 2$\theta$ = 41.05$^\circ$ (110), 42.13$^\circ$ (102), and 75.53$^\circ$ (212).
+
+Overall, the XRD results confirm that all electroplated materials were successfully synthesized without observable impurity phases, which is further corroborated by the EDX analysis presented in the FESEM section. Moreover, the primary diffraction peak of the PdAu sample appears between the corresponding Au and Pd peak positions, providing additional evidence for successful Au--Pd alloy formation during the electroplating process.
+
+
+\FloatBarrier
+\newpage
+\section{Electrolysis}
+
+The constant-voltage electrolysis of glycine resulted in markedly different current density responses across the investigated electrodes. \Cref{Current-Time} presents the chronoamperometric current--time curves for all electrodes recorded at an applied potential of 2.0~V vs RHE. The sharp spikes observed in the current profiles correspond to brief interruptions caused by sample withdrawal during the electrolysis experiments. It should be noted that the copper electrode did not reach the target potential of 2.0~V vs RHE, as the potentiostat reached its maximum compliance voltage of 22~V.
+
+All current data were corrected for \textit{iR} losses. The solution resistance was obtained from electrochemical impedance spectroscopy (EIS) measurements at 20~kHz and combined with short current sampling intervals of 5~s. The calculated \textit{iR} drop was added back to the applied potential to determine the true electrode potential. Conversion of the reference electrode potential to the RHE scale was performed using the measured pH of the electrolyte during electrolysis.
+
+Upon polarization, the copper electrode exhibited the highest current density, followed by PdAu, Ni, Pd, TiCu, Au, and TiNi, respectively. Copper experienced significant leaching during the experiment, which contributed to its elevated current density and, as discussed previously, resulted in the highest ammonia production. The Ni electrode showed an unusual increase in current density after approximately one hour, which is likely associated with the oxidation of reaction intermediates or the formation of additional oxide layers on the electrode surface. Despite changes in solution pH during electrolysis—which can influence the oxygen evolution reaction (OER)—the PdAu electrode maintained a relatively stable current response, suggesting enhanced electrochemical stability under the reaction conditions. In contrast, the current densities of Pd, TiCu, Au, and TiNi gradually decreased over time, which may be attributed to pH variations or catalyst deactivation.
+
+
+\begin{figure}%[H]
+    \centering
+    \includegraphics[width=0.9\linewidth]{si_current.png}
+    \caption{Chronoamperometric current–time profile measured at 2.0 V vs RHE.}
+    \label{Current-Time}
+\end{figure}
+\FloatBarrier
+\newpage
+\subsection{Evolution of the solution pH in the anodic compartment}
+The pH of the electrolyte is a critical parameter that is often overlooked, yet it plays a decisive role in governing electrode stability during electrolysis. As discussed in the theoretical section, each pure metal and alloy exhibits a specific stability domain in which it remains resistant to corrosion in the presence of glycine, ammonia, and potentially cyanide formed as a byproduct. To quantify pH variations under operating conditions, the solution pH was monitored at 15, 30, 60, and 120~min of electrolysis, and the results are presented in \Cref{pH.SI}.
+
+During electrolysis, the pH can evolve as a result of several coupled factors, including electrochemical reactions, the formation of reaction intermediates, and mass-transport limitations of hydroxide ions. Because the diffusivity of hydroxide ions through the membrane is limited, OH$^-$ generated at the cathode must migrate to the anodic compartment to maintain charge balance. When the rate of hydroxide generation exceeds the membrane transport capacity, the system enters a diffusion-limited regime, leading to the development of a pH gradient across the electrolyzer. As a consequence, the anodic compartment can experience a gradual decrease in pH, while the cathodic side becomes increasingly alkaline.
+
+In addition to transport effects, the formation of acidic intermediates can further contribute to pH shifts. For example, during glycine oxidation, the generation of carboxylic acid species can locally decrease the pH near the electrode surface, thereby altering the chemical environment and influencing electrode stability and dissolution behavior.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\linewidth]{si_pH.png}
+    \caption{Evolution of the solution pH measured at 15, 30, 60, and 120 min during electrolysis.}
+    \label{pH.SI}
+\end{figure}
+\FloatBarrier
+\newpage
+
+\section{Nitrogen product as a function of charge passed}
+As discussed earlier, ammonia plays a critical role in governing electrode stability; therefore, quantifying ammonia production provides insight into the reaction mechanism while enabling a direct comparison of catalytic performance and stability. The ammonia productivity as a function of the charge passed is shown in \Cref{Ammonia.SI}. It should be noted that a time-based representation can be misleading under chronoamperometric operation because the current response varies with time. For this reason, ammonia production is plotted as a function of the accumulated charge delivered to the system.
+
+Analysis of the data reveals that the rate of ammonia formation evolves significantly as electrolysis proceeds, which is consistent with the involvement of multiple reaction pathways. Notably, the PdAu and Ni electrodes exhibit nearly linear trends on a logarithmic scale, whereas the remaining electrodes display a pronounced increase in ammonia productivity beyond a characteristic charge threshold. This divergence suggests a transition between distinct dominant reaction pathways as the extent of electrolysis increases. In practice, multiple pathways are likely operative simultaneously, with their relative contributions shifting as additional charge is supplied to the system.
+
+It is also important to monitor the formation of other inorganic nitrogen species, both from an environmental perspective and to assess the overall efficiency of the electrochemical process. The nitrate (NO$_3^-$) productivity of the investigated electrocatalysts is shown in \Cref{N3.SI}. Among the tested materials, Ni and PdAu exhibit the highest tendency toward the formation of undesired nitrate. In addition, the Au electrode shows a noticeable increase in nitrate production after approximately 5~C of charge has passed through the system, which can be attributed to the electrochemical oxidation of ammonia. Nevertheless, the absolute nitrate concentrations remain low, and only a small fraction of the cumulative charge contributes to nitrate formation, as illustrated in \Cref{IC_product}.
+
+As expected, the production of nitrite (NO$_2^-$) was slightly higher than that of nitrate, consistent with its more favorable reaction kinetics involving an eight-electron transfer. Similar to nitrate, the nitrite concentration remained low, and only a very small fraction of the total charge was directed toward its formation, as shown in \Cref{N2.SI}.
+
+
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=0.6\linewidth]{si_ammonia.png}
+    \caption{Ammonia productivity, expressed as N--NH$_3$, of various electrodes as a function of the total charge passed.}
+    \label{Ammonia.SI}
+\end{figure}
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=0.6\linewidth]{si_N3.png}
+    \caption{Nitrate productivity, expressed as N--NO$_3^-$, of various electrodes as a function of the accumulated charge passed during electrolysis.}
+    \label{N3.SI}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\linewidth]{si_N2.png}
+    \caption{Nitrite productivity, expressed as N--NO$_2^-$, of various electrodes as a function of the accumulated charge passed during electrolysis.}
+    \label{N2.SI}
+\end{figure}
+\FloatBarrier
+\newpage
+\section{Ion chromatography (IC) calibration curve}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\linewidth]{si_calibration.pdf}
+    \caption{Ion chromatography (IC) calibration curves for quantitative analysis of (a) nitrate, (b) nitrite, (c) ammonia,(d) formate, (e) glyoxylic acid, and (f) oxalate.
+}
+    \label{IC-cal.SI}
+\end{figure}
+
+\newpage
+\FloatBarrier
+\clearpage
+\section{Pourbaix Diagram Data}
+
+\input{tbl_NH3_energy.tex}
+
+\newpage
+\input{tbl_Gly_energy.tex}
+
+\newpage
+\input{tbl_CN_energy}
+
+\newpage
+\input{tbl_Ni_energy}
+
+\newpage
+\input{tbl_Au_energy}
+
+\newpage
+\input{tbl_Cu_energy}
+
+\newpage
+\input{tbl_Pd_energy}
+
+\newpage
+\input{tbl_Pt_energy}
+
+\newpage
+\input{tbl_Ti_energy}
+
+\newpage
+\input{tbl_NiTi_energy}
+
+\newpage
+\input{tbl_TiCu_energy}
+
+\newpage
+\input{tbl_AuPd_energy}
+
+\newpage
+\input{tbl_Ni_reactions}
+
+\newpage
+\input{tbl_Au_reactions}
+
+\newpage
+\input{tbl_Cu_reactions}
+
+\newpage
+\input{tbl_Pd_reactions}
+
+\newpage
+\input{tbl_Pt_reactions}
+
+\newpage
+\input{tbl_Ti_reactions}
+
+
+
+
+
+
+\newpage
+\bibliography{references}
+
+% \bibliography{Figures/Ehsan}
+% references
+\end{document}

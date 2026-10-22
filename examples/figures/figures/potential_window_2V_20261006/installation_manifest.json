@@ -1,0 +1,247 @@
+[
+  {
+    "name": "figure1.pdf",
+    "source": "/global/cfs/cdirs/m5419/nianhant_project_storage/stability_paper/single-metal-pourbaix-plotter/examples/figures/figures/potential_window_2V_20261006/single/figure1_2x3_overwide_side_colors_upper_ticks.pdf",
+    "sha256": "88c866c255dfe2db29b171e8e64cef8acb2b2c084fbbf3faeef14370bf15657b"
+  },
+  {
+    "name": "figure2.pdf",
+    "source": "/global/cfs/cdirs/m5419/nianhant_project_storage/stability_paper/single-metal-pourbaix-plotter/examples/figures/figures/potential_window_2V_20261006/single/figure2_1x2_side_colors.pdf",
+    "sha256": "03ec25dafb81b971ea394096eace1b502cb775073e02a6b8f09e981d1e0fe24f"
+  },
+  {
+    "name": "figure3.pdf",
+    "source": "/global/cfs/cdirs/m5419/nianhant_project_storage/stability_paper/single-metal-pourbaix-plotter/examples/figures/figures/potential_window_2V_20261006/binary/figure3.pdf",
+    "sha256": "69915650f6362251d5398f39fc2f79018316e7ad556843ad84c2a19c018b9c66"
+  },
+  {
+    "name": "SI_Au_3panel_side_colors.pdf",
+    "source": "/global/cfs/cdirs/m5419/nianhant_project_storage/stability_paper/single-metal-pourbaix-plotter/examples/figures/figures/potential_window_2V_20261006/single/SI_Au_3panel_side_colors.pdf",
+    "sha256": "09a5be89f725163eb3e7b4059a26257b59a4ccf3f1d37f9b81b7ccc037cf1e18"
+  },
+  {
+    "name": "SI_Pd_3panel_side_colors.pdf",
+    "source": "/global/cfs/cdirs/m5419/nianhant_project_storage/stability_paper/single-metal-pourbaix-plotter/examples/figures/figures/potential_window_2V_20261006/single/SI_Pd_3panel_side_colors.pdf",
+    "sha256": "bba4bc4954a076d5e04b03db02594ec1cd55f25715c354a54f873108ff12cabf"
+  },
+  {
+    "name": "SI_Ni_3panel_side_colors.pdf",
+    "source": "/global/cfs/cdirs/m5419/nianhant_project_storage/stability_paper/single-metal-pourbaix-plotter/examples/figures/figures/potential_window_2V_20261006/single/SI_Ni_3panel_side_colors.pdf",
+    "sha256": "20a5193ae8cf886f5d4d16e6198e03e6643475b469580d4b0ae86729e54ce2f8"
+  },
+  {
+    "name": "SI_Cu_3panel_side_colors.pdf",
+    "source": "/global/cfs/cdirs/m5419/nianhant_project_storage/stability_paper/single-metal-pourbaix-plotter/examples/figures/figures/potential_window_2V_20261006/single/SI_Cu_3panel_side_colors.pdf",
+    "sha256": "e5978fd3909c47b7353ba8c3b5192ef8da78d625209e956f04499969d43be65b"
+  },
+  {
+    "name": "SI_Fe_3panel_side_colors.pdf",
+    "source": "/global/cfs/cdirs/m5419/nianhant_project_storage/stability_paper/single-metal-pourbaix-plotter/examples/figures/figures/potential_window_2V_20261006/single/SI_Fe_3panel_side_colors.pdf",
+    "sha256": "d9ce760cbf16475b40a675c2967c6412859abc323b3f85d05d403e59b7058710"
+  },
+  {
+    "name": "SI_Mn_2panel_side_colors.pdf",
+    "source": "/global/cfs/cdirs/m5419/nianhant_project_storage/stability_paper/single-metal-pourbaix-plotter/examples/figures/figures/potential_window_2V_20261006/single/SI_Mn_2panel_side_colors.pdf",
+    "sha256": "9964b8574e52c05bd22b03f007e903002abe11a74c9f77f1ec9848d8488dc003"
+  },
+  {
+    "name": "SI_Zn_3panel_side_colors.pdf",
+    "source": "/global/cfs/cdirs/m5419/nianhant_project_storage/stability_paper/single-metal-pourbaix-plotter/examples/figures/figures/potential_window_2V_20261006/single/SI_Zn_3panel_side_colors.pdf",
+    "sha256": "24994318bdbb50c34c6ba5bb7f01fd9c8ccf0e9cbfdd9cf7f5700a5f8a43014d"
+  },
+  {
+    "name": "SI_Cd_3panel_side_colors.pdf",
+    "source": "/global/cfs/cdirs/m5419/nianhant_project_storage/stability_paper/single-metal-pourbaix-plotter/examples/figures/figures/potential_window_2V_20261006/single/SI_Cd_3panel_side_colors.pdf",
+    "sha256": "b3d11433cb9d1d08dfc3beef7c8de78df053ca2a1ed1e711d605ccbc9b8cf78f"
+  },
+  {
+    "name": "SI_Co_3panel_side_colors.pdf",
+    "source": "/global/cfs/cdirs/m5419/nianhant_project_storage/stability_paper/single-metal-pourbaix-plotter/examples/figures/figures/potential_window_2V_20261006/single/SI_Co_3panel_side_colors.pdf",
+    "sha256": "2389cf2ea679c19b3420ddf21340217e1c2373d3a5ca1930885d65b474659ce3"
+  },
+  {
+    "name": "SI_Sr_1panel_side_colors.pdf",
+    "source": "/global/cfs/cdirs/m5419/nianhant_project_storage/stability_paper/single-metal-pourbaix-plotter/examples/figures/figures/potential_window_2V_20261006/single/SI_Sr_1panel_side_colors.pdf",
+    "sha256": "a9814f54714661b3b0bcb6df13c4b9942fca876e872a59bc12d86691bdfb3898"
+  },
+  {
+    "name": "SI_TiNi_2panel_side_colors_all_species.pdf",
+    "source": "/global/cfs/cdirs/m5419/nianhant_project_storage/stability_paper/single-metal-pourbaix-plotter/examples/figures/figures/potential_window_2V_20261006/binary/SI_TiNi_2panel_side_colors_all_species.pdf",
+    "sha256": "db4057cdd3c37242b0d997f5fe93087b85b3dab8ea0ddf30e0d265875e005724"
+  },
+  {
+    "name": "SI_TiCu_2panel_side_colors_all_species.pdf",
+    "source": "/global/cfs/cdirs/m5419/nianhant_project_storage/stability_paper/single-metal-pourbaix-plotter/examples/figures/figures/potential_window_2V_20261006/binary/SI_TiCu_2panel_side_colors_all_species.pdf",
+    "sha256": "5319b62db78830ded896782b1dd5dc8eee582a670378cb7c1ecac5e62819c0cc"
+  },
+  {
+    "name": "SI_TiFe_2panel_side_colors_all_species.pdf",
+    "source": "/global/cfs/cdirs/m5419/nianhant_project_storage/stability_paper/single-metal-pourbaix-plotter/examples/figures/figures/potential_window_2V_20261006/binary/SI_TiFe_2panel_side_colors_all_species.pdf",
+    "sha256": "320ebd3ebe4eca283f6a701a690aa0df93a1716e7a6caddc5797dbabca3333e2"
+  },
+  {
+    "name": "SI_TiMg_1panel_side_colors_all_species.pdf",
+    "source": "/global/cfs/cdirs/m5419/nianhant_project_storage/stability_paper/single-metal-pourbaix-plotter/examples/figures/figures/potential_window_2V_20261006/binary/SI_TiMg_1panel_side_colors_all_species.pdf",
+    "sha256": "ff6ebac10a9527a04d2a2ad08e045eb06624f374fd6a088ad9169bff9d576433"
+  },
+  {
+    "name": "SI_TiMn_1panel_side_colors_all_species.pdf",
+    "source": "/global/cfs/cdirs/m5419/nianhant_project_storage/stability_paper/single-metal-pourbaix-plotter/examples/figures/figures/potential_window_2V_20261006/binary/SI_TiMn_1panel_side_colors_all_species.pdf",
+    "sha256": "59b8c984215240f46d4eee97ac7ae2467725a13353fb6489ad4f06cdae5852f8"
+  },
+  {
+    "name": "SI_TiZn_1panel_side_colors_all_species.pdf",
+    "source": "/global/cfs/cdirs/m5419/nianhant_project_storage/stability_paper/single-metal-pourbaix-plotter/examples/figures/figures/potential_window_2V_20261006/binary/SI_TiZn_1panel_side_colors_all_species.pdf",
+    "sha256": "8b38d80c16af932019d08d9bb1dae88971fdecd6e2b135078995a0da1dad2a80"
+  },
+  {
+    "name": "SI_PdAg_2panel_side_colors_all_species.pdf",
+    "source": "/global/cfs/cdirs/m5419/nianhant_project_storage/stability_paper/single-metal-pourbaix-plotter/examples/figures/figures/potential_window_2V_20261006/binary/SI_PdAg_2panel_side_colors_all_species.pdf",
+    "sha256": "68b8d49a5895cb39b43b62cf978de6152df1730decc748d8067978e66a2632ef"
+  },
+  {
+    "name": "SI_PdCu_2panel_side_colors_all_species.pdf",
+    "source": "/global/cfs/cdirs/m5419/nianhant_project_storage/stability_paper/single-metal-pourbaix-plotter/examples/figures/figures/potential_window_2V_20261006/binary/SI_PdCu_2panel_side_colors_all_species.pdf",
+    "sha256": "728fe2ebc5197a0cc57c580beab359d82c9cebbbc9a1383aad5c9eb13ee67c4b"
+  },
+  {
+    "name": "SI_PdNi_2panel_side_colors_all_species.pdf",
+    "source": "/global/cfs/cdirs/m5419/nianhant_project_storage/stability_paper/single-metal-pourbaix-plotter/examples/figures/figures/potential_window_2V_20261006/binary/SI_PdNi_2panel_side_colors_all_species.pdf",
+    "sha256": "e362fbb79e919aab6d20bbe92f5dec2cd7278518b12013022c99f3fbb4847a9a"
+  },
+  {
+    "name": "SI_PdPt_2panel_side_colors_all_species.pdf",
+    "source": "/global/cfs/cdirs/m5419/nianhant_project_storage/stability_paper/single-metal-pourbaix-plotter/examples/figures/figures/potential_window_2V_20261006/binary/SI_PdPt_2panel_side_colors_all_species.pdf",
+    "sha256": "9a6ef20301da442267bcbd0f38fb7756cb3d100a68c28f6e001a1f0d3bb4769d"
+  },
+  {
+    "name": "SI_AuPd_2panel_side_colors_all_species.pdf",
+    "source": "/global/cfs/cdirs/m5419/nianhant_project_storage/stability_paper/single-metal-pourbaix-plotter/examples/figures/figures/potential_window_2V_20261006/binary/SI_AuPd_2panel_side_colors_all_species.pdf",
+    "sha256": "bfcf725d5420a97d4f42629edf381514c267f86d87af1376c4deb6b48be8ba9c"
+  },
+  {
+    "name": "Au_activity_three_levels_1x3_side_colors.pdf",
+    "source": "/global/cfs/cdirs/m5419/nianhant_project_storage/stability_paper/single-metal-pourbaix-plotter/examples/figures/figures/potential_window_2V_20261006/single/Au_activity_three_levels_1x3_side_colors.pdf",
+    "sha256": "41d05d3efce8b8365c2ca753804b5dfd64b718db09dcaced3801825f52183831"
+  },
+  {
+    "name": "Au_NH3_three_levels_1x3_side_colors.pdf",
+    "source": "/global/cfs/cdirs/m5419/nianhant_project_storage/stability_paper/single-metal-pourbaix-plotter/examples/figures/figures/potential_window_2V_20261006/single/Au_NH3_three_levels_1x3_side_colors.pdf",
+    "sha256": "43a1e7a8732b72212aaaf83a855fea3a727cff84ff57c910af28784f6dc4dcc9"
+  },
+  {
+    "name": "Au_Gly_three_levels_1x3_side_colors.pdf",
+    "source": "/global/cfs/cdirs/m5419/nianhant_project_storage/stability_paper/single-metal-pourbaix-plotter/examples/figures/figures/potential_window_2V_20261006/single/Au_Gly_three_levels_1x3_side_colors.pdf",
+    "sha256": "202ec7edd6fd157357358c695a20b01e49ac94b93070880e54b53625a29eb61d"
+  },
+  {
+    "name": "Au_CN_three_levels_1x3_side_colors.pdf",
+    "source": "/global/cfs/cdirs/m5419/nianhant_project_storage/stability_paper/single-metal-pourbaix-plotter/examples/figures/figures/potential_window_2V_20261006/single/Au_CN_three_levels_1x3_side_colors.pdf",
+    "sha256": "204097d240436164e3c30c5dd99f6849ad21191fbf486768f6c927a1c35fcc14"
+  },
+  {
+    "name": "Ni_activity_three_levels_1x3_side_colors.pdf",
+    "source": "/global/cfs/cdirs/m5419/nianhant_project_storage/stability_paper/single-metal-pourbaix-plotter/examples/figures/figures/potential_window_2V_20261006/single/Ni_activity_three_levels_1x3_side_colors.pdf",
+    "sha256": "43a92649e5617e6303a393da341c31ea41463b644e6e0042ab0ec46a64003abd"
+  },
+  {
+    "name": "Ni_Gly_three_levels_1x3_side_colors.pdf",
+    "source": "/global/cfs/cdirs/m5419/nianhant_project_storage/stability_paper/single-metal-pourbaix-plotter/examples/figures/figures/potential_window_2V_20261006/single/Ni_Gly_three_levels_1x3_side_colors.pdf",
+    "sha256": "091631488f887f7ecad82dcab88323cc81eb0118e0ed6ad4beb210af1998b0de"
+  },
+  {
+    "name": "Ni_CN_three_levels_1x3_side_colors.pdf",
+    "source": "/global/cfs/cdirs/m5419/nianhant_project_storage/stability_paper/single-metal-pourbaix-plotter/examples/figures/figures/potential_window_2V_20261006/single/Ni_CN_three_levels_1x3_side_colors.pdf",
+    "sha256": "c888b1c3c85fb29dbdd230a4f09689047f7ef3fd38245c364dcc4e0842a19490"
+  },
+  {
+    "name": "Cu_activity_three_levels_1x3_side_colors.pdf",
+    "source": "/global/cfs/cdirs/m5419/nianhant_project_storage/stability_paper/single-metal-pourbaix-plotter/examples/figures/figures/potential_window_2V_20261006/single/Cu_activity_three_levels_1x3_side_colors.pdf",
+    "sha256": "9783128330f7ee9e96b5ca15004b1673bc1d9045fdb94d5031275d61ce679205"
+  },
+  {
+    "name": "Cu_NH3_three_levels_1x3_side_colors.pdf",
+    "source": "/global/cfs/cdirs/m5419/nianhant_project_storage/stability_paper/single-metal-pourbaix-plotter/examples/figures/figures/potential_window_2V_20261006/single/Cu_NH3_three_levels_1x3_side_colors.pdf",
+    "sha256": "9411ab5a304acab7f8f5b44476fa5e1bf2c4cfa4e937ec50825eacbd583e6bc3"
+  },
+  {
+    "name": "Cu_Gly_three_levels_1x3_side_colors.pdf",
+    "source": "/global/cfs/cdirs/m5419/nianhant_project_storage/stability_paper/single-metal-pourbaix-plotter/examples/figures/figures/potential_window_2V_20261006/single/Cu_Gly_three_levels_1x3_side_colors.pdf",
+    "sha256": "3df95afe1d32d626e2076178c6600ff066cb69ea5249fbc456341e04f136266c"
+  },
+  {
+    "name": "Cu_CN_three_levels_1x3_side_colors.pdf",
+    "source": "/global/cfs/cdirs/m5419/nianhant_project_storage/stability_paper/single-metal-pourbaix-plotter/examples/figures/figures/potential_window_2V_20261006/single/Cu_CN_three_levels_1x3_side_colors.pdf",
+    "sha256": "80592ee08438e825ff650e206b822ff6851bf4de9b82d1f3cad01998bccd158e"
+  },
+  {
+    "name": "Pd_activity_three_levels_1x3_side_colors.pdf",
+    "source": "/global/cfs/cdirs/m5419/nianhant_project_storage/stability_paper/single-metal-pourbaix-plotter/examples/figures/figures/potential_window_2V_20261006/single/Pd_activity_three_levels_1x3_side_colors.pdf",
+    "sha256": "6a33928b4ad1ce8eb5ea14b27e2f88bb7d13140b66abe277844a097f3697ea3c"
+  },
+  {
+    "name": "Pd_NH3_three_levels_1x3_side_colors.pdf",
+    "source": "/global/cfs/cdirs/m5419/nianhant_project_storage/stability_paper/single-metal-pourbaix-plotter/examples/figures/figures/potential_window_2V_20261006/single/Pd_NH3_three_levels_1x3_side_colors.pdf",
+    "sha256": "420a88d8777a7dd3e9e2830a58bcd41a3b3c09620cdd30fb6a4bb8937b0faee1"
+  },
+  {
+    "name": "Pd_CN_three_levels_1x3_side_colors.pdf",
+    "source": "/global/cfs/cdirs/m5419/nianhant_project_storage/stability_paper/single-metal-pourbaix-plotter/examples/figures/figures/potential_window_2V_20261006/single/Pd_CN_three_levels_1x3_side_colors.pdf",
+    "sha256": "8f1bba981a2ea4df119c8734271fe7fba28ecead0191110104831fc84929d488"
+  },
+  {
+    "name": "Pt_CN_three_levels_1x3_side_colors.pdf",
+    "source": "/global/cfs/cdirs/m5419/nianhant_project_storage/stability_paper/single-metal-pourbaix-plotter/examples/figures/figures/potential_window_2V_20261006/single/Pt_CN_three_levels_1x3_side_colors.pdf",
+    "sha256": "b9de1993531583617089eed9520fef41055f397a9c06ff228ab7adcd68bb0f25"
+  },
+  {
+    "name": "TiNi_activity_three_levels_1x3_side_colors.pdf",
+    "source": "/global/cfs/cdirs/m5419/nianhant_project_storage/stability_paper/single-metal-pourbaix-plotter/examples/figures/figures/potential_window_2V_20261006/binary/TiNi_activity_three_levels_1x3_side_colors.pdf",
+    "sha256": "af6bcf72b04f744baae1ee48e5465e291bf3fb051d14a853495df154304985e6"
+  },
+  {
+    "name": "TiNi_Gly_three_levels_1x3_side_colors.pdf",
+    "source": "/global/cfs/cdirs/m5419/nianhant_project_storage/stability_paper/single-metal-pourbaix-plotter/examples/figures/figures/potential_window_2V_20261006/binary/TiNi_Gly_three_levels_1x3_side_colors.pdf",
+    "sha256": "5bd2aa926b8f4095ca740be0851d327d59ce23abba95f52b84ccc243ab59b22a"
+  },
+  {
+    "name": "TiNi_CN_three_levels_1x3_side_colors.pdf",
+    "source": "/global/cfs/cdirs/m5419/nianhant_project_storage/stability_paper/single-metal-pourbaix-plotter/examples/figures/figures/potential_window_2V_20261006/binary/TiNi_CN_three_levels_1x3_side_colors.pdf",
+    "sha256": "7f1ad4f76de161616cea2c36c44de813fbec61a87602bec8d992356723e95ffd"
+  },
+  {
+    "name": "TiCu_activity_three_levels_1x3_side_colors.pdf",
+    "source": "/global/cfs/cdirs/m5419/nianhant_project_storage/stability_paper/single-metal-pourbaix-plotter/examples/figures/figures/potential_window_2V_20261006/binary/TiCu_activity_three_levels_1x3_side_colors.pdf",
+    "sha256": "ba9fb8fe8dafd310b6b95e6e06a338fac355c7bf13c247d3577cfd727959da93"
+  },
+  {
+    "name": "TiCu_NH3_three_levels_1x3_side_colors.pdf",
+    "source": "/global/cfs/cdirs/m5419/nianhant_project_storage/stability_paper/single-metal-pourbaix-plotter/examples/figures/figures/potential_window_2V_20261006/binary/TiCu_NH3_three_levels_1x3_side_colors.pdf",
+    "sha256": "8561702d5fb9cb844b1de25fcdaa9a67ae77b2ffd518f44db1409cee08702bbb"
+  },
+  {
+    "name": "TiCu_Gly_three_levels_1x3_side_colors.pdf",
+    "source": "/global/cfs/cdirs/m5419/nianhant_project_storage/stability_paper/single-metal-pourbaix-plotter/examples/figures/figures/potential_window_2V_20261006/binary/TiCu_Gly_three_levels_1x3_side_colors.pdf",
+    "sha256": "0515412f2d4d24886ab1faa794d7e5ed1fc09448af6e411cf4858c02c32863d2"
+  },
+  {
+    "name": "TiCu_CN_three_levels_1x3_side_colors.pdf",
+    "source": "/global/cfs/cdirs/m5419/nianhant_project_storage/stability_paper/single-metal-pourbaix-plotter/examples/figures/figures/potential_window_2V_20261006/binary/TiCu_CN_three_levels_1x3_side_colors.pdf",
+    "sha256": "42e25191fa1fa418841d6719bf2207e37c227d22040d9eae241cf6687b82c0f4"
+  },
+  {
+    "name": "PdAu_activity_three_levels_1x3_side_colors.pdf",
+    "source": "/global/cfs/cdirs/m5419/nianhant_project_storage/stability_paper/single-metal-pourbaix-plotter/examples/figures/figures/potential_window_2V_20261006/binary/PdAu_activity_three_levels_1x3_side_colors.pdf",
+    "sha256": "bc558f39e35a62faf0dd2b84b76e26f1b0067aa0517a5297ae1d9063a6eeaf1b"
+  },
+  {
+    "name": "PdAu_NH3_three_levels_1x3_side_colors.pdf",
+    "source": "/global/cfs/cdirs/m5419/nianhant_project_storage/stability_paper/single-metal-pourbaix-plotter/examples/figures/figures/potential_window_2V_20261006/binary/PdAu_NH3_three_levels_1x3_side_colors.pdf",
+    "sha256": "ef9c71ef938ecf87134e5371cf6995f071766e2674aa52e5950110ce8a734bc2"
+  },
+  {
+    "name": "PdAu_CN_three_levels_1x3_side_colors.pdf",
+    "source": "/global/cfs/cdirs/m5419/nianhant_project_storage/stability_paper/single-metal-pourbaix-plotter/examples/figures/figures/potential_window_2V_20261006/binary/PdAu_CN_three_levels_1x3_side_colors.pdf",
+    "sha256": "76f3d56f3ee81fe938cb0d242c04b1c9507ded1f193b029ded68958676aca571"
+  }
+]
